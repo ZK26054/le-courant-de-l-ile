@@ -80,12 +80,18 @@ Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-au
 > - `charbon` → titre EDF **« Biomasse (MW) »** (`x-originalName` = « Charbon »).
 > - `diesel`  → titre EDF **« Bioliquide (MW) »** (`x-originalName` = « Diesel »).
 >
-> **Il n'y a plus de charbon fossile à La Réunion depuis fin 2023** (Bois-Rouge/Le Gol 100 %
-> biomasse — pellets bois + bagasse — depuis mars 2024, autorisation CRE 2022, −84 % émissions
-> vs charbon / étude Deloitte). **Le « diesel » = huile de colza** (Port-Est, EDF PEI, fournisseur
-> Saipol, sans palme ni soja, depuis déc. 2023). `turbines_combustion` reste **fossile** (libellé
-> EDF « Turbines à combustion », non renommé). Les **clés Python internes restent** `Charbon`/`Diesel`
-> (couplage `fetch_data`/`COLORS`/Plotly) — seul l'AFFICHAGE passe par `label()`.
+> **Il n'y a plus de charbon fossile à La Réunion** (Bois-Rouge/Le Gol 100 % biomasse — pellets
+> bois + bagasse ; autorisation CRE 2022, −84 % émissions vs charbon / étude Deloitte).
+> **Le « diesel » = huile de colza** (Port-Est, EDF PEI, fournisseur Saipol, sans palme ni soja).
+> `turbines_combustion` reste **fossile** (libellé EDF « Turbines à combustion », non renommé) :
+> ce sont les **TAC de La Baie (80 MW, GNR) + TAC Sud (41 MW)**. Les **clés Python internes restent**
+> `Charbon`/`Diesel` (couplage `fetch_data`/`COLORS`/Plotly) — seul l'AFFICHAGE passe par `label()`.
+>
+> 📅 **Dates exactes (recalées sur source primaire EDF SEI, 2026-07-20)** — voir
+> `docs/sources/SOURCE_bilan-previsionnel-2024.md` : Port-Est converti **oct. 2023** ;
+> Bois-Rouge tranche 2 en 2022, tranches 1.1/1.2 mi-2023 ; **Le Gol A.1/A.2 finalisées
+> fév. et juil. 2024** → la conversion de TOUT le parc charbon/fioul est achevée **mi-2024**
+> (et non « mars 2024 », correction d'une version antérieure de ce fichier).
 
 - **ENR directes** (sans combustion, incontestables) : Photovoltaique, Eolien, Hydraulique.
 - **Bioénergies** (ENR au sens réglementaire/OER, neutralité carbone DÉBATTUE) : Bioénergies,
@@ -120,13 +126,19 @@ Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-au
 - La Réunion = **ZNI** (Zone Non Interconnectée) : réseau insulaire isolé, faible inertie, stabilité 50 Hz critique.
 - Plafond d'injection instantanée PV+éolien ~30 % (arrêté 23 avril 2008), assoupli via stockage.
 - Objectif **autonomie énergétique 2030** (100 % électricité renouvelable), loi outre-mer.
-- Centrales : **Port-Est** (EDF PEI, converti au **bioliquide huile de colza** déc. 2023, plus de fioul), **Bois-Rouge & Le Gol** (Albioma, conversion **100 % biomasse achevée mars 2024**, plus de charbon), turbines à combustion (fossile, pointe), hydraulique (Rivière de l'Est, Takamaka). Parc **éolien** : Sainte-Suzanne 19,8 MW (repowering TotalEnergies), Sainte-Rose démantelé 2023.
+- **Parc au 01/07/2024 = 563 MW** (source primaire EDF SEI) : bioénergie pilotable ~**415 MW** (l'ossature) · hydraulique **136 MW** (Rivière de l'Est 80, Takamaka I+II 43,4) · PV **210 MWc** · éolien (Perrière 8,8 MW après repowering partiel ; Sainte-Rose 0 MW, travaux jusqu'en 2026) · stockage batterie (Batrun 5 MW, Cratère 5 MW/10 MWh — **pas de STEP opérationnelle documentée**).
+- Centrales : **Port-Est** (EDF PEI, 211 MW, **bioliquide huile de colza** depuis oct. 2023, ≈40 % des besoins), **Bois-Rouge** (94,1 MW) **& Le Gol** (~105 MW) — Albioma, biomasse + bagasse, conversion du parc achevée **mi-2024** ; **TAC La Baie 80 MW (GNR) + TAC Sud 41 MW = seul fossile** ; groupes de secours 24 MW maintenus.
+- **Chiffres ENR ANNUELS officiels** (≠ instantané du dashboard) : **57 % en 2023**, en hausse depuis les conversions. Non-synchrone (PV+éolien) 2023 : dépassait rarement 40 % instantané, ~11 % de la conso annuelle. ⚠️ Ne jamais présenter un instantané (« 99 % ce soir ») comme la performance annuelle de l'île.
+- **Souveraineté** : le bioliquide est du **colza importé d'Europe** (Saipol, RED), la biomasse repose sur des **pellets importés** ; la bagasse locale ne couvre que la saison sucrière (~201 GWh sur 923 en 2023). La dépendance au fioul a été **déplacée**, pas supprimée.
+- **Vulnérabilités** (constats EDF) : Rivière de l'Est fragilisée par les cyclones Cheneso (2023) et Belal (2024) + lave torrentielle → travaux lourds ; fiabilité des centrales converties « à démontrer dans la durée » (S1 2024 compliqué) ; maintenance lourde Takamaka.
+- **Inertie/ZNI** : PV, éolien et batteries sont **non-synchrones** → pas d'inertie ; réserve primaire ~50 MW, secondaire jusqu'à ~200 MW (2033) ; critère de défaillance PPE = **3 h/an**.
+- **Trajectoire** : fossile 118 MW (2024) → 41 MW (Azur 2040) ou 0 dès 2027 (Emeraude) ; bioénergie reste ~415 MW jusqu'en 2040 (**la base combustion et la dépendance import perdurent**) ; pilotable complémentaire requis 80 MW (2033) → 480 MW (2040, fin contrat Port-Est) ; conso +40/+50 %, pointe 737-799 MW vs 498 MW en 2023.
 - Ordre de grandeur utile pour valider un KPI : production totale instantanée **≈ 340 MW**
   (mesuré le 2026-07-17). Un `Total = 0` est un **bug**, pas une donnée.
 
 ## Équipe de sous-agents (.claude/agents/)
 - **architecte-energie** — cadre, décide, découpe, ADR. Ne code pas.
-- **concepteur-experts** — conçoit/calibre les personas experts. Travaille dans `agent_expert.py` (gelé).
+- **concepteur-experts** — conçoit/calibre les personas experts. Travaille dans `agent_expert.py` / `experts.py` (**dégelés** — le FREEZE de la Phase 0/1 est levé depuis l'intégration).
 - **dev-rapports** — moteur de rapports horodatés (HTML/PDF).
 - **dev-features** — implémentation Streamlit/Plotly/ingestion au quotidien.
 - **gardien-qualite** — sécurité + tests + validation par preuve. Obligatoire avant commit.

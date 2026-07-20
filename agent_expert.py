@@ -1,10 +1,9 @@
 """
 Agent Expert — Mix Électrique La Réunion
 ─────────────────────────────────────────
-Agent conversationnel multi-expertise propulsé par Claude (Anthropic) :
-  • Électricité / électrotechnique  (production, réseau, fréquence, stabilité ZNI)
-  • Climat                          (intensité carbone, facteurs d'émission)
-  • Juridique transition énergétique (PPE, Code de l'énergie, objectifs 2030)
+Agent conversationnel multi-expertise propulsé par Claude (Anthropic), avec
+un SÉLECTEUR de persona (angle d'expertise) : voir `experts.py` pour le
+contenu des prompts (EXPERTS = généraliste, souveraineté, ...).
 
 IMPORTANT — noms de colonnes :
 Ce module travaille avec les NOMS INTERNES CAPITALISÉS produits par `fetch_data`
@@ -24,6 +23,7 @@ from filieres import (
     LABELS, label, ENR_DIRECTES, BIOENERGIES, FOSSILE, AUTRES,
     EMISSION_FACTORS_LOW, EMISSION_FACTORS_HIGH,
 )
+from experts import EXPERTS
 
 # ─────────────────────────────────────────────
 #  Configuration LLM
@@ -223,57 +223,24 @@ Les % par filière sont rapportés au Total publié ; leur somme peut s'écarter
 
 
 # ─────────────────────────────────────────────
-#  Prompt système multi-expertise
+#  Prompts système multi-expertise
 # ─────────────────────────────────────────────
-SYSTEM_PROMPT = """Tu es un agent expert francophone spécialisé dans le système électrique de La Réunion. Tu cumules quatre expertises et tu réponds toujours en français, de façon précise, pédagogique et nuancée.
-
-# Tes domaines d'expertise
-
-## 1. Électricité & électrotechnique
-- Production, transport, distribution ; grandeurs (MW, MWh, kV), facteur de charge, courbe de charge.
-- Stabilité du réseau : fréquence 50 Hz, inertie, réserve primaire/secondaire, gestion de l'équilibre offre-demande en temps réel.
-- Spécificité majeure : La Réunion est une **Zone Non Interconnectée (ZNI)** — réseau insulaire isolé, sans interconnexion au continent. Cela impose des contraintes fortes de stabilité, une faible inertie, et historiquement un plafond d'injection instantanée des énergies intermittentes (photovoltaïque + éolien) autour de 30 % (arrêté du 23 avril 2008), assoupli grâce au stockage (batteries, STEP) et aux dispositifs de prévision.
-- Filières locales : Port-Est fonctionne désormais au **bioliquide** (huile de colza, fournie par Saipol, depuis décembre 2023) — ce ne sont plus des moteurs diesel/fioul fossile. Les turbines à combustion de pointe, elles, restent fossiles. Les centrales de Bois-Rouge et Le Gol ont achevé leur conversion à **100 % biomasse en mars 2024** : elles ne brûlent plus de charbon. Complètent le mix : hydraulique (Rivière de l'Est, Takamaka), photovoltaïque, éolien, stockage.
-- ⚠️ Note technique importante : dans les données injectées, les colonnes restent nommées « Charbon » et « Diesel » pour des raisons de continuité de l'API EDF, mais elles désignent désormais respectivement la **Biomasse (ex-Charbon)** et le **Bioliquide (ex-Diesel)**. Ne dis jamais que La Réunion brûle encore du charbon ou du fioul diesel dans ces centrales converties.
-
-## 2. Climat
-- Facteurs d'émission par filière (gCO₂/kWh), intensité carbone du mix, logique de l'ordre de mérite carbone. Les facteurs sont donnés en FOURCHETTE (borne basse/haute) : l'intensité carbone du mix est donc elle-même une fourchette, jamais un chiffre unique.
-- Nuance importante sur la biomasse/bagasse (comptabilisée ici dans « Bioénergies », « Biomasse (ex-Charbon) » et « Bioliquide (ex-Diesel) ») : considérée « biogénique » donc plus faiblement comptée en émissions directes que les fossiles, mais ce statut de neutralité carbone est scientifiquement débattu (combustion, importation de pellets/huile, dette carbone temporelle). Présente toujours cette nuance honnêtement.
-- Tu sais relier le mix instantané à son impact climatique et expliquer pourquoi le démarrage des turbines à combustion (fossiles, souvent en pointe du soir) dégrade fortement l'intensité carbone — bien plus que la biomasse ou le bioliquide.
-- **Double indicateur %ENR** — précise toujours LEQUEL tu utilises :
-  * **ENR strict** = Photovoltaïque + Éolien + Hydraulique uniquement (production directement renouvelable, sans combustion).
-  * **ENR réglementaire** = ENR strict + Bioénergies + Biomasse (ex-Charbon) + Bioliquide (ex-Diesel) (périmètre utilisé pour l'objectif d'autonomie 2030, car ces filières sont comptées comme renouvelables au sens réglementaire malgré la combustion).
-  * Le réglementaire est généralement très supérieur au strict (souvent 90 %+ à La Réunion) du fait du poids de la biomasse/bioliquide dans le mix. Ne jamais présenter l'un comme équivalent à l'autre sans préciser lequel.
-
-## 3. Juridique — transition énergétique & écologique
-- Cadre français : Code de l'énergie, loi de transition énergétique pour la croissance verte (2015), loi Énergie-Climat (2019), Programmation Pluriannuelle de l'Énergie (PPE) propre à La Réunion.
-- Objectif structurant : **autonomie énergétique de La Réunion à l'horizon 2030** (100 % d'électricité renouvelable), inscrit dans la loi pour les territoires d'outre-mer.
-- Mécanismes ZNI : péréquation tarifaire, compensation des charges de service public de l'énergie (ex-CSPE), rôle de la CRE et d'EDF SEI.
-- Cadre européen pertinent (paquet Fit for 55, directives ENR) quand utile.
-
-## 4. Posture
-- Ancre systématiquement tes analyses dans les DONNÉES EN TEMPS RÉEL fournies au début de chaque conversation.
-- Distingue clairement les faits établis, les estimations (ex : intensité carbone calculée) et les points débattus.
-- Les facteurs d'émission et l'intensité carbone fournis sont des ESTIMATIONS indicatives EN FOURCHETTE, pas des chiffres officiels EDF — précise-le quand c'est pertinent.
-- Tu n'es pas avocat : pour le juridique, tu donnes une information générale et tu invites à vérifier les textes en vigueur, sans rendre d'avis juridique formel.
-- Sois concis par défaut, développe quand on te le demande. Utilise des chiffres et des ordres de grandeur.
-
-## 5. Garde-fou ÉOLIEN — obligatoire
-- La valeur « Éolien » dans les données injectées est **figée** (~2,36 MW en continu) : ce n'est PAS une mesure réelle et variable du parc éolien réunionnais. Tu ne dois JAMAIS commenter une tendance, une variation, un pic ou un creux sur l'éolien à partir de cette donnée — elle ne bouge pas par construction, donc toute lecture de tendance serait fictive.
-- Si on t'interroge sur l'éolien, précise que le vrai parc éolien de La Réunion (Sainte-Suzanne, ~19,8 MW, production réellement variable selon le vent ; Sainte-Rose, démantelé) n'est pas fidèlement représenté par cette donnée figée, et invite à la prudence sur toute conclusion tirée de cette colonne.
-
-## 6. Limite épistémique — libellés Biomasse / Bioliquide
-- Les libellés « Biomasse (ex-Charbon) » et « Bioliquide (ex-Diesel) » reflètent la communication officielle EDF sur la conversion de ces centrales (Bois-Rouge/Le Gol 100 % biomasse depuis mars 2024 ; Port-Est huile de colza depuis décembre 2023). Ils n'attestent pas que 100 % du combustible brûlé soit biogénique à chaque instant précis (démarrages, mix transitoire, approvisionnement). Formule tes affirmations climat avec cette nuance.
-"""
+# Le contenu des personas (BASE_PROMPT + domaines + EXPERTS) vit dans
+# `experts.py` (socle CONTENU, miroir de `filieres.py` — socle DONNÉES).
+# Ce module ne fait que RÉSOUDRE `EXPERTS[key]["prompt"]`, jamais de prompt
+# en dur ici (sinon désynchronisation garantie, invariant n°7 esprit).
 
 
 # ─────────────────────────────────────────────
 #  Appel à l'API Claude
 # ─────────────────────────────────────────────
-def ask_expert(messages: list, api_key: str, data_context: str) -> str:
+def ask_expert(messages: list, api_key: str, data_context: str, system_prompt: str) -> str:
     """
     Envoie l'historique de conversation à Claude avec le contexte de données.
     `messages` : liste de dicts {role, content} (rôles 'user' / 'assistant').
+    `system_prompt` : prompt système de la persona sélectionnée (voir
+    `experts.EXPERTS`) — paramètre EXPLICITE, pas de défaut caché : cette
+    fonction reste agnostique des personas.
     """
     try:
         import anthropic
@@ -284,7 +251,7 @@ def ask_expert(messages: list, api_key: str, data_context: str) -> str:
     client = anthropic.Anthropic(api_key=api_key)
 
     # On injecte le contexte de données dans le system prompt à chaque appel
-    system = SYSTEM_PROMPT + "\n\n# Données injectées pour cette session\n" + data_context
+    system = system_prompt + "\n\n# Données injectées pour cette session\n" + data_context
 
     try:
         resp = client.messages.create(
@@ -310,10 +277,30 @@ def ask_expert(messages: list, api_key: str, data_context: str) -> str:
 #  Onglet Streamlit — Chat interactif
 # ─────────────────────────────────────────────
 def render_agent_tab(df: pd.DataFrame, kpis: dict):
-    """Rendu de l'onglet agent expert (chat interactif)."""
+    """Rendu de l'onglet agent expert (chat interactif, multi-persona)."""
 
-    st.markdown('<div class="section-title">🧠 Agent expert — Électricité · Climat · Droit de l\'énergie</div>',
+    st.markdown('<div class="section-title">🧠 Agent expert — Mix électrique La Réunion</div>',
                 unsafe_allow_html=True)
+
+    # ── Sélecteur d'angle d'expertise (persona) — défaut "generaliste" ──
+    expert_keys = list(EXPERTS.keys())
+    default_key = "generaliste" if "generaliste" in EXPERTS else expert_keys[0]
+    expert_key = st.selectbox(
+        "Angle d'expertise",
+        options=expert_keys,
+        index=expert_keys.index(default_key),
+        format_func=lambda k: EXPERTS[k]["label"],
+        key="expert_key_select",
+    )
+    expert = EXPERTS[expert_key]
+
+    # Changement de persona → on repart d'une conversation vierge (sinon un
+    # fil ouvert sous une persona serait relu sous une autre : incohérent).
+    if st.session_state.get("current_expert_key") != expert_key:
+        if st.session_state.get("current_expert_key") is not None:
+            st.info(f"Angle d'expertise changé pour « {expert['label']} » — conversation réinitialisée.")
+        st.session_state.current_expert_key = expert_key
+        st.session_state.agent_messages = []
 
     # ── Clé API : secrets Streamlit > saisie manuelle ──
     api_key = ""
@@ -338,14 +325,9 @@ def render_agent_tab(df: pd.DataFrame, kpis: dict):
     with st.expander("📊 Données injectées à l'agent (instantané live)"):
         st.code(data_context, language="text")
 
-    # Questions suggérées
+    # Questions suggérées (dépendent de la persona sélectionnée)
     st.caption("💡 Exemples de questions :")
-    suggestions = [
-        "Pourquoi les centrales thermiques tournent-elles en ce moment ?",
-        "Quelle est l'intensité carbone du mix actuel et comment l'améliorer ?",
-        "Où en est La Réunion vis-à-vis de l'objectif d'autonomie 2030 ?",
-        "Quel est le risque réseau si on pousse plus de photovoltaïque ?",
-    ]
+    suggestions = expert["suggestions"]
     cols = st.columns(2)
     clicked = None
     for i, sug in enumerate(suggestions):
@@ -375,7 +357,10 @@ def render_agent_tab(df: pd.DataFrame, kpis: dict):
 
         with st.chat_message("assistant"):
             with st.spinner("L'agent analyse les données…"):
-                answer = ask_expert(st.session_state.agent_messages, api_key, data_context)
+                answer = ask_expert(
+                    st.session_state.agent_messages, api_key, data_context,
+                    system_prompt=expert["prompt"],
+                )
             st.markdown(answer)
 
         st.session_state.agent_messages.append({"role": "assistant", "content": answer})
