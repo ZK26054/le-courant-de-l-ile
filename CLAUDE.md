@@ -15,7 +15,10 @@ Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-au
 - `dashboard_reunion.py` — app principale, **3 onglets** (`st.tabs`) : Dashboard (`render_dashboard`), Agent expert (`agent_expert.render_agent_tab`), Diagnostic (`render_diagnostic`). Contient `API_URLS`, `fetch_data`, `_fetch_records`, `compute_kpis`, les fabriques Plotly (`make_stacked_area`, `make_total_line`, `make_renewables_pct`, `make_thermal_lines`). Importe la taxonomie depuis `filieres.py`.
 - `agent_expert.py` — agents experts Claude (dégelé, intégré). `SYSTEM_PROMPT` multi-expertise, `build_data_context` (contexte live enrichi : instantané, tendance 1h, amplitude, double %ENR, fourchette carbone), `compute_carbon_intensity` (retourne un couple `(low, high)`), `ask_expert`, `render_agent_tab`. Couplage lâche : reçoit `df`/`kpis`, ne manipule que les noms internes capitalisés. Importe la taxonomie depuis `filieres.py`.
 - `filieres.py` — **SOURCE UNIQUE DE VÉRITÉ** (voir invariant n°7) : taxonomie 3 familles, `EMISSION_FACTORS_LOW/HIGH`, `DISPLAY_LABELS`/`label()`, `COLORS`. Socle pur, aucun import projet. Importé par les deux fichiers ci-dessus.
-- `test_fetch_data.py` (13 tests, ingestion) · `test_filieres.py` (7 tests, taxonomie/facteurs).
+- **Tests — 28 au total, tous déterministes et HORS RÉSEAU** (fixture figée) :
+  `test_fetch_data.py` (18, ingestion + pagination curseur + échappement XSS) ·
+  `test_filieres.py` (7, taxonomie/facteurs) · `test_taxonomie_carbone.py` (3, fige le modèle Phase 1.5).
+  `fixture_utils.py` — doubles de test partagés · `tests/fixtures/payload_edf.json` — payload EDF **figé volontairement** (ne pas régénérer sans raison).
 - `docs/adr/002-source-unique-taxonomie-filieres.md` — ADR de la source unique.
 - `requirements.txt` — dépendances épinglées en `==`.
 - `prod-electricite-temps-reel-974.csv` — échantillon de données local.
@@ -34,7 +37,12 @@ Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-au
   (*« Impossible de trier sur le champ Date, il n'existe pas »*).
 - **`limit` est plafonné à 100.** `limit=101` → **HTTP 400** (*« limit should be less than 100 »*),
   et le corps d'erreur est en **`text/plain`**, pas en JSON → un `.json()` naïf lève `JSONDecodeError`.
-  Au-delà de 100 lignes, paginer via `offset` (voir `_fetch_records`).
+  Au-delà de 100 lignes, paginer via **CURSEUR** (`where=date < '<date la plus ancienne reçue>'`),
+  **pas** via `offset` — voir `_fetch_records`. ⚠️ L'`offset` est piégeux ici : le jeu est une
+  **fenêtre glissante élaguée** (de nouvelles lignes arrivent en tête, d'anciennes sont supprimées
+  en queue pendant la pagination), donc l'`offset` désigne une ligne différente d'une page à l'autre
+  → ~1 ligne réelle sautée par fetch (bug corrigé en Phase 1.75). Le curseur est ancré sur une
+  **donnée**, pas sur une position : il est insensible au glissement.
 - **Doublons** : l'API sert des lignes de date identique, strictement égales sur les 12 colonnes.
   Dédoublonnage sur `Date` — vérifié : aucune perte de donnée réelle.
 - **Trous de données à la source** : certains timestamps 5 min sont absents côté EDF
@@ -151,18 +159,9 @@ Preuves indépendantes (triple mesure : `dev-features`, `gardien-qualite`, puis 
 - ✅ Négatifs préservés (min `-0.3398`), dégradation propre vérifiée (API KO → pas de crash).
 - ✅ Aucun secret en dur. `streamlit run` → HTTP 200.
 
-### Dette connue (non bloquante, à traiter)
-- ⚠️ **Dérive de pagination** : ~1 ligne réelle sautée par fetch. Le jeu est une fenêtre
-  glissante élaguée (`total_count` 300 → 294 en cours de session) : l'`offset` dérive entre
-  les pages. Sans impact KPI (`iloc[-1]` = ligne la plus récente), trou de 5 min sur les courbes.
-- ⚠️ **Injection HTML** : `statut` (contrôlé par l'API) est injecté dans
-  `st.markdown(..., unsafe_allow_html=True)` sans échappement. Faible sévérité (exige EDF
-  compromis) mais c'est une entrée non maîtrisée → à échapper.
-- `pytest` installé dans `.venv` mais **absent de `requirements.txt`**.
-- `use_container_width` déprécié (4 occurrences) → migrer vers `width='stretch'`.
-- Imports morts préexistants : `plotly.express as px`, `datetime`.
-- **Pas de `.gitignore`** et projet non-git. À créer **avant** tout `git init`, sinon
-  l'invariant n°1 n'a aucun garde-fou.
+> *(La dette listée ici à l'époque — pagination, injection HTML, `pytest`, `use_container_width`,
+> `.gitignore`/git — a été intégralement soldée depuis. Voir la section « Dette restante » en fin
+> de fichier, seule à faire autorité.)*
 
 ## État actuel — Phases 0 / 1 / 1.5 ✅ LIVRÉES (2026-07-18)
 
@@ -171,14 +170,17 @@ Preuves indépendantes (triple mesure : `dev-features`, `gardien-qualite`, puis 
 - **Phase 1.5** (reclassement) : taxonomie 3 familles + double %ENR + libellés `ex-Charbon`/`ex-Diesel` + fourchette carbone, dans **`filieres.py`** (source unique, invariant n°7). Prouvé : 20 tests verts (13 fetch + 7 filieres), anti-dup et anti-cycle vérifiés, carbone chuté ~494 → **68-145 gCO₂/kWh**, %ENR réglementaire ~99 %, badge éolien + garde-fou prompt en place.
 - App **3 onglets** (`st.tabs`) fonctionnelle, `streamlit run` → HTTP 200.
 
-### Dette connue (non bloquante)
-- ⚠️ **Dérive de pagination** : ~1 ligne réelle sautée par fetch (fenêtre glissante). Sans impact KPI (`iloc[-1]`), trou de 5 min sur les courbes.
-- ⚠️ **Injection HTML** : `statut` (contrôlé par l'API) dans `st.markdown(..., unsafe_allow_html=True)` sans échappement. Faible sévérité → à échapper.
-- ⚠️ **`diesel`/Bioliquide** = point carbone le plus incertain (colza : combustion biogénique mais amont N₂O/transport/ILUC) → fourchette large 30/150, à affiner si source CRE/EDF trouvée.
-- `pytest` absent de `requirements.txt`. `use_container_width` déprécié (occurrences). Imports morts préexistants (`plotly.express`, `datetime`).
+## État actuel — Phase 4 ✅ LIVRÉE (2026-07-20) — git + régression figée
 
-### Prochaine étape : Phase 4
-`git init` propre (`.gitignore` déjà prêt et éprouvé : `secrets.toml` hors-git prouvé par `git check-ignore`) + **fixture JSON figée** pour la régression déterministe (sur le modèle corrigé Phase 1.5, jamais sur appel réseau live — voir section API « Estimé »). Puis Phase 2 (nouveaux experts).
+- **Gate sécurité passé du premier coup** : `git init` puis double preuve **avant** tout commit —
+  `git ls-files --error-unmatch .streamlit/secrets.toml` → *did not match any file(s) known to git*,
+  `git check-ignore -v` → règle `.gitignore:2`, et `git grep` sur **tout** l'historique → aucune clé.
+  La clé API réelle n'est jamais entrée dans git. (Dividende d'avoir préparé et éprouvé le
+  `.gitignore` **avant** le `git init`.)
+- **Fixture déterministe** : `tests/fixtures/payload_edf.json` (payload EDF figé volontairement).
+  Toute la suite tourne **hors réseau** (vérifié en bloquant `socket.socket.connect`).
+- **Filet prouvé par la casse** : reclasser `Diesel` en FOSSILE → test rouge ; remettre
+  `order_by="Date DESC"` → test rouge ; restauration → vert. Voir la leçon en invariant n°4.
 
 ## État actuel — Phase 1.75 ✅ LIVRÉE (2026-07-20) — sprint dette
 
@@ -208,8 +210,19 @@ Fermeture des 3 items de dette identifiés en Phase 0/1.5, avant ouverture publi
   pagination (AVANT logique offset reconstituée perd une ligne / APRÈS `dash._fetch_records` réel
   n'en perd aucune).
 
-### Dette restante (non bloquante)
-- `pytest` absent de `requirements.txt`.
-- Imports morts préexistants (`plotly.express as px`, `datetime`).
-- ⚠️ **`diesel`/Bioliquide** = point carbone le plus incertain (colza) → fourchette large 30/150,
-  à affiner si source CRE/EDF trouvée.
+### Dette restante (SEULE SECTION FAISANT AUTORITÉ — vérifiée le 2026-07-20)
+- ⚠️ **`diesel`/Bioliquide = point carbone le plus incertain** (colza : combustion biogénique mais
+  amont N₂O sols / transport bateau / ILUC) → fourchette volontairement large **30/150**, à affiner
+  si une source CRE/EDF opérationnelle est trouvée. C'est la principale incertitude du modèle.
+- ⚠️ **Éolien figé** : cause exacte non tranchable par la donnée (capteur bloqué vs remontée EDF).
+  Traité défensivement (badge UI + garde-fou prompt), pas résolu à la source.
+- Imports morts préexistants dans `dashboard_reunion.py` : `plotly.express as px` (l.11),
+  `from datetime import datetime` (l.13) — cosmétique.
+- **Validation live de l'agent en attente de crédits Anthropic** : la chaîne est prouvée verte
+  (clé + modèle `claude-sonnet-5` acceptés ; l'échec est un HTTP 400 « credit balance too low »,
+  pas un problème de code). Les 5 questions-test de `concepteur-experts` sont prêtes pour juger
+  la qualité des réponses sur le modèle corrigé.
+
+> ✅ **Soldé** en Phase 4 / 1.75, ne pas réinscrire comme dette : `pytest` (épinglé `pytest==9.1.1`),
+> `use_container_width` (migré `width='stretch'`, 0 occurrence), injection HTML (`html.escape`),
+> dérive de pagination (curseur `where`), `.gitignore` + `git init`.
