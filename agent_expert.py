@@ -349,7 +349,7 @@ def render_agent_tab(df: pd.DataFrame, kpis: dict):
     cols = st.columns(2)
     clicked = None
     for i, sug in enumerate(suggestions):
-        if cols[i % 2].button(sug, key=f"sug_{i}", use_container_width=True):
+        if cols[i % 2].button(sug, key=f"sug_{i}", width="stretch"):
             clicked = sug
 
     # ── Historique de conversation ──

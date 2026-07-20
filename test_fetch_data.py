@@ -22,6 +22,8 @@ from fixture_utils import (
     make_paginated_get,
     make_order_by_sensitive_get,
     make_synthetic_two_page_get,
+    make_sliding_window_rows,
+    make_sliding_window_get,
 )
 
 PAYLOAD = load_edf_payload()
@@ -36,6 +38,34 @@ def fetch_data_ORIGINE_BUG1(limit=200):
     r = requests.get(dash.API_URLS[0], params={"limit": limit, "order_by": "Date DESC"}, timeout=15)
     r.raise_for_status()
     return pd.DataFrame(r.json().get("results", []))
+
+
+def _fetch_records_ORIGINE_OFFSET(url, limit):
+    """
+    Reconstitution de l'ANCIENNE pagination par `offset` (dette Phase 0/1.5,
+    remplacee par une pagination par curseur en Phase 1.75). Sur un jeu de
+    donnees stable, elle fonctionne ; sur une fenetre GLISSANTE (nouvelles
+    lignes en tete pendant qu'on pagine), l'offset numerique ne pointe plus
+    la meme ligne d'un appel a l'autre -> une ligne reelle est sautee.
+    """
+    records = []
+    offset = 0
+    while len(records) < limit:
+        page_size = min(dash.API_MAX_LIMIT, limit - len(records))
+        resp = requests.get(
+            url,
+            params={"limit": page_size, "offset": offset, "order_by": "date desc"},
+            timeout=15,
+        )
+        resp.raise_for_status()
+        page = resp.json().get("results", [])
+        if not page:
+            break
+        records.extend(page)
+        offset += len(page)
+        if len(page) < page_size:
+            break
+    return records
 
 
 def fetch_data_ORIGINE_BUG2(limit=100):
@@ -151,6 +181,101 @@ def test_APRES_pagination_assemble_plusieurs_pages(monkeypatch):
     monkeypatch.setattr(dash.requests, "get", make_synthetic_two_page_get(100, 30))
     records = dash._fetch_records(dash.API_URLS[0], limit=130)
     assert len(records) == 130, f"pagination inoperante : {len(records)} lignes assemblees"
+
+
+# ── Phase 1.75 — pagination par curseur (remplace l'offset) ────────
+def test_AVANT_pagination_offset_saute_une_ligne_sur_fenetre_glissante(monkeypatch):
+    """
+    Reproduit le bug de derive documente dans CLAUDE.md : entre le 1er et le
+    2e appel de pagination, une nouvelle ligne apparait en tete de la fenetre
+    (glissement observe sur l'API reelle, total_count variable en cours de
+    session). Avec l'ANCIENNE logique par `offset`, la 2e page pointe alors
+    sur une position decalee : elle re-sert la derniere ligne de la 1ere page
+    (doublon, slot gaspille) et NE RECUPERE JAMAIS la ligne la plus ancienne
+    demandee -> perte reelle d'une ligne.
+    """
+    before_rows, after_rows = make_sliding_window_rows(n_before=130)
+    monkeypatch.setattr(dash.requests, "get", make_sliding_window_get(before_rows, after_rows))
+
+    records = _fetch_records_ORIGINE_OFFSET(dash.API_URLS[0], limit=130)
+
+    dates = [r["date"] for r in records]
+    missing_date = before_rows[-1]["date"]  # ligne la plus ancienne demandee
+    assert len(set(dates)) < 130, (
+        "le doublon d'offset devrait consommer un slot (moins de 130 lignes uniques) "
+        "- si ce test echoue, la fenetre synthetique ne reproduit plus la derive"
+    )
+    assert missing_date not in dates, (
+        "BUG NON REPRODUIT : la ligne la plus ancienne est presente malgre la "
+        "fenetre glissante -> verifier make_sliding_window_rows/_get"
+    )
+
+
+def test_APRES_pagination_curseur_aucune_ligne_perdue_sur_fenetre_glissante(monkeypatch):
+    """
+    Meme scenario de fenetre glissante, mais en exercant le VRAI code de
+    production (dash._fetch_records, pagination par curseur `where=date < ...`).
+    Preuve du fix : les 130 lignes demandees sont toutes recuperees, sans
+    doublon - y compris la ligne que l'ancienne logique par offset perdait
+    (test precedent). Si `_fetch_records` regresse vers l'offset, ce test
+    doit rougir exactement comme le precedent.
+    """
+    before_rows, after_rows = make_sliding_window_rows(n_before=130)
+    monkeypatch.setattr(dash.requests, "get", make_sliding_window_get(before_rows, after_rows))
+
+    records = dash._fetch_records(dash.API_URLS[0], limit=130)
+
+    dates = [r["date"] for r in records]
+    assert len(dates) == 130, f"pagination par curseur incomplete : {len(dates)} lignes recuperees"
+    assert len(set(dates)) == 130, "doublon detecte malgre la pagination par curseur"
+    missing_date = before_rows[-1]["date"]
+    assert missing_date in dates, (
+        "la ligne que l'ancienne logique par offset perdait doit etre recuperee ici"
+    )
+
+
+# ── Phase 1.75 — echappement HTML du statut (origine API non maitrisee) ────
+def test_AVANT_statut_api_non_echappe_serait_interprete_comme_html():
+    """
+    Documente le vecteur XSS de la construction PRE-FIX du badge (statut
+    injecte tel quel dans du HTML, sans html.escape) : une balise malveillante
+    apparaitrait brute dans le HTML genere, donc interpretee par le navigateur.
+    Reconstitue l'ancienne ligne inline de render_dashboard (avant refactor
+    vers build_update_badge_html) - ne teste PAS le code de prod actuel,
+    seulement la preuve que le risque etait reel.
+    """
+    kpis = {
+        "date": pd.Timestamp("2026-07-20 10:00", tz="Indian/Reunion"),
+        "statut": "<script>alert(1)</script>",
+    }
+    ts = kpis["date"].strftime("%d/%m/%Y %H:%M")
+    html_avant = (
+        f'<div class="update-badge">Dernière donnée : {ts} (heure Réunion) '
+        f'· statut : {kpis.get("statut","—")}</div>'
+    )
+    assert "<script>alert(1)</script>" in html_avant, (
+        "la reconstitution pre-fix devrait contenir la balise brute (non echappee)"
+    )
+
+
+def test_APRES_statut_api_echappe_dans_badge_html():
+    """
+    Preuve que le VRAI code de prod (dash.build_update_badge_html, appele
+    par render_dashboard) echappe le `statut` d'origine API : la balise brute
+    ne doit JAMAIS apparaitre dans le HTML produit, seule sa version echappee.
+    """
+    kpis = {
+        "date": pd.Timestamp("2026-07-20 10:00", tz="Indian/Reunion"),
+        "statut": "<script>alert(1)</script>",
+    }
+    out = dash.build_update_badge_html(kpis)
+    assert "<script>alert(1)</script>" not in out, "balise brute presente : injection HTML non neutralisee"
+    assert "&lt;script&gt;alert(1)&lt;/script&gt;" in out, "version echappee absente du HTML produit"
+
+    # L'echappement ne doit pas degrader l'affichage normal (statut legitime).
+    kpis_ok = {"date": kpis["date"], "statut": "Estimé"}
+    out_ok = dash.build_update_badge_html(kpis_ok)
+    assert "Estimé" in out_ok, "un statut legitime doit s'afficher normalement, non echappe visuellement"
 
 
 def test_APRES_dates_triees_et_uniques(df):

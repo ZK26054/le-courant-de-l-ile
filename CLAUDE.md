@@ -6,7 +6,7 @@
 > Dernier recalage sur preuve : **2026-07-18**.
 
 ## Objectif
-Dashboard temps réel du mix électrique de La Réunion (Open Data EDF Réunion), enrichi d'agents experts (Claude) qui analysent les données live sous plusieurs angles : électrotechnique, climat, juridique transition énergétique. Phase 0 (ingestion), Phase 1 (contexte enrichi) et Phase 1.5 (reclassement nomenclature/carbone) **livrées et validées**. Prochaine étape : **Phase 4** (git + fixture de régression sur le modèle corrigé), puis Phase 2 (nouveaux experts).
+Dashboard temps réel du mix électrique de La Réunion (Open Data EDF Réunion), enrichi d'agents experts (Claude) qui analysent les données live sous plusieurs angles : électrotechnique, climat, juridique transition énergétique. Phase 0 (ingestion), Phase 1 (contexte enrichi), Phase 1.5 (reclassement nomenclature/carbone), Phase 4 (git + fixture de régression) et Phase 1.75 (sprint dette : XSS, `width`, pagination curseur) **livrées et validées**. Prochaine étape : **Phase 2** (nouveaux experts).
 
 ## Stack
 Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-autorefresh.
@@ -103,6 +103,7 @@ Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-au
 2. **Jamais de `time.sleep()` + `st.rerun()` bloquant.** L'auto-refresh passe par `streamlit-autorefresh` (préserve `session_state`, donc le chat).
 3. **Dégradation propre** partout : API down / données vides / clé absente → message clair, jamais de crash brut.
 4. **Preuve, pas déclaration** : aucun fix n'est clos sur un message de succès. Test qui échoue avant / passe après, ou re-probe indépendant. (Méthodologie de travail centrale.) **Corollaire API « Estimé »** : une preuve sur données live compare toujours *au sein d'un payload unique* — jamais deux appels séparés (voir section API). Régression déterministe = fixture JSON figée.
+   **Corollaire « filet décoratif » (leçon Phase 4, 2026-07-20)** : *un test qui reconstitue la fonction ≠ un test de la vraie fonction de prod.* Un test doit **importer et exercer le code de production réel**, pas une copie recollée dans le fichier de test. Découvert en dur : `test_AVANT_bug1/bug2` validaient une copie locale et n'auraient **jamais** attrapé une régression réelle du `order_by` de `_fetch_records` — le filet était décoratif sur ce point depuis la Phase 0, sans qu'on le sache. **Prouver qu'un test ROUGIT quand on casse volontairement le code est le seul moyen de savoir s'il teste vraiment quelque chose.** Même famille que : « fichier créé ≠ migration appliquée », « déployé ≠ prouvé ».
 5. **Facteurs d'émission = estimations** (en FOURCHETTE bas/haut), pas des chiffres officiels EDF. La neutralité carbone de la biomasse/bagasse/bioliquide est débattue → toujours le préciser.
 6. **Dépendances épinglées** en `==` dans `requirements.txt`.
 7. **Source unique de vérité filières.** Toute liste de filières (`ENR_DIRECTES`, `BIOENERGIES`, `FOSSILE`, `COMBUSTION_THERMIQUE`), la palette `COLORS`, les `DISPLAY_LABELS` et les `EMISSION_FACTORS_LOW/HIGH` vivent **exclusivement** dans `filieres.py`. `dashboard_reunion.py` et `agent_expert.py` les **importent**, ne les redéfinissent jamais localement — ni copie, ni alias masquant une valeur différente sous un nom identique. `filieres.py` n'importe aucun module projet (socle). Vérifié par `test_filieres.py` + grep de non-régression.
@@ -178,3 +179,37 @@ Preuves indépendantes (triple mesure : `dev-features`, `gardien-qualite`, puis 
 
 ### Prochaine étape : Phase 4
 `git init` propre (`.gitignore` déjà prêt et éprouvé : `secrets.toml` hors-git prouvé par `git check-ignore`) + **fixture JSON figée** pour la régression déterministe (sur le modèle corrigé Phase 1.5, jamais sur appel réseau live — voir section API « Estimé »). Puis Phase 2 (nouveaux experts).
+
+## État actuel — Phase 1.75 ✅ LIVRÉE (2026-07-20) — sprint dette
+
+Fermeture des 3 items de dette identifiés en Phase 0/1.5, avant ouverture publique (Streamlit Cloud) :
+
+- ✅ **Injection HTML** : badge « dernière donnée » extrait dans `build_update_badge_html()`
+  (`dashboard_reunion.py`), `statut` (origine API non maîtrisée) passé par `html.escape()`.
+  `render_kpi()` échappe aussi label/value/unit en défense en profondeur. Preuve AVANT/APRÈS :
+  reconstitution pré-fix → `<script>alert(1)</script>` brut dans le HTML ; code de prod actuel →
+  `&lt;script&gt;alert(1)&lt;/script&gt;` (neutralisé), affichage normal non dégradé (`Estimé`
+  reste `Estimé`). Audit complet : seul point réel était le badge ; `agent_expert.py` n'injecte
+  aucune donnée API dans `unsafe_allow_html` (le contexte agent passe par `st.code`, pas de HTML).
+- ✅ **`use_container_width` → `width='stretch'`** : les 4 `st.plotly_chart` (`dashboard_reunion.py`)
+  et le `st.button` des suggestions (`agent_expert.py`) migrés. Validé réellement supporté par les
+  deux widgets en Streamlit 1.59.2 (signature `inspect.signature`), puis prouvé par exécution
+  réelle via `streamlit.testing.v1.AppTest` (0 exception, 4 `plotly_chart` + 4 `button` rendus) et
+  par `streamlit run --server.headless` → HTTP 200, logs sans warning de dépréciation.
+- ✅ **Dérive de pagination** : `_fetch_records` bascule d'`offset` à un **curseur** (`where=date <
+  '<date la plus ancienne reçue>'`), ancré sur une donnée et non une position — insensible au
+  glissement de la fenêtre. Syntaxe validée par appel réel (HTTP 200, page suivante correcte).
+  Preuve par reproduction : sur une fenêtre glissante synthétique (nouvelle ligne en tête entre 2
+  appels), l'ancienne logique offset perd réellement 1 ligne (129/130 lignes uniques, la plus
+  ancienne demandée absente) ; la nouvelle logique curseur récupère les 130 lignes sans doublon —
+  confirmé en forçant l'ancienne logique dans `dash._fetch_records` (le test cursor rougit alors).
+- ✅ **Tests** : 24 → **28 tests verts**, zéro réseau (vérifié en bloquant `socket.socket.connect` :
+  la suite passe toujours). 4 nouveaux : 2 injection (AVANT casse brute / APRÈS échappée), 2
+  pagination (AVANT logique offset reconstituée perd une ligne / APRÈS `dash._fetch_records` réel
+  n'en perd aucune).
+
+### Dette restante (non bloquante)
+- `pytest` absent de `requirements.txt`.
+- Imports morts préexistants (`plotly.express as px`, `datetime`).
+- ⚠️ **`diesel`/Bioliquide** = point carbone le plus incertain (colza) → fourchette large 30/150,
+  à affiner si source CRE/EDF trouvée.

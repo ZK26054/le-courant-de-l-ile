@@ -4,6 +4,7 @@ Source : API Open Data EDF Réunion
 Mise à jour automatique toutes les 5 minutes
 """
 
+import html
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -118,7 +119,8 @@ API_URLS = [
 ]
 
 # Plafond dur imposé par l'API explore v2.1 : limit > 100 → HTTP 400
-# ("limit should be less than 100"), corps en text/plain. Au-delà, on pagine via `offset`.
+# ("limit should be less than 100"), corps en text/plain. Au-delà, on pagine
+# par curseur (`where=date < ...`, voir _fetch_records) — pas par `offset`.
 API_MAX_LIMIT = 100
 
 # Correspondance colonnes API (minuscules) → noms internes (clés de COLORS).
@@ -153,22 +155,32 @@ def _fetch_records(url: str, limit: int) -> list:
     Récupère `limit` lignes sur un endpoint explore v2.1, en paginant si besoin
     (l'API refuse limit > API_MAX_LIMIT). Lève l'exception au premier échec :
     c'est fetch_data qui décide de basculer sur l'URL suivante.
+
+    Pagination par CURSEUR (keyset), pas par `offset` : le jeu de données est
+    une fenêtre glissante élaguée (nouvelles lignes en tête, anciennes hors
+    fenêtre en queue, `total_count` observé variable en cours de session).
+    Un `offset` numérique désigne une POSITION, qui ne correspond plus à la
+    même ligne d'un appel à l'autre si la fenêtre a bougé entre-temps → une
+    ligne réelle peut être sautée (dette connue, prouvée par régression).
+    Le curseur ancre au contraire la page suivante sur une VALEUR déjà reçue
+    (`where=date < '<date la plus ancienne de la page précédente>'`),
+    insensible au glissement. Syntaxe validée par appel réel le 2026-07-20
+    (HTTP 200, page suivante correcte, aucun trou).
     """
     records = []
-    offset = 0
+    cursor = None  # date (str) de la ligne la plus ancienne reçue jusqu'ici
     while len(records) < limit:
         page_size = min(API_MAX_LIMIT, limit - len(records))
-        resp = requests.get(
-            url,
-            params={"limit": page_size, "offset": offset, "order_by": "date desc"},
-            timeout=15,
-        )
+        params = {"limit": page_size, "order_by": "date desc"}
+        if cursor is not None:
+            params["where"] = f"date < '{cursor}'"
+        resp = requests.get(url, params=params, timeout=15)
         resp.raise_for_status()
         page = resp.json().get("results", [])   # `results` = lignes ; `total_count` = compteur
         if not page:
             break                               # jeu de données épuisé
         records.extend(page)
-        offset += len(page)
+        cursor = page[-1].get("date")            # dernière ligne = la plus ancienne (order_by date desc)
         if len(page) < page_size:
             break                               # dernière page
     return records
@@ -416,6 +428,13 @@ def _dark_layout(title: str) -> dict:
 # ─────────────────────────────────────────────
 
 def render_kpi(label: str, value: str, unit: str = "", extra_class: str = "") -> str:
+    # Défense en profondeur : label/value/unit sont normalement des libellés
+    # statiques ou des nombres déjà formatés (donc sûrs), mais on échappe
+    # quand même — cette fonction est un point d'entrée générique et rien ne
+    # garantit qu'une valeur d'origine API n'y transitera jamais un jour.
+    label = html.escape(str(label))
+    value = html.escape(str(value))
+    unit = html.escape(str(unit))
     return f"""
     <div class="kpi-card {extra_class}">
         <div class="kpi-label">{label}</div>
@@ -424,12 +443,25 @@ def render_kpi(label: str, value: str, unit: str = "", extra_class: str = "") ->
     </div>"""
 
 
+def build_update_badge_html(kpis: dict) -> str:
+    """
+    Construit le HTML du badge « dernière donnée ». Fonction séparée (et non
+    inline dans render_dashboard) pour être testable indépendamment de
+    Streamlit : `statut` provient de l'API EDF (donnée NON maîtrisée) et est
+    injecté dans du HTML brut (`unsafe_allow_html=True`) — sans échappement,
+    un statut malveillant (ex. `<script>...`) serait interprété comme du HTML
+    par le navigateur (XSS). `html.escape` neutralise ce risque tout en
+    préservant l'affichage normal (« Estimé » reste « Estimé »).
+    """
+    ts = kpis["date"].strftime("%d/%m/%Y %H:%M") if kpis else "—"
+    statut = html.escape(str(kpis.get("statut", "—")))
+    return f'<div class="update-badge">Dernière donnée : {ts} (heure Réunion) · statut : {statut}</div>'
+
+
 def render_dashboard(df, kpis):
     """Onglet Dashboard : reçoit df/kpis déjà chargés par main (ne les recharge pas)."""
     # ── Timestamp ──────────────────────────────
-    ts = kpis["date"].strftime("%d/%m/%Y %H:%M") if kpis else "—"
-    st.markdown(f'<div class="update-badge">Dernière donnée : {ts} (heure Réunion) · statut : {kpis.get("statut","—")}</div>',
-                unsafe_allow_html=True)
+    st.markdown(build_update_badge_html(kpis), unsafe_allow_html=True)
 
     # ── KPI cards ──────────────────────────────
     # Deux %ENR distincts (décision COO, pas de 3e variante) : strict (ENR
@@ -457,21 +489,21 @@ def render_dashboard(df, kpis):
 
     # ── Graphique principal : mix empilé ───────
     st.markdown('<div class="section-title">Mix énergétique</div>', unsafe_allow_html=True)
-    st.plotly_chart(make_stacked_area(df), use_container_width=True)
+    st.plotly_chart(make_stacked_area(df), width='stretch')
 
     # ── Ligne : production totale + % ENR ──────
     st.markdown('<div class="section-title">Production totale & renouvelables</div>', unsafe_allow_html=True)
     col_left, col_right = st.columns(2)
     with col_left:
-        st.plotly_chart(make_total_line(df), use_container_width=True)
+        st.plotly_chart(make_total_line(df), width='stretch')
     with col_right:
-        st.plotly_chart(make_renewables_pct(df), use_container_width=True)
+        st.plotly_chart(make_renewables_pct(df), width='stretch')
 
     # ── Bonus : centrales thermiques ───────────
     st.markdown('<div class="section-title">🔥 Bonus — Démarrage des centrales thermiques</div>',
                 unsafe_allow_html=True)
     st.caption("Observer les pics de Biomasse (ex-Charbon), Bioliquide (ex-Diesel) et Turbines à combustion lors des montées de charge.")
-    st.plotly_chart(make_thermal_lines(df), use_container_width=True)
+    st.plotly_chart(make_thermal_lines(df), width='stretch')
 
     # ── Pied de page ───────────────────────────
     st.markdown("""
