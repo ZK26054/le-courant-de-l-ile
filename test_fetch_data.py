@@ -2,15 +2,29 @@
 Harnais de regression - gardien-qualite.
 Prouve que les 2 bugs d'origine echouaient ET que le code actuel passe.
 Rejouable : ./.venv/Scripts/python.exe -m pytest test_fetch_data.py -v
-Necessite le reseau (re-probe reel de l'API EDF).
+
+ZERO RESEAU (Phase 4) : tous les tests s'executent sur la fixture JSON figee
+tests/fixtures/payload_edf.json (capturee le 2026-07-20, voir tests/README.md).
+`requests.get` est systematiquement patche - aucun appel reseau reel n'est
+emis, y compris pour les 2 bugs d'origine et les tests de degradation.
+Raison (CLAUDE.md) : l'API sert des donnees a statut "Estime" qui sont
+REVISEES entre deux appels -> comparer a un second appel produit de faux
+negatifs. Un test fiable capture UN SEUL payload et le fait traverser le
+code via `requests.get` patche.
 """
 import pandas as pd
 import pytest
 import requests
 
 import dashboard_reunion as dash
+from fixture_utils import (
+    load_edf_payload,
+    make_paginated_get,
+    make_order_by_sensitive_get,
+    make_synthetic_two_page_get,
+)
 
-BASE = "https://opendata-reunion.edf.fr/api/explore/v2.1/catalog/datasets/prod-electricite-temps-reel-974/records"
+PAYLOAD = load_edf_payload()
 
 
 # ── Reconstitution du code FAUTIF d'origine ────────────────────────
@@ -19,7 +33,7 @@ COLORS_CAPITALISE = list(dash.COLORS.keys()) + ["Total"]
 
 def fetch_data_ORIGINE_BUG1(limit=200):
     """Bug n1 : order_by='Date DESC' -> HTTP 400 -> DataFrame vide."""
-    r = requests.get(BASE, params={"limit": limit, "order_by": "Date DESC"}, timeout=15)
+    r = requests.get(dash.API_URLS[0], params={"limit": limit, "order_by": "Date DESC"}, timeout=15)
     r.raise_for_status()
     return pd.DataFrame(r.json().get("results", []))
 
@@ -27,7 +41,7 @@ def fetch_data_ORIGINE_BUG1(limit=200):
 def fetch_data_ORIGINE_BUG2(limit=100):
     """Bug n2 : colonnes API minuscules comparees aux cles COLORS capitalisees
     -> le `else` ecrase tout a 0.0 -> tous les KPI a zero."""
-    r = requests.get(BASE, params={"limit": limit, "order_by": "date desc"}, timeout=15)
+    r = requests.get(dash.API_URLS[0], params={"limit": limit, "order_by": "date desc"}, timeout=15)
     df = pd.DataFrame(r.json().get("results", []))
     for col in COLORS_CAPITALISE:
         if col in df.columns:          # 'Total' vs 'total' -> jamais vrai
@@ -37,26 +51,50 @@ def fetch_data_ORIGINE_BUG2(limit=100):
     return df
 
 
-# ── ECHEC AVANT ────────────────────────────────────────────────────
-def test_AVANT_bug1_order_by_capitalise_leve_400():
+# ── ECHEC AVANT (reconstitue hors reseau, via requests.get patche) ─
+def test_AVANT_bug1_order_by_capitalise_leve_400(monkeypatch):
+    monkeypatch.setattr(dash.requests, "get", make_order_by_sensitive_get(PAYLOAD))
     with pytest.raises(requests.exceptions.HTTPError) as e:
         fetch_data_ORIGINE_BUG1()
     assert e.value.response.status_code == 400
 
 
-def test_AVANT_bug2_normalisation_met_tous_les_kpi_a_zero():
+def test_AVANT_bug2_normalisation_met_tous_les_kpi_a_zero(monkeypatch):
+    monkeypatch.setattr(dash.requests, "get", make_paginated_get(PAYLOAD))
     df = fetch_data_ORIGINE_BUG2()
-    assert not df.empty, "l'API doit repondre pour que le test soit valide"
+    assert not df.empty, "la fixture doit fournir des lignes pour que le test soit valide"
     for col in COLORS_CAPITALISE:
         assert (df[col] == 0.0).all(), f"{col} devrait etre ecrase a 0 par le bug"
 
 
-# ── SUCCES APRES (code actuel, cache Streamlit contourne) ──────────
+# ── SUCCES APRES (code actuel, sur la fixture figee) ────────────────
 @pytest.fixture(scope="module")
 def df():
-    d = dash.fetch_data.__wrapped__(limit=200)
-    assert not d.empty, "REFUS : fetch_data renvoie un DataFrame vide sur donnees reelles"
+    mp = pytest.MonkeyPatch()
+    mp.setattr(dash.requests, "get", make_paginated_get(PAYLOAD))
+    try:
+        d = dash.fetch_data.__wrapped__(limit=200)
+    finally:
+        mp.undo()
+    assert not d.empty, "REFUS : fetch_data renvoie un DataFrame vide sur la fixture"
     return d
+
+
+def test_APRES_production_envoie_order_by_minuscule(monkeypatch):
+    """
+    Teste le VRAI chemin de production (_fetch_records/fetch_data), pas la
+    fonction ORIGINE_BUG1 reconstituee : sert la fixture uniquement si
+    order_by="date desc" (minuscule), sinon HTTP 400 - comme l'API reelle.
+    Si le code de production regresse vers "Date DESC", ce test doit rougir
+    (fetch_data degrade en DataFrame vide, st.error est appele).
+    """
+    monkeypatch.setattr(dash.requests, "get", make_order_by_sensitive_get(PAYLOAD))
+    monkeypatch.setattr(dash.st, "error", lambda *a, **k: None)
+    out = dash.fetch_data.__wrapped__(limit=200)
+    assert not out.empty, (
+        "fetch_data a degrade en DataFrame vide : le code de production "
+        "n'envoie plus order_by='date desc' (minuscule) - regression du bug n1"
+    )
 
 
 def test_APRES_total_non_nul_ordre_de_grandeur_reunion(df):
@@ -95,13 +133,24 @@ def test_APRES_somme_filieres_egale_total(df):
 
 
 def test_APRES_negatifs_preserves_non_clippes(df):
-    """turbines_combustion / stockage peuvent etre negatifs : ne pas clipper."""
+    """turbines_combustion / stockage peuvent etre negatifs : ne pas clipper.
+    (Fixture 2026-07-20 : turbines_combustion est negatif sur les 100 lignes.)"""
     assert (df[["Turbines_combustion", "Stockage"]].min() < 0).any(), \
-        "aucune valeur negative dans l'echantillon : test non concluant"
+        "aucune valeur negative dans la fixture : test non concluant"
 
 
-def test_APRES_pagination_depasse_le_plafond_100(df):
-    assert len(df) > 100, f"pagination inoperante : {len(df)} lignes"
+def test_APRES_pagination_assemble_plusieurs_pages(monkeypatch):
+    """
+    Unit-test du MECANISME de pagination de _fetch_records : donnees
+    synthetiques (2 pages de 100 + 30), independantes de la fixture reelle,
+    pour prouver que l'offset avance et que les pages sont assemblees
+    au-dela du plafond API_MAX_LIMIT=100 - sans dependre du volume reel
+    disponible dans la capture figee du 2026-07-20 (qui plafonne a 100
+    lignes brutes, ~97 apres dedup).
+    """
+    monkeypatch.setattr(dash.requests, "get", make_synthetic_two_page_get(100, 30))
+    records = dash._fetch_records(dash.API_URLS[0], limit=130)
+    assert len(records) == 130, f"pagination inoperante : {len(records)} lignes assemblees"
 
 
 def test_APRES_dates_triees_et_uniques(df):
@@ -112,8 +161,12 @@ def test_APRES_dates_triees_et_uniques(df):
 
 # ── Invariant n3 : degradation propre ──────────────────────────────
 def test_degradation_propre_api_injoignable(monkeypatch):
-    """API down -> DataFrame vide, PAS de crash."""
-    monkeypatch.setattr(dash, "API_URLS", ["https://invalid.invalid/nope"])
+    """API injoignable -> DataFrame vide, PAS de crash. `requests.get` leve
+    directement l'exception reseau : aucune tentative de connexion reelle
+    (meme vouee a l'echec) n'est emise."""
+    def raise_connexion(*a, **k):
+        raise requests.exceptions.ConnectionError("simulated: host unreachable")
+    monkeypatch.setattr(dash.requests, "get", raise_connexion)
     monkeypatch.setattr(dash.st, "error", lambda *a, **k: None)
     out = dash.fetch_data.__wrapped__(limit=10)
     assert isinstance(out, pd.DataFrame) and out.empty
