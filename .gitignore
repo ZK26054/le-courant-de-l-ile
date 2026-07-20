@@ -1,0 +1,11 @@
+# ── Secrets — NE JAMAIS versionner (invariant n°1) ──
+.streamlit/secrets.toml
+.env
+
+# ── Environnement Python ──
+.venv/
+__pycache__/
+*.pyc
+
+# ── Divers ──
+.pytest_cache/
