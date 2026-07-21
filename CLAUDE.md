@@ -6,19 +6,22 @@
 > Dernier recalage sur preuve : **2026-07-18**.
 
 ## Objectif
-Dashboard temps réel du mix électrique de La Réunion (Open Data EDF Réunion), enrichi d'agents experts (Claude) qui analysent les données live sous plusieurs angles : électrotechnique, climat, juridique transition énergétique. Phase 0 (ingestion), Phase 1 (contexte enrichi), Phase 1.5 (reclassement nomenclature/carbone), Phase 4 (git + fixture de régression) et Phase 1.75 (sprint dette : XSS, `width`, pagination curseur) **livrées et validées**. Prochaine étape : **Phase 2** (nouveaux experts).
+Dashboard temps réel du mix électrique de La Réunion (Open Data EDF Réunion), enrichi d'agents experts (Claude) qui analysent les données live sous plusieurs angles : électrotechnique, climat, juridique transition énergétique, **souveraineté/résilience**. Phases 0 (ingestion), 1 (contexte enrichi), 1.5 (reclassement nomenclature/carbone), 4 (git + fixture de régression), 1.75 (sprint dette : XSS, `width`, pagination curseur) et **2 (expert souveraineté + sélecteur d'expert)** **livrées et validées** (Phase 2 : validation live des réponses en attente de crédits Anthropic). Prochaine étape possible : autres experts (économie ZNI, réseau/smart-grid, prospective 2040).
 
 ## Stack
 Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-autorefresh.
 
 ## Architecture des fichiers
 - `dashboard_reunion.py` — app principale, **3 onglets** (`st.tabs`) : Dashboard (`render_dashboard`), Agent expert (`agent_expert.render_agent_tab`), Diagnostic (`render_diagnostic`). Contient `API_URLS`, `fetch_data`, `_fetch_records`, `compute_kpis`, les fabriques Plotly (`make_stacked_area`, `make_total_line`, `make_renewables_pct`, `make_thermal_lines`). Importe la taxonomie depuis `filieres.py`.
-- `agent_expert.py` — agents experts Claude (dégelé, intégré). `SYSTEM_PROMPT` multi-expertise, `build_data_context` (contexte live enrichi : instantané, tendance 1h, amplitude, double %ENR, fourchette carbone), `compute_carbon_intensity` (retourne un couple `(low, high)`), `ask_expert`, `render_agent_tab`. Couplage lâche : reçoit `df`/`kpis`, ne manipule que les noms internes capitalisés. Importe la taxonomie depuis `filieres.py`.
+- `agent_expert.py` — intégration agent Claude. `build_data_context` (contexte live enrichi : instantané, tendance 1h, amplitude, double %ENR, fourchette carbone), `compute_carbon_intensity` (retourne un couple `(low, high)`), `ask_expert(messages, api_key, data_context, system_prompt)` (le prompt est passé explicitement — plus de `SYSTEM_PROMPT` monolithique), `render_agent_tab` (avec **sélecteur d'expert** `st.selectbox`, reset de l'historique au changement de persona). Couplage lâche : reçoit `df`/`kpis`, ne manipule que les noms internes capitalisés. Importe la taxonomie depuis `filieres.py`, les personas depuis `experts.py`.
+- `experts.py` — **SOCLE CONTENU** (personas, miroir de `filieres.py`) : `BASE_PROMPT` (posture + garde-fous éolien & limite épistémique biomasse/bioliquide, communs à TOUTES les personas), `DOMAINE_*` (électrotechnique, climat, juridique, **souveraineté/résilience**), `EXPERTS = {"generaliste", "souverainete", …}`. Texte pur, aucun import projet, aucune donnée filière (invariant n°7).
 - `filieres.py` — **SOURCE UNIQUE DE VÉRITÉ** (voir invariant n°7) : taxonomie 3 familles, `EMISSION_FACTORS_LOW/HIGH`, `DISPLAY_LABELS`/`label()`, `COLORS`. Socle pur, aucun import projet. Importé par les deux fichiers ci-dessus.
-- **Tests — 28 au total, tous déterministes et HORS RÉSEAU** (fixture figée) :
+- **Tests — 42 au total, tous déterministes et HORS RÉSEAU** (fixture figée, `anthropic` mocké) :
   `test_fetch_data.py` (18, ingestion + pagination curseur + échappement XSS) ·
-  `test_filieres.py` (7, taxonomie/facteurs) · `test_taxonomie_carbone.py` (3, fige le modèle Phase 1.5).
+  `test_filieres.py` (7, taxonomie/facteurs) · `test_taxonomie_carbone.py` (3, fige le modèle Phase 1.5) ·
+  `test_experts.py` (14, personas + garde-fous transverses + ancrage dates sourcées + transmission du bon prompt).
   `fixture_utils.py` — doubles de test partagés · `tests/fixtures/payload_edf.json` — payload EDF **figé volontairement** (ne pas régénérer sans raison).
+- `docs/sources/SOURCE_bilan-previsionnel-2024.md` — **source primaire** (Bilan Prévisionnel EDF SEI 2024), référence factuelle de l'expert souveraineté.
 - `docs/adr/002-source-unique-taxonomie-filieres.md` — ADR de la source unique.
 - `requirements.txt` — dépendances épinglées en `==`.
 - `prod-electricite-temps-reel-974.csv` — échantillon de données local.
@@ -193,6 +196,32 @@ Preuves indépendantes (triple mesure : `dev-features`, `gardien-qualite`, puis 
   Toute la suite tourne **hors réseau** (vérifié en bloquant `socket.socket.connect`).
 - **Filet prouvé par la casse** : reclasser `Diesel` en FOSSILE → test rouge ; remettre
   `order_by="Date DESC"` → test rouge ; restauration → vert. Voir la leçon en invariant n°4.
+
+## État actuel — Phase 2 ✅ LIVRÉE (2026-07-21) — expert souveraineté + sélecteur
+
+- **Expert Souveraineté/Résilience** ajouté, sourcé sur le **Bilan Prévisionnel EDF SEI 2024**
+  (`docs/sources/`) : signature analytique = 3 niveaux de lecture (%ENR strict / réglementaire /
+  **moyenne annuelle officielle 57 % en 2023**), dépendance import (colza + pellets), vulnérabilités
+  (Rivière de l'Est, cyclones), inertie/non-synchrone, trajectoire 2040. Neutralité politique imposée
+  (position EDF ET critique « dépendance déplacée », sans militer).
+- **Architecture** : nouveau socle `experts.py` (personas), `EXPERTS = {"generaliste", "souverainete"}`,
+  sélecteur `st.selectbox` dans l'UI (défaut `generaliste`), reset historique au changement.
+  `ask_expert` prend le prompt en paramètre explicite. `filieres.py` **intact** (non touché).
+  Garde-fous éolien + limite épistémique dans `BASE_PROMPT` → hérités par TOUTE persona (testé transverse).
+- **Expert électrotechnique enrichi** : cadre synchrone/non-synchrone, inertie, réserves 50/200 MW,
+  critère PPE 3 h/an. Correction factuelle : **aucune STEP opérationnelle** (seulement batteries).
+- **Preuves** : **42 tests verts** (28 + 14 `test_experts.py`), hors réseau, `anthropic` mocké.
+  Filet prouvé par casse : réintroduire « mars 2024 » → `test_aucune_persona_naffirme_la_date_erronee`
+  rougit. `streamlit run` → HTTP 200, sélecteur fonctionnel (`AppTest`).
+- ⚠️ **Régression attrapée par `gardien-qualite`** : le commit initial corrigeait la date de conversion
+  dans CLAUDE.md mais laissait « mars 2024 » (faux) **en dur dans les prompts LLM**. Corrigé (mi-2024,
+  Port-Est oct. 2023) + 2 tests d'ancrage ajoutés. Illustre : *un fait corrigé dans la doc mais pas
+  dans le code envoyé au modèle reste un mensonge servi à l'utilisateur.*
+- **Reste à valider en LIVE** (COO, dès crédits Anthropic) : la **qualité** des réponses sur les
+  5-6 questions-test de `concepteur-experts` — « La Réunion est-elle autonome ? » (doit exposer
+  l'écart strict/réglementaire/annuel + imports, ne pas dire « oui à 99 % »), « Port-Est au fioul ? »
+  (→ colza oct. 2023), « risque Rivière de l'Est ? » (→ cyclones + travaux). Prompts prouvés corrects ;
+  exécution par le modèle non testable sans crédits.
 
 ## État actuel — Phase 1.75 ✅ LIVRÉE (2026-07-20) — sprint dette
 

@@ -41,6 +41,29 @@ def test_prompt_souverainete_contient_les_ancres_factuelles_clefs():
         assert ancre in prompt, f"Ancre factuelle manquante dans le prompt souveraineté : {ancre!r}"
 
 
+def test_aucune_persona_naffirme_la_date_erronee_mars_2024():
+    """
+    Régression Phase 2 (trouvée par gardien-qualite) : « mars 2024 » était codé en dur
+    dans BASE_PROMPT et DOMAINE_ELECTROTECHNIQUE, alors que la source primaire
+    (docs/sources/SOURCE_bilan-previsionnel-2024.md) établit que la conversion de TOUT
+    le parc charbon/fioul est achevée **mi-2024** (Le Gol A.1/A.2 : fév. et juil. 2024).
+    Le prompt affirmait donc au LLM une date que le projet avait corrigée ailleurs.
+    Ce test ancre la date pour qu'elle ne puisse plus régresser silencieusement.
+    """
+    for key, expert in experts.EXPERTS.items():
+        assert "mars 2024" not in expert["prompt"], (
+            f"{key} : date erronée « mars 2024 » — la source primaire dit mi-2024"
+        )
+
+
+def test_conversion_parc_datee_mi_2024_dans_toutes_les_personas():
+    """La bonne date doit être présente, pas seulement l'absence de la mauvaise."""
+    for key, expert in experts.EXPERTS.items():
+        assert "mi-2024" in expert["prompt"], (
+            f"{key} : la date de conversion du parc (mi-2024) doit être affirmée"
+        )
+
+
 def test_prompt_souverainete_contient_le_garde_fou_instantane_vs_annuel():
     prompt = experts.EXPERTS["souverainete"]["prompt"]
     assert "JAMAIS" in prompt, "Garde-fou instantané/annuel absent (mot-clé JAMAIS introuvable)"
