@@ -3,7 +3,7 @@
 > Mémoire projet persistante. Lire ce fichier au début de chaque session.
 > **Ce fichier décrit le réel, pas la cible.** Toute section démentie par une preuve
 > (re-probe, test) doit être corrigée ici *avant* de coder par-dessus.
-> Dernier recalage sur preuve : **2026-07-18**.
+> Dernier recalage sur preuve : **2026-07-28** (Carte installations V1 ; recalages précédents : Phase 4/1.75 le 2026-07-20, Phase 2 le 2026-07-21).
 
 ## Objectif
 Dashboard temps réel du mix électrique de La Réunion (Open Data EDF Réunion), enrichi d'agents experts (Claude) qui analysent les données live sous plusieurs angles : électrotechnique, climat, juridique transition énergétique, **souveraineté/résilience**, et d'une **carte des installations** à la maille communale (registre EDF). Phases 0 (ingestion), 1 (contexte enrichi), 1.5 (reclassement nomenclature/carbone), 4 (git + fixture de régression), 1.75 (sprint dette : XSS, `width`, pagination curseur), **2 (expert souveraineté + sélecteur d'expert)** et **Carte installations V1 (registre, maille communale)** **livrées et validées** (Phase 2 : validation live des réponses en attente de crédits Anthropic). Prochaine étape possible : autres experts (économie ZNI, réseau/smart-grid, prospective 2040).
