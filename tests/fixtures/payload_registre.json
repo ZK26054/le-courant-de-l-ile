@@ -1,0 +1,327 @@
+{
+  "total_count": 46,
+  "results": [
+    {
+      "codeinseecommune": "97407",
+      "commune": "Le Port",
+      "filiere": "Bioénergies",
+      "p_kw": 211000,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97408",
+      "commune": "La Possession",
+      "filiere": "Thermique non renouvelable",
+      "p_kw": 160000,
+      "n_inst": 4
+    },
+    {
+      "codeinseecommune": "97419",
+      "commune": "Sainte-Rose",
+      "filiere": "Hydraulique",
+      "p_kw": 153680,
+      "n_inst": 7
+    },
+    {
+      "codeinseecommune": "97414",
+      "commune": "Saint-Louis",
+      "filiere": "Bioénergies",
+      "p_kw": 110800,
+      "n_inst": 2
+    },
+    {
+      "codeinseecommune": "97409",
+      "commune": "Saint-André",
+      "filiere": "Bioénergies",
+      "p_kw": 99500,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97416",
+      "commune": "Saint-Pierre",
+      "filiere": "Solaire",
+      "p_kw": 65755.7,
+      "n_inst": 1194
+    },
+    {
+      "codeinseecommune": "97418",
+      "commune": "Sainte-Marie",
+      "filiere": "Thermique non renouvelable",
+      "p_kw": 48000,
+      "n_inst": 2
+    },
+    {
+      "codeinseecommune": "97407",
+      "commune": "Le Port",
+      "filiere": "Solaire",
+      "p_kw": 45043.85,
+      "n_inst": 265
+    },
+    {
+      "codeinseecommune": "97416",
+      "commune": "Saint-Pierre",
+      "filiere": "Thermique non renouvelable",
+      "p_kw": 41000,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97420",
+      "commune": "Sainte-Suzanne",
+      "filiere": "Eolien",
+      "p_kw": 28300,
+      "n_inst": 3
+    },
+    {
+      "codeinseecommune": "97415",
+      "commune": "Saint-Paul",
+      "filiere": "Solaire",
+      "p_kw": 22111.49,
+      "n_inst": 1375
+    },
+    {
+      "codeinseecommune": "97410",
+      "commune": "Saint-Benoît",
+      "filiere": "Solaire",
+      "p_kw": 20651.12,
+      "n_inst": 320
+    },
+    {
+      "codeinseecommune": "97414",
+      "commune": "Saint-Louis",
+      "filiere": "Solaire",
+      "p_kw": 17328.1,
+      "n_inst": 608
+    },
+    {
+      "codeinseecommune": "97420",
+      "commune": "Sainte-Suzanne",
+      "filiere": "Solaire",
+      "p_kw": 16810.41,
+      "n_inst": 316
+    },
+    {
+      "codeinseecommune": "97419",
+      "commune": "Sainte-Rose",
+      "filiere": "Solaire",
+      "p_kw": 16480.6,
+      "n_inst": 73
+    },
+    {
+      "codeinseecommune": "97411",
+      "commune": "Saint-Denis",
+      "filiere": "Solaire",
+      "p_kw": 15962.76,
+      "n_inst": 899
+    },
+    {
+      "codeinseecommune": "97418",
+      "commune": "Sainte-Marie",
+      "filiere": "Solaire",
+      "p_kw": 14525.1,
+      "n_inst": 472
+    },
+    {
+      "codeinseecommune": "97404",
+      "commune": "L'Étang-Salé",
+      "filiere": "Solaire",
+      "p_kw": 13845.46,
+      "n_inst": 364
+    },
+    {
+      "codeinseecommune": "97422",
+      "commune": "Le Tampon",
+      "filiere": "Solaire",
+      "p_kw": 11838.11,
+      "n_inst": 874
+    },
+    {
+      "codeinseecommune": "97409",
+      "commune": "Saint-André",
+      "filiere": "Solaire",
+      "p_kw": 10400.28,
+      "n_inst": 528
+    },
+    {
+      "codeinseecommune": "97409",
+      "commune": "Saint-André",
+      "filiere": "Hydraulique",
+      "p_kw": 8200,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97416",
+      "commune": "Saint-Pierre",
+      "filiere": "Bioénergies",
+      "p_kw": 7880,
+      "n_inst": 3
+    },
+    {
+      "codeinseecommune": "97408",
+      "commune": "La Possession",
+      "filiere": "Solaire",
+      "p_kw": 7686.63,
+      "n_inst": 635
+    },
+    {
+      "codeinseecommune": "97419",
+      "commune": "Sainte-Rose",
+      "filiere": "Eolien",
+      "p_kw": 6325,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97413",
+      "commune": "Saint-Leu",
+      "filiere": "Solaire",
+      "p_kw": 6215.76,
+      "n_inst": 533
+    },
+    {
+      "codeinseecommune": "97413",
+      "commune": "Saint-Leu",
+      "filiere": "Stockage non hydraulique",
+      "p_kw": 5000,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97412",
+      "commune": "Saint-Joseph",
+      "filiere": "Solaire",
+      "p_kw": 4937.25,
+      "n_inst": 440
+    },
+    {
+      "codeinseecommune": "97410",
+      "commune": "Saint-Benoît",
+      "filiere": "Stockage non hydraulique",
+      "p_kw": 4898,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97403",
+      "commune": "Entre-Deux",
+      "filiere": "Hydraulique",
+      "p_kw": 4600,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97412",
+      "commune": "Saint-Joseph",
+      "filiere": "Hydraulique",
+      "p_kw": 3600,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97402",
+      "commune": "Bras-Panon",
+      "filiere": "Solaire",
+      "p_kw": 2729.66,
+      "n_inst": 180
+    },
+    {
+      "codeinseecommune": "97410",
+      "commune": "Saint-Benoît",
+      "filiere": "Bioénergies",
+      "p_kw": 2280,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97402",
+      "commune": "Bras-Panon",
+      "filiere": "Hydraulique",
+      "p_kw": 2240,
+      "n_inst": 2
+    },
+    {
+      "codeinseecommune": "97418",
+      "commune": "Sainte-Marie",
+      "filiere": "Bioénergies",
+      "p_kw": 2000,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97420",
+      "commune": "Sainte-Suzanne",
+      "filiere": "Bioénergies",
+      "p_kw": 1898,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97405",
+      "commune": "Petite-Île",
+      "filiere": "Solaire",
+      "p_kw": 1853,
+      "n_inst": 221
+    },
+    {
+      "codeinseecommune": "97401",
+      "commune": "Les Avirons",
+      "filiere": "Solaire",
+      "p_kw": 1365.2,
+      "n_inst": 186
+    },
+    {
+      "codeinseecommune": "97403",
+      "commune": "Entre-Deux",
+      "filiere": "Solaire",
+      "p_kw": 1111.61,
+      "n_inst": 111
+    },
+    {
+      "codeinseecommune": "97415",
+      "commune": "Saint-Paul",
+      "filiere": "Hydraulique",
+      "p_kw": 811,
+      "n_inst": 2
+    },
+    {
+      "codeinseecommune": "97423",
+      "commune": "Les Trois-Bassins",
+      "filiere": "Solaire",
+      "p_kw": 584.25,
+      "n_inst": 74
+    },
+    {
+      "codeinseecommune": "97406",
+      "commune": "La Plaine-des-Palmistes",
+      "filiere": "Solaire",
+      "p_kw": 368.86,
+      "n_inst": 62
+    },
+    {
+      "codeinseecommune": "97417",
+      "commune": "Saint-Philippe",
+      "filiere": "Solaire",
+      "p_kw": 328.09,
+      "n_inst": 53
+    },
+    {
+      "codeinseecommune": "97421",
+      "commune": "Salazie",
+      "filiere": "Solaire",
+      "p_kw": 239.19,
+      "n_inst": 22
+    },
+    {
+      "codeinseecommune": "97416",
+      "commune": "Saint-Pierre",
+      "filiere": "Hydraulique",
+      "p_kw": 210,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97413",
+      "commune": "Saint-Leu",
+      "filiere": "Hydraulique",
+      "p_kw": 150,
+      "n_inst": 1
+    },
+    {
+      "codeinseecommune": "97424",
+      "commune": "Cilaos",
+      "filiere": "Solaire",
+      "p_kw": 148.5,
+      "n_inst": 34
+    }
+  ]
+}

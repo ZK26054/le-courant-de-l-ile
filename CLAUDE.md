@@ -6,23 +6,27 @@
 > Dernier recalage sur preuve : **2026-07-18**.
 
 ## Objectif
-Dashboard temps réel du mix électrique de La Réunion (Open Data EDF Réunion), enrichi d'agents experts (Claude) qui analysent les données live sous plusieurs angles : électrotechnique, climat, juridique transition énergétique, **souveraineté/résilience**. Phases 0 (ingestion), 1 (contexte enrichi), 1.5 (reclassement nomenclature/carbone), 4 (git + fixture de régression), 1.75 (sprint dette : XSS, `width`, pagination curseur) et **2 (expert souveraineté + sélecteur d'expert)** **livrées et validées** (Phase 2 : validation live des réponses en attente de crédits Anthropic). Prochaine étape possible : autres experts (économie ZNI, réseau/smart-grid, prospective 2040).
+Dashboard temps réel du mix électrique de La Réunion (Open Data EDF Réunion), enrichi d'agents experts (Claude) qui analysent les données live sous plusieurs angles : électrotechnique, climat, juridique transition énergétique, **souveraineté/résilience**, et d'une **carte des installations** à la maille communale (registre EDF). Phases 0 (ingestion), 1 (contexte enrichi), 1.5 (reclassement nomenclature/carbone), 4 (git + fixture de régression), 1.75 (sprint dette : XSS, `width`, pagination curseur), **2 (expert souveraineté + sélecteur d'expert)** et **Carte installations V1 (registre, maille communale)** **livrées et validées** (Phase 2 : validation live des réponses en attente de crédits Anthropic). Prochaine étape possible : autres experts (économie ZNI, réseau/smart-grid, prospective 2040).
 
 ## Stack
 Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-autorefresh.
 
 ## Architecture des fichiers
-- `dashboard_reunion.py` — app principale, **3 onglets** (`st.tabs`) : Dashboard (`render_dashboard`), Agent expert (`agent_expert.render_agent_tab`), Diagnostic (`render_diagnostic`). Contient `API_URLS`, `fetch_data`, `_fetch_records`, `compute_kpis`, les fabriques Plotly (`make_stacked_area`, `make_total_line`, `make_renewables_pct`, `make_thermal_lines`). Importe la taxonomie depuis `filieres.py`.
+- `dashboard_reunion.py` — app principale, **4 onglets** (`st.tabs`) : Dashboard (`render_dashboard`), Carte (`registre_installations.render_carte_tab`, 2e position), Agent expert (`agent_expert.render_agent_tab`), Diagnostic (`render_diagnostic`). Contient `API_URLS`, `fetch_data`, `_fetch_records`, `compute_kpis`, les fabriques Plotly (`make_stacked_area`, `make_total_line`, `make_renewables_pct`, `make_thermal_lines`). Importe la taxonomie depuis `filieres.py`.
 - `agent_expert.py` — intégration agent Claude. `build_data_context` (contexte live enrichi : instantané, tendance 1h, amplitude, double %ENR, fourchette carbone), `compute_carbon_intensity` (retourne un couple `(low, high)`), `ask_expert(messages, api_key, data_context, system_prompt)` (le prompt est passé explicitement — plus de `SYSTEM_PROMPT` monolithique), `render_agent_tab` (avec **sélecteur d'expert** `st.selectbox`, reset de l'historique au changement de persona). Couplage lâche : reçoit `df`/`kpis`, ne manipule que les noms internes capitalisés. Importe la taxonomie depuis `filieres.py`, les personas depuis `experts.py`.
 - `experts.py` — **SOCLE CONTENU** (personas, miroir de `filieres.py`) : `BASE_PROMPT` (posture + garde-fous éolien & limite épistémique biomasse/bioliquide, communs à TOUTES les personas), `DOMAINE_*` (électrotechnique, climat, juridique, **souveraineté/résilience**), `EXPERTS = {"generaliste", "souverainete", …}`. Texte pur, aucun import projet, aucune donnée filière (invariant n°7).
-- `filieres.py` — **SOURCE UNIQUE DE VÉRITÉ** (voir invariant n°7) : taxonomie 3 familles, `EMISSION_FACTORS_LOW/HIGH`, `DISPLAY_LABELS`/`label()`, `COLORS`. Socle pur, aucun import projet. Importé par les deux fichiers ci-dessus.
-- **Tests — 42 au total, tous déterministes et HORS RÉSEAU** (fixture figée, `anthropic` mocké) :
+- `filieres.py` — **SOURCE UNIQUE DE VÉRITÉ** (voir invariant n°7) : taxonomie 3 familles, `EMISSION_FACTORS_LOW/HIGH`, `DISPLAY_LABELS`/`label()`, `COLORS`. Socle pur, aucun import projet. Importé par les deux fichiers ci-dessus. **Non touché** par la Carte installations (registre) — voir ADR-003, nomenclature de filières différente.
+- `registre_installations.py` — **module ISOLÉ** (voir `docs/adr/003-*.md`), un seul consommateur (`dashboard_reunion.py`) : `fetch_registre_par_commune_filiere` (registre EDF agrégé commune×filière, kW→MW, cache TTL long), `load_centroides`/`joindre_centroides` (jointure sur `codeinseecommune` string strict), `make_bubble_map` (`go.Scattermap`, bulles ∝ MW échelle racine carrée), `render_carte_tab` (LAZY, dégradation locale). Palette `FILIERE_COLORS` locale, non fusionnée avec `filieres.COLORS` (nomenclature différente : Solaire/Thermique non renouvelable/etc., pas de Charbon/Diesel).
+- `geo/communes_974_centroides.json` + `geo/README.md` — 24 centroïdes communaux (INSEE→lat/lon), source `geo.api.gouv.fr` (Etalab), donnée de référence administrative publique, **pas** un hardcode par installation (voir invariant data-driven ADR-003).
+- **Tests — 62 au total, tous déterministes et HORS RÉSEAU** (fixtures figées, `anthropic` mocké) :
   `test_fetch_data.py` (18, ingestion + pagination curseur + échappement XSS) ·
   `test_filieres.py` (7, taxonomie/facteurs) · `test_taxonomie_carbone.py` (3, fige le modèle Phase 1.5) ·
-  `test_experts.py` (14, personas + garde-fous transverses + ancrage dates sourcées + transmission du bon prompt).
-  `fixture_utils.py` — doubles de test partagés · `tests/fixtures/payload_edf.json` — payload EDF **figé volontairement** (ne pas régénérer sans raison).
+  `test_experts.py` (14, personas + garde-fous transverses + ancrage dates sourcées + transmission du bon prompt) ·
+  `test_registre_installations.py` (20, centroïdes/fetch kW→MW/`sum(nbinstallations)`≠`count(*)`/jointure/carte à bulles/`AppTest`).
+  `fixture_utils.py` — doubles de test partagés (flux temps réel) · `tests/fixtures/payload_edf.json` — payload EDF **figé volontairement** (ne pas régénérer sans raison) · `tests/fixtures/payload_registre.json` — payload registre **figé volontairement** (capturé 2026-07-28, voir tests/README.md).
 - `docs/sources/SOURCE_bilan-previsionnel-2024.md` — **source primaire** (Bilan Prévisionnel EDF SEI 2024), référence factuelle de l'expert souveraineté.
-- `docs/adr/002-source-unique-taxonomie-filieres.md` — ADR de la source unique.
+- `docs/adr/002-source-unique-taxonomie-filieres.md` — ADR de la source unique (filières temps réel).
+- `docs/adr/003-carte-installations-registre-communal.md` — ADR de la carte des installations (registre, maille communale).
 - `requirements.txt` — dépendances épinglées en `==`.
 - `prod-electricite-temps-reel-974.csv` — échantillon de données local.
 - `.claude/agents/` — équipe de sous-agents de développement (voir plus bas).
@@ -222,6 +226,62 @@ Preuves indépendantes (triple mesure : `dev-features`, `gardien-qualite`, puis 
   l'écart strict/réglementaire/annuel + imports, ne pas dire « oui à 99 % »), « Port-Est au fioul ? »
   (→ colza oct. 2023), « risque Rivière de l'Est ? » (→ cyclones + travaux). Prompts prouvés corrects ;
   exécution par le modèle non testable sans crédits.
+
+## État actuel — Carte installations (registre) ✅ LIVRÉE (2026-07-28)
+
+- **Nouveau flux de données, isolé du temps réel** : registre EDF
+  `registre-national-des-installations-de-production-et-de-stockage-d-electricite-reunion`
+  (slug suffixé `-reunion`, 724 lignes brutes agrégées par lots, toutes en 974). Endpoint :
+  `https://opendata-reunion.edf.fr/api/explore/v2.1/catalog/datasets/registre-national-des-installations-de-production-et-de-stockage-d-electricite-reunion/records`.
+  **Aucune coordonnée dans ce jeu** : localisation = `codeinseecommune` (string "974xx") +
+  `commune` ; `nominstallation` = "Confidentiel" partout (pas de nom de site).
+- **Requête validée** : `select=codeinseecommune, commune, filiere, sum(puismaxinstallee) as
+  p_kw, sum(nbinstallations) as n_inst` + `group_by=codeinseecommune, commune, filiere` +
+  `order_by=p_kw desc` → **46 lignes** (commune × filière), un seul appel API, 0 code INSEE
+  vide. Total agrégé ≈ **1200,7 MW**, `sum(nbinstallations)` = **9878**.
+- **Pièges** : `puismaxinstallee` en **kW** (conversion kW→MW UNE SEULE FOIS, à la source,
+  dans `fetch_registre_par_commune_filiere`) ; **`sum(nbinstallations)` (9878) ≠ `count(*)`
+  (724 lignes brutes non groupées)** — l'agrégation par lots du registre est réelle, un
+  comptage naïf des lignes sous-compte massivement le parc réel ; corps d'erreur parfois
+  `text/plain` (comme le flux temps réel) → géré explicitement (`ValueError` typée, pas de
+  `JSONDecodeError` brute).
+- **Filières du registre** (nomenclature DIFFÉRENTE du flux temps réel) : Solaire, Hydraulique,
+  Bioénergies, Thermique non renouvelable, Eolien, Stockage non hydraulique. Palette locale
+  `FILIERE_COLORS` dans `registre_installations.py`, **non fusionnée** avec `filieres.COLORS`
+  (les deux classifications ne sont pas bijectives — voir ADR-003).
+- **Invariant data-driven (non-négociable, ADR-003)** : V1 n'a **aucune coordonnée de centrale
+  saisie à la main, ni aucune identité de site déduite**. La table de centroïdes communaux
+  (`geo/communes_974_centroides.json`, 24 lignes, source `geo.api.gouv.fr`/Etalab) contient des
+  coordonnées, mais à la maille COMMUNE — donnée de référence administrative publique et
+  sourcée, pas un hardcode par installation. L'affectation installation → lieu reste 100 %
+  pilotée par l'API via `codeinseecommune`, en jointure **string strict** (zéros initiaux
+  préservés des deux côtés).
+- **Rendu** : bulles proportionnelles (`go.Scattermap`, MapLibre, style `open-street-map`
+  token-free — préféré à `go.Scattermapbox`, legacy bien que fonctionnel en Plotly 6.9.0), aire
+  ∝ MW (échelle racine carrée du rayon, pas linéaire), couleur = filière dominante par commune.
+  Pas de choroplèthe (déformerait une quantité absolue par l'aire du territoire communal).
+- **Nouvel onglet `🗺️ Carte`, 2e position** (Dashboard, Carte, Agent expert, Diagnostic).
+  `render_carte_tab()` est **LAZY** (appelé uniquement dans le corps de l'onglet, jamais dans
+  le fetch eager de `main()`), cache `@st.cache_data(ttl=REGISTRE_TTL_SECONDS=86400)` distinct
+  de `REFRESH_INTERVAL` (300 s, temps réel). Dégradation **locale** à l'onglet (panne registre,
+  centroïdes absents, 0 ligne) : jamais de `st.stop()` global, les 3 autres onglets restent
+  fonctionnels. Aucun autorefresh/`time.sleep`/`st.rerun` sur cet onglet (registre = snapshot
+  administratif, pas un flux temps réel — invariant n°2 hors-sujet ici mais respecté).
+- **Preuves** : **62 tests verts** (42 existants inchangés + 20 nouveaux dans
+  `test_registre_installations.py`), hors réseau (vérifié en bloquant `socket.socket.connect`).
+  Filet prouvé par casse volontaire sur le VRAI code de prod (`registre_installations.
+  fetch_registre_par_commune_filiere`) : retirer le `/1000` (kW→MW) → le test dédié rougit
+  (`256043.85` au lieu de `256`) ; restaurer → vert. Remplacer `sum(nbinstallations)` par un
+  comptage de lignes (`n_inst = 1`) → le test dédié rougit (`46` au lieu de `9878`) ; restaurer
+  → vert. `py_compile` OK sur `dashboard_reunion.py`/`registre_installations.py`. `streamlit run
+  --server.headless` → HTTP 200 ; `AppTest` confirme les **4 onglets** dans l'ordre attendu et
+  **0 exception**, y compris en cas de panne réseau simulée du registre (message d'erreur
+  localisé à l'onglet Carte, badge du Dashboard toujours rendu normalement en parallèle).
+  `git diff --stat` : **0 changement** sur `filieres.py`/`agent_expert.py`/`experts.py`/
+  `fetch_data` — fonctionnalité greffée par un import et un onglet supplémentaires uniquement.
+- **Reste hors V1** (assumé, voir ADR-003) : pas d'identité de site (registre 100 %
+  `Confidentiel`), pas de maille plus fine que la commune (pas de `shapely`/GeoJSON de
+  polygones), pas de choroplèthe.
 
 ## État actuel — Phase 1.75 ✅ LIVRÉE (2026-07-20) — sprint dette
 

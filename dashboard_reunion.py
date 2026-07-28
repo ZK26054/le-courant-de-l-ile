@@ -14,6 +14,7 @@ from datetime import datetime
 from streamlit_autorefresh import st_autorefresh
 
 import agent_expert  # onglet Agent expert (Claude) — noms internes capitalisés attendus
+import registre_installations  # onglet Carte — registre EDF, module isolé (voir ADR-003)
 from filieres import (
     ENR_DIRECTES, BIOENERGIES, FOSSILE, AUTRES,
     ENR_STRICT, ENR_REGLEMENTAIRE, TOUTES_FILIERES,
@@ -569,12 +570,22 @@ def main():
     kpis = compute_kpis(df)
 
     # ── Navigation par onglets ─────────────────
-    tab1, tab2, tab3 = st.tabs(["📊 Dashboard", "🧠 Agent expert", "🔧 Diagnostic"])
+    # Onglet Carte en 2e position (ADR-003) : proche du dashboard temps réel
+    # dans le parcours de lecture, avant l'agent expert et le diagnostic.
+    tab1, tab2, tab3, tab4 = st.tabs(
+        ["📊 Dashboard", "🗺️ Carte", "🧠 Agent expert", "🔧 Diagnostic"]
+    )
     with tab1:
         render_dashboard(df, kpis)
     with tab2:
-        agent_expert.render_agent_tab(df, kpis)
+        # LAZY : appelée seulement ici, jamais dans le fetch eager ci-dessus.
+        # Fonctionnalité isolée (registre EDF, cache TTL propre) — dégradation
+        # locale à cet onglet en cas de panne (invariant n°3), sans impact sur
+        # les 3 autres onglets.
+        registre_installations.render_carte_tab()
     with tab3:
+        agent_expert.render_agent_tab(df, kpis)
+    with tab4:
         render_diagnostic()
 
 
