@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import registre from '../data/images.json';
+import { lien } from '../lib/chemins';
+// ⚠️ À compléter par l'éditeur : adresse électronique de contact. Ne pas inventer.
+const CONTACT = 'À_COMPLÉTER_PAR_Z';
+---
+<Base titre="Mentions légales" description="Éditeur, hébergeur, licences des données et crédits photos du site Le courant de l’île.">
+  <article class="conteneur page">
+    <h1 class="haut">Mentions légales</h1>
+
+    <h2>Éditeur</h2>
+    <p>Z, Saint-Louis, La Réunion.<br />Contact : <span class="mono">{CONTACT}</span></p>
+    <p class="discret">Site d’information indépendant, sans but commercial. Il n’est affilié ni à EDF, ni à Albioma, ni à aucun acteur du secteur.</p>
+
+    <h2>Hébergeur</h2>
+    <p>GitHub Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. <a href="https://docs.github.com/fr/pages">docs.github.com/fr/pages</a></p>
+
+    <h2>Données personnelles et cookies</h2>
+    <p>Le site ne dépose <strong>aucun cookie</strong>, n’utilise <strong>aucun outil de mesure d’audience ni traceur</strong> et ne collecte aucune donnée personnelle. Les polices et les vidéos sont hébergées sur le site lui-même.</p>
+    <p>Comme tout hébergeur, GitHub peut conserver des journaux techniques de connexion (adresse IP). Voir sa <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement">déclaration de confidentialité</a>.</p>
+    <p>L’encart « en direct » de l’accueil et de la page Réseau interroge l’open data d’EDF Réunion (opendata-reunion.edf.fr) <strong>directement depuis votre navigateur</strong>. Cette requête ne transmet ni cookie ni page d’origine. Comme toute requête web, elle fait connaître votre adresse IP au serveur d’EDF.</p>
+
+    <h2>Licences des données</h2>
+    <ul>
+      <li>Données temps réel d’EDF Réunion : Licence Ouverte / Open Licence 2.0 (Etalab).</li>
+      <li>Positions des installations : © contributeurs OpenStreetMap, ODbL.</li>
+      <li>Contours des communes : geo.api.gouv.fr (IGN / Etalab), Licence Ouverte 2.0.</li>
+      <li>Chiffres des bilans officiels : Observatoire Énergie Réunion, EDF SEI, CRE, cités avec leur source. Le détail figure dans <a href={lien('/sources')}>Sources et méthode</a>.</li>
+    </ul>
+
+    <h2>Crédits photos</h2>
+    {registre.images.length === 0 ? <p>Aucune photo pour l’instant.</p> : (
+      <ul class="sources-liste">
+        {registre.images.map((im: any) => (
+          <li>{im.legende} — {im.auteur}, {im.licence_url ? <a href={im.licence_url}>{im.licence}</a> : im.licence}, <a href={im.url_source}>source Wikimedia Commons</a> (récupérée le {im.date_recuperation}).</li>
+        ))}
+      </ul>
+    )}
+    <p class="petit tres-discret">Les photos sont reproduites dans les conditions de leur licence : réduites à 1 600 pixels au plus et converties au format WebP, sans autre modification. Les photos sous CC BY-SA restent sous la même licence.</p>
+
+    <h2>Polices</h2>
+    <p>Bricolage Grotesque, Inter et JetBrains Mono, sous SIL Open Font License 1.1 (<a href={lien('/fonts/LICENCES.txt')}>détail</a>).</p>
+  </article>
+</Base>
+
+<style>
+  .haut { margin-top: 2rem; }
+  .page > * { max-width: 48rem; }
+</style>

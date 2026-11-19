@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import { lien } from '../lib/chemins';
+---
+<Base titre="Page introuvable" description="Cette page n’existe pas.">
+  <div class="conteneur">
+    <h1 style="margin-top:2rem">Page introuvable</h1>
+    <p class="discret">Cette adresse ne correspond à aucune page. <a href={lien('/')}>Retour à l’accueil</a>.</p>
+  </div>
+</Base>

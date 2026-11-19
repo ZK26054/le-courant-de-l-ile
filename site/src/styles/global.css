@@ -1,0 +1,134 @@
+/* Le courant de l'île — identité des vidéos : océan nuit, texte clair, accent lave. */
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('../assets/fonts/BricolageGrotesque-Variable.ttf') format('truetype');
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../assets/fonts/JetBrainsMono-Variable.ttf') format('truetype');
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark light;
+  --bg: #0A1C27;
+  --bg-2: #0F2735;
+  --surface: #12303F;
+  --ligne: #1E4152;
+  --texte: #EEF2EE;
+  --texte-2: #A9BEC5;
+  --texte-3: #7F98A1;
+  --accent: #FF6B3D;          /* lave */
+  --accent-texte: #FF8A63;    /* lave éclaircie pour le texte sur fond nuit */
+  --sur-accent: #0A1C27;
+  --carte-ile: #18282E;
+  --carte-contour: #2C4650;
+
+  /* filières (couleurs des vidéos) */
+  --f-hydro: #38B6CC;
+  --f-solaire: #F5C24C;
+  --f-eolien: #A9DCD0;
+  --f-bagasse: #8CC65A;
+  --f-biogaz: #5E9E4A;
+  --f-granules: #C9874C;
+  --f-colza: #B3A64A;
+  --f-turbines: #FF6B3D;
+  --f-secours: #5C6E77;
+  --f-batteries: #A08CE6;
+
+  --f-display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+  --f-texte: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', monospace;
+
+  --rayon: 14px;
+  --rayon-s: 8px;
+  --gouttiere: 16px;
+  --largeur: 72rem;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #F6F4EE;
+    --bg-2: #ECE9E0;
+    --surface: #FFFFFF;
+    --ligne: #D5D9D3;
+    --texte: #0C2230;
+    --texte-2: #3A5562;
+    --texte-3: #5B727C;
+    --accent: #D9481A;
+    --accent-texte: #B23A12;
+    --sur-accent: #FFFFFF;
+    --carte-ile: #E3E7E1;
+    --carte-contour: #B9C4C2;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 5rem; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%) fixed;
+  background-color: var(--bg);
+  color: var(--texte);
+  font-family: var(--f-texte);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-feature-settings: 'cv11', 'ss01';
+}
+img, svg, video { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent-texte); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.08; letter-spacing: -0.01em; text-wrap: balance; margin: 0 0 0.5em; }
+h1 { font-size: clamp(2.1rem, 6.5vw, 4rem); font-weight: 800; }
+h2 { font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 750; margin-top: 2.2em; }
+h3 { font-size: 1.2rem; font-weight: 700; margin-top: 1.6em; }
+p { margin: 0 0 1em; text-wrap: pretty; }
+small, .petit { font-size: 0.85rem; }
+.mono, code, .chiffre { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.surtitre { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-texte); margin: 0 0 0.6rem; }
+.discret { color: var(--texte-2); }
+.tres-discret { color: var(--texte-3); }
+
+.conteneur { width: 100%; max-width: var(--largeur); margin: 0 auto; padding: 0 var(--gouttiere); }
+@media (min-width: 48rem) { :root { --gouttiere: 32px; } }
+
+.carte-bloc {
+  background: var(--surface);
+  border: 1px solid var(--ligne);
+  border-radius: var(--rayon);
+  padding: 1.25rem;
+}
+.grille { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+.pastille { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 3px; vertical-align: -0.05em; margin-right: 0.4em; flex: none; }
+.badge {
+  display: inline-flex; align-items: center; gap: 0.35em;
+  font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.03em;
+  padding: 0.2em 0.6em; border-radius: 999px; border: 1px solid var(--ligne); color: var(--texte-2);
+  white-space: nowrap;
+}
+.badge.statut-en-service { border-color: color-mix(in srgb, var(--f-bagasse) 60%, var(--ligne)); }
+.badge.statut-projet, .badge.statut-engage, .badge.statut-annonce, .badge.statut-permis { border-color: color-mix(in srgb, var(--f-solaire) 60%, var(--ligne)); }
+.badge.statut-arret { border-color: color-mix(in srgb, var(--accent) 60%, var(--ligne)); }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+th, td { text-align: left; padding: 0.55rem 0.5rem; border-bottom: 1px solid var(--ligne); vertical-align: top; }
+th { font-weight: 600; color: var(--texte-2); font-size: 0.85rem; }
+td.num, th.num { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.defile { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+.sources-liste { font-size: 0.9rem; color: var(--texte-2); padding-left: 1.3rem; }
+.sources-liste li { margin-bottom: 0.4rem; }
+.niveau { font-family: var(--f-mono); font-size: 0.75rem; padding: 0 0.35em; border: 1px solid var(--ligne); border-radius: 4px; margin-right: 0.3em; }
+
+.visuellement-cache { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.lien-evitement { position: absolute; left: -999px; top: 0; background: var(--accent); color: var(--sur-accent); padding: 0.6rem 1rem; z-index: 100; }
+.lien-evitement:focus { left: 1rem; top: 1rem; }
+
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }

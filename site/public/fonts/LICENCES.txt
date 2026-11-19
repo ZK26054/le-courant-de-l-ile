@@ -1,0 +1,12 @@
+Polices auto-hébergées par « Le courant de l'île » — toutes sous SIL Open Font License 1.1
+(https://openfontlicense.org/ ; texte : https://scripts.sil.org/OFL).
+
+- BricolageGrotesque-Variable.ttf — Copyright 2022 The Bricolage Grotesque Project Authors
+  (https://github.com/ateliertriay/bricolage). Version 1.001. Fichier renommé, non modifié.
+- JetBrainsMono-Variable.ttf — Copyright 2020 The JetBrains Mono Project Authors
+  (https://github.com/JetBrains/JetBrainsMono). Version 2.211. Fichier renommé, non modifié.
+- Inter — Copyright The Inter Project Authors (https://github.com/rsms/inter), distribuée
+  via le paquet npm @fontsource/inter 5.3.0 et intégrée au site lors de la compilation.
+
+Textes complets de la licence (copiés depuis les dépôts officiels le 2026-11-19) :
+OFL-BricolageGrotesque.txt, OFL-JetBrainsMono.txt, OFL-Inter.txt (dans ce dossier).

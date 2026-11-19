@@ -1,0 +1,21 @@
+{
+  "name": "le-courant-de-l-ile",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Site public « Le courant de l'île » : le système électrique de La Réunion, sourcé.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "node --test \"tests/*.test.mjs\"",
+    "affiches": "node scripts/affiches.mjs"
+  },
+  "dependencies": {
+    "astro": "7.4.5",
+    "@fontsource/inter": "5.3.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

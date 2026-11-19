@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import DirectMix from '../components/DirectMix.astro';
+import { lien } from '../lib/chemins';
+const BP = 'https://reunion.edf.fr/sites/sei_reu/files/2025-04/2025-04-29-reunion-bp-2024.pdf';
+const RETEX = 'https://www.reunion.developpement-durable.gouv.fr/IMG/pdf/5b_edf_retex_post_garance_electricite.pdf';
+const OER = 'https://oer.energies-reunion.com/sites/observatoire-energie-reunion/files/2025-09/ENERGIESREUNION-CHIFFRESCLES%202024%20120x300%20Page%20a%20Page_4.pdf';
+---
+<Base titre="Le réseau" description="Le réseau électrique d’une île isolée : équilibre à chaque seconde, fréquence de 50 Hz, inertie, réserves, cyclones et stockage.">
+  <article class="conteneur prose-page">
+    <p class="surtitre haut">Le réseau</p>
+    <h1>Une île, un réseau, aucun secours extérieur</h1>
+    <p class="chapo discret">La Réunion est une <a href={lien('/comprendre#zni')}>zone non interconnectée</a> : aucun câble ne la relie à un autre réseau. Quand une centrale s’arrête, aucun voisin ne peut prendre le relais.</p>
+
+    <h2>L’équilibre à chaque seconde</h2>
+    <p>La production doit égaler la consommation à chaque instant. L’indicateur de cet équilibre est la <strong>fréquence</strong>, fixée à 50 Hz. Si la consommation dépasse la production, la fréquence baisse ; dans le cas inverse, elle monte. Trop d’écart, et des protections coupent automatiquement des clients ou des centrales.</p>
+
+    <h2>Inertie : pourquoi le solaire ne suffit pas seul</h2>
+    <p>Les centrales thermiques et hydrauliques font tourner de grosses machines synchrones. Leur <a href={lien('/comprendre#inertie')}>inertie</a> freine les variations brusques de fréquence. Le solaire, l’éolien et les batteries sont raccordés par de l’électronique et n’en apportent pas naturellement. Plus leur part instantanée monte, plus la fréquence devient délicate à tenir.</p>
+    <p>En 2023, le solaire et l’éolien dépassaient rarement 40 % de la production instantanée, et ont couvert environ 11 % de la consommation annuelle (EDF SEI, <a href={BP}>Bilan prévisionnel 2024</a>).</p>
+
+    <h2>Les réserves</h2>
+    <ul>
+      <li><strong>Réserve primaire, environ 50 MW</strong> : de quoi compenser en quelques secondes la perte de la plus grosse machine en fonctionnement.</li>
+      <li><strong>Réserve secondaire, jusqu’à environ 200 MW</strong> aux heures de forte production solaire, à l’horizon 2033 dans le scénario le plus renouvelable.</li>
+      <li><strong>Critère de défaillance : 3 heures par an</strong> en moyenne, la durée au-delà de laquelle le système est jugé insuffisant.</li>
+    </ul>
+    <p class="petit tres-discret">Source : EDF SEI, <a href={BP}>Bilan prévisionnel 2024</a>.</p>
+
+    <h2>La pointe du soir</h2>
+    <p>La consommation culmine le soir, quand le solaire ne produit plus. La pointe a atteint <strong>498 MW en 2023</strong> (EDF SEI) et <strong>496 MW en février 2024</strong> (<a href={OER}>OER</a>). Les barrages, les turbines à combustion et les batteries servent à la passer. Selon les scénarios d’EDF SEI, elle pourrait atteindre 737 à 799 MW en 2040.</p>
+
+    <h2>Les cyclones</h2>
+    <p>Fin février 2025, le cyclone Garance a touché environ <strong>30 % du réseau à haute tension</strong>. Il a détruit 2 lignes (21 supports) et la prise d’eau n°1 des Orgues, qui alimente la centrale de la Rivière de l’Est. Cette centrale réinjecte depuis le 9 mai 2025 (EDF SEI, <a href={RETEX}>retour d’expérience, juin 2025</a>). Voir la fiche <a href={lien('/installations/riviere-de-l-est')}>Rivière de l’Est</a>.</p>
+
+    <h2>Le stockage</h2>
+    <p>Deux batteries de 5 MW sont en service : l’une stabilise la fréquence, l’autre déplace l’énergie dans la journée. Fiches : <a href={lien('/installations/batterie-saint-leu')}>Saint-Leu</a> et <a href={lien('/installations/batterie-cratere')}>Cratère</a>. <strong>Aucune STEP n’est en service.</strong> Le <a href={lien('/installations/tanika')}>projet Tanika</a> vise 2033.</p>
+
+    <DirectMix />
+  </article>
+</Base>
+
+<style>
+  .haut { margin-top: 2rem; }
+  .prose-page > :not(.direct) { max-width: 46rem; }
+  .chapo { font-size: 1.12rem; }
+</style>
