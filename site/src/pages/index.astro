@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import DirectMix from '../components/DirectMix.astro';
+import { CHIFFRES_2024, OER_CC2024, OER_BER2024 } from '../data/chiffres-cles';
+import { lien } from '../lib/chemins';
+---
+<Base titre="Le courant de l'île" description="D’où vient l’électricité de La Réunion ? Le mix en direct, les centrales de l’île et les chiffres officiels, sourcés et datés.">
+  <section class="conteneur hero">
+    <p class="surtitre">La Réunion · 974 · système électrique</p>
+    <h1>Le courant de l’île</h1>
+    <p class="chapo">Une île, un réseau, aucun câble vers l’extérieur. D’où vient l’électricité de La Réunion, qui la produit, et que reste-t-il à faire pour qu’elle soit vraiment locale ? Tous les chiffres sont sourcés et datés.</p>
+  </section>
+
+  <div class="conteneur">
+    <DirectMix />
+
+    <section aria-labelledby="cc-titre" class="cc">
+      <h2 id="cc-titre">Les chiffres de l’année 2024</h2>
+      <p class="discret">Bilans annuels officiels. Le dernier publié porte sur 2024 : aucun bilan 2025 n’est sorti à ce jour. Un instantané « en direct » ne se compare pas à une moyenne annuelle.</p>
+      <ul class="grille cc-liste">
+        {CHIFFRES_2024.map((c) => (
+          <li class="carte-bloc">
+            <p class="cc-valeur">{c.valeur}</p>
+            <p class="cc-titre">{c.titre}</p>
+            <p class="petit discret">{c.detail}</p>
+            <p class="petit tres-discret">Source : <a href={OER_CC2024.url}>{OER_CC2024.editeur}, chiffres clés 2024</a>{c.source2 && <> ; <a href={OER_BER2024.url}>{c.source2}</a></>}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="explorer" class="explorer">
+      <h2 id="explorer">Explorer</h2>
+      <ul class="grille">
+        <li class="carte-bloc"><h3><a href={lien('/installations')}>Les installations</a></h3><p class="discret">Chaque centrale, sa puissance, son combustible et ses sources, sur une carte de l’île.</p></li>
+        <li class="carte-bloc"><h3><a href={lien('/reseau')}>Le réseau</a></h3><p class="discret">Pourquoi une île doit équilibrer production et consommation à chaque seconde.</p></li>
+        <li class="carte-bloc"><h3><a href={lien('/comprendre')}>Comprendre</a></h3><p class="discret">Deux vidéos de trois minutes et un glossaire des mots de l’énergie.</p></li>
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .hero { padding-top: clamp(2rem, 7vw, 4.5rem); }
+  .chapo { font-size: clamp(1.05rem, 2.6vw, 1.3rem); color: var(--texte-2); max-width: 44rem; }
+  .cc-liste, .explorer ul { list-style: none; padding: 0; margin: 1rem 0 0; }
+  .cc-valeur { font-family: var(--f-display); font-weight: 800; font-size: clamp(2.2rem, 7vw, 2.8rem); line-height: 1; margin: 0 0 0.25rem; color: var(--accent-texte); }
+  .cc-titre { font-weight: 600; margin-bottom: 0.5rem; }
+  .explorer h3 { margin-top: 0; }
+</style>

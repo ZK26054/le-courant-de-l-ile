@@ -1,0 +1,183 @@
+---
+// Îlot client : mix électrique des dernières 24 h, lu DIRECTEMENT depuis l'open data
+// EDF Réunion (CORS ouvert, testé le 19/11/2026). Aucune donnée personnelle envoyée
+// par le site ; la requête part du navigateur vers opendata-reunion.edf.fr.
+import { TAXO, COULEURS_FLUX } from '../lib/filieres';
+const legende = TAXO.ordre.map((k: string) => ({ k, libelle: (TAXO.libelles as Record<string, string>)[k], couleur: COULEURS_FLUX[k] }));
+---
+<section class="direct carte-bloc" aria-labelledby="direct-titre" data-etat="chargement">
+  <div class="direct-tete">
+    <div>
+      <p class="surtitre">En direct · dernières 24 h</p>
+      <h2 id="direct-titre">D’où vient l’électricité en ce moment ?</h2>
+    </div>
+    <p class="maj mono" aria-live="polite"><span data-maj>Chargement des données EDF…</span></p>
+  </div>
+
+  <div class="resume" data-resume hidden>
+    <p class="total"><span class="chiffre" data-total>—</span> <span class="unite">MW produits</span></p>
+    <p class="petit discret" data-parts></p>
+  </div>
+
+  <div class="graphe" data-graphe role="img" aria-label="Graphique en aires empilées de la production électrique par filière sur les dernières 24 heures"></div>
+
+  <ul class="legende" data-legende>
+    {legende.map((l) => (
+      <li data-k={l.k}><span class="pastille" style={`background:${l.couleur}`}></span>{l.libelle} <span class="chiffre" data-val></span></li>
+    ))}
+  </ul>
+
+  <p class="erreur" data-erreur hidden>
+    Les données en direct d’EDF Réunion ne répondent pas pour le moment. Réessayez plus tard, ou consultez directement
+    <a href="https://opendata-reunion.edf.fr/explore/dataset/prod-electricite-temps-reel-974/">le jeu de données sur le portail open data</a>.
+  </p>
+  <noscript><p class="erreur">L’encart en direct nécessite JavaScript. Les données sont consultables sur
+    <a href="https://opendata-reunion.edf.fr/explore/dataset/prod-electricite-temps-reel-974/">le portail open data d’EDF Réunion</a>.</p></noscript>
+
+  <p class="petit tres-discret note">
+    Source : EDF Réunion, open data (« Production d’électricité par filière en temps réel », pas de 5 min). Valeurs au statut
+    <strong>« estimé »</strong>, révisées ensuite par EDF. « Biomasse (ex-Charbon) » et « Bioliquide (ex-Diesel) » sont les
+    libellés officiels des colonnes héritées <code>charbon</code> et <code>diesel</code> : ces centrales ne brûlent plus de charbon
+    ni de fioul. Une valeur négative (stockage en recharge) est tracée sous l’axe.
+  </p>
+</section>
+
+<script>
+  import taxo from '../data/filieres.json';
+  import { COULEURS_FLUX as COULEURS } from '../lib/filieres';
+  const API = 'https://opendata-reunion.edf.fr/api/explore/v2.1/catalog/datasets/prod-electricite-temps-reel-974/records';
+  const ORDRE: string[] = taxo.ordre;
+  const API2INT: Record<string, string> = taxo.api_vers_interne;
+  const LIB: Record<string, string> = taxo.libelles;
+  const fmtHeure = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Indian/Reunion', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  const fmtH = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Indian/Reunion', hour: '2-digit', minute: '2-digit' });
+  const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
+  const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
+
+  type Ligne = { t: number; statut: string; total: number; v: Record<string, number> };
+
+  async function page(avant?: string) {
+    const p = new URLSearchParams({ limit: '100', order_by: 'date desc' });
+    // Pagination par CURSEUR (limit plafonné à 100 ; l'offset dérive sur cette fenêtre glissante).
+    if (avant) p.set('where', `date < '${avant}'`);
+    const ctrl = new AbortController();
+    const minuterie = setTimeout(() => ctrl.abort(), 12000);
+    try {
+      const r = await fetch(`${API}?${p}`, { signal: ctrl.signal, credentials: 'omit', referrerPolicy: 'no-referrer' });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const j = await r.json();
+      return (j.results ?? []) as any[];
+    } finally { clearTimeout(minuterie); }
+  }
+
+  async function charger(): Promise<Ligne[]> {
+    let brut = await page();
+    if (!brut.length) return [];
+    const fin = Date.parse(brut[0].date);
+    for (let i = 0; i < 3; i++) {
+      const plusAncien = brut[brut.length - 1].date;
+      if (Date.parse(plusAncien) <= fin - 24 * 3600e3) break;
+      const suite = await page(plusAncien);
+      if (!suite.length) break;
+      brut = brut.concat(suite);
+    }
+    const vu = new Map<number, Ligne>();
+    for (const r of brut) {
+      const t = Date.parse(r.date);
+      if (Number.isNaN(t) || t < fin - 24 * 3600e3 || vu.has(t)) continue;
+      const v: Record<string, number> = {};
+      for (const [api, k] of Object.entries(API2INT)) v[k] = Number(r[api]) || 0;
+      vu.set(t, { t, statut: String(r.statut ?? ''), total: Number(r.total) || 0, v });
+    }
+    return [...vu.values()].sort((a, b) => a.t - b.t);
+  }
+
+  function dessiner(el: HTMLElement, lignes: Ligne[]) {
+    const W = 720, H = 300, G = 44, D = 8, Hh = 14, B = 26;
+    const t0 = lignes[0].t, t1 = lignes[lignes.length - 1].t;
+    let ymax = 0, ymin = 0;
+    for (const l of lignes) {
+      let pos = 0, neg = 0;
+      for (const k of ORDRE) { const x = l.v[k]; if (x > 0) pos += x; else neg += x; }
+      ymax = Math.max(ymax, pos); ymin = Math.min(ymin, neg);
+    }
+    ymax = Math.ceil(ymax / 100) * 100 || 100;
+    ymin = ymin < -0.5 ? -Math.ceil(-ymin / 20) * 20 : 0;
+    const X = (t: number) => G + ((t - t0) / Math.max(1, t1 - t0)) * (W - G - D);
+    const Y = (v: number) => Hh + ((ymax - v) / (ymax - ymin)) * (H - Hh - B);
+    const basPos = lignes.map(() => 0), basNeg = lignes.map(() => 0);
+    let aires = '';
+    for (const k of ORDRE) {
+      for (const signe of [1, -1]) {
+        const bas = signe > 0 ? basPos : basNeg;
+        const haut = lignes.map((l, i) => bas[i] + (signe > 0 ? Math.max(0, l.v[k]) : Math.min(0, l.v[k])));
+        if (haut.every((h, i) => Math.abs(h - bas[i]) < 1e-6)) continue;
+        const dessus = lignes.map((l, i) => `${X(l.t).toFixed(1)},${Y(haut[i]).toFixed(1)}`);
+        const dessous = lignes.map((l, i) => `${X(l.t).toFixed(1)},${Y(bas[i]).toFixed(1)}`).reverse();
+        aires += `<path d="M${dessus.join('L')}L${dessous.join('L')}Z" fill="${COULEURS[k]}" fill-opacity="0.92"><title>${LIB[k]}</title></path>`;
+        haut.forEach((h, i) => (bas[i] = h));
+      }
+    }
+    let axes = '';
+    const pas = ymax > 400 ? 200 : 100;
+    for (let v = 0; v <= ymax; v += pas) axes += `<line x1="${G}" x2="${W - D}" y1="${Y(v)}" y2="${Y(v)}" class="g"/><text x="${G - 6}" y="${Y(v) + 4}" text-anchor="end">${v}</text>`;
+    if (ymin < 0) axes += `<line x1="${G}" x2="${W - D}" y1="${Y(ymin)}" y2="${Y(ymin)}" class="g"/><text x="${G - 6}" y="${Y(ymin) + 4}" text-anchor="end">${ymin}</text>`;
+    for (let h = 0; h <= 4; h++) {
+      const t = t0 + (h / 4) * (t1 - t0);
+      axes += `<text x="${X(t)}" y="${H - 6}" text-anchor="${h === 0 ? 'start' : h === 4 ? 'end' : 'middle'}">${fmtH.format(t)}</text>`;
+    }
+    axes += `<text x="${G - 6}" y="${Hh - 3}" text-anchor="end">MW</text>`;
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${axes}${aires}<line x1="${G}" x2="${W - D}" y1="${Y(0)}" y2="${Y(0)}" class="z"/></svg>`;
+  }
+
+  async function demarrer(racine: HTMLElement) {
+    const q = (s: string) => racine.querySelector(s) as HTMLElement;
+    try {
+      const lignes = await charger();
+      if (lignes.length < 2) throw new Error('données insuffisantes');
+      const der = lignes[lignes.length - 1];
+      const ageMin = Math.round((Date.now() - der.t) / 60000);
+      q('[data-maj]').textContent = `Donnée de ${fmtHeure.format(der.t)} (heure de La Réunion) · statut « ${der.statut.toLowerCase() || 'non précisé'} »${ageMin > 90 ? ` · ⚠ donnée vieille de ${Math.round(ageMin / 60)} h` : ''}`;
+      q('[data-total]').textContent = nf.format(der.total);
+      // Familles issues de filieres.py (via filieres.json) : ENR directes / bioénergies.
+      const dir = taxo.familles.enr_directes.reduce((s: number, k: string) => s + der.v[k], 0);
+      const bio = taxo.familles.bioenergies.reduce((s: number, k: string) => s + der.v[k], 0);
+      if (der.total > 0) {
+        q('[data-parts]').textContent = `À cet instant : ${nf1.format((dir / der.total) * 100)} % solaire, vent et eau ; ${nf1.format(((dir + bio) / der.total) * 100)} % en comptant les bioénergies (biomasse, bagasse, colza), en majorité importées.`;
+      }
+      q('[data-resume]').hidden = false;
+      racine.querySelectorAll<HTMLElement>('[data-legende] li').forEach((li) => {
+        const v = der.v[li.dataset.k as string];
+        (li.querySelector('[data-val]') as HTMLElement).textContent = `${nf1.format(v)} MW`;
+      });
+      dessiner(q('[data-graphe]'), lignes);
+      racine.dataset.etat = 'ok';
+    } catch (e) {
+      q('[data-maj]').textContent = 'Données en direct indisponibles';
+      q('[data-erreur]').hidden = false;
+      q('[data-graphe]').hidden = true;
+      racine.dataset.etat = 'erreur';
+    }
+  }
+  document.querySelectorAll<HTMLElement>('.direct').forEach(demarrer);
+</script>
+
+<style>
+  .direct { margin-top: 1.5rem; }
+  .direct-tete { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 0.5rem 1rem; }
+  .direct-tete h2 { margin: 0; font-size: clamp(1.3rem, 3.6vw, 1.8rem); }
+  .maj { font-size: 0.8rem; color: var(--texte-2); margin: 0; max-width: 32rem; }
+  .total { margin: 1rem 0 0.2rem; }
+  .total .chiffre { font-family: var(--f-display); font-weight: 800; font-size: clamp(2.4rem, 8vw, 3.4rem); line-height: 1; }
+  .unite { color: var(--texte-2); }
+  .graphe { margin: 0.75rem -0.25rem 0.5rem; min-height: 120px; }
+  .graphe :global(svg) { width: 100%; height: auto; }
+  .graphe :global(text) { font-family: var(--f-mono); font-size: 11px; fill: var(--texte-3); }
+  .graphe :global(.g) { stroke: var(--ligne); stroke-width: 1; }
+  .graphe :global(.z) { stroke: var(--texte-3); stroke-width: 1; }
+  .legende { list-style: none; padding: 0; margin: 0.5rem 0 0.75rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14.5rem), 1fr)); gap: 0.3rem 1rem; font-size: 0.9rem; }
+  .legende li { display: flex; align-items: center; }
+  .legende .chiffre { margin-left: auto; color: var(--texte-2); font-size: 0.85rem; padding-left: 0.5rem; }
+  .erreur { border-left: 3px solid var(--accent); padding: 0.5rem 0.75rem; background: var(--bg-2); border-radius: 0 var(--rayon-s) var(--rayon-s) 0; }
+  .note { margin: 0; }
+</style>

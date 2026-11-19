@@ -1,0 +1,51 @@
+{
+  "_avertissement": "Fichier généré par scripts/export_filieres_site.py depuis filieres.py. Ne pas éditer.",
+  "ordre": [
+    "Photovoltaique",
+    "Eolien",
+    "Hydraulique",
+    "Bioénergies",
+    "Charbon",
+    "Diesel",
+    "Turbines_combustion",
+    "Stockage"
+  ],
+  "api_vers_interne": {
+    "photovoltaique": "Photovoltaique",
+    "eolien": "Eolien",
+    "hydraulique": "Hydraulique",
+    "bioenergies": "Bioénergies",
+    "charbon": "Charbon",
+    "diesel": "Diesel",
+    "turbines_combustion": "Turbines_combustion",
+    "stockage": "Stockage"
+  },
+  "libelles": {
+    "Photovoltaique": "Photovoltaïque",
+    "Eolien": "Éolien",
+    "Hydraulique": "Hydraulique",
+    "Bioénergies": "Bioénergies",
+    "Charbon": "Biomasse (ex-Charbon)",
+    "Diesel": "Bioliquide (ex-Diesel)",
+    "Turbines_combustion": "Turbines à combustion",
+    "Stockage": "Stockage"
+  },
+  "familles": {
+    "enr_directes": [
+      "Photovoltaique",
+      "Eolien",
+      "Hydraulique"
+    ],
+    "bioenergies": [
+      "Bioénergies",
+      "Charbon",
+      "Diesel"
+    ],
+    "fossile": [
+      "Turbines_combustion"
+    ],
+    "autres": [
+      "Stockage"
+    ]
+  }
+}
