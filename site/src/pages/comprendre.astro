@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import { VIDEOS } from '../data/videos';
+import { GLOSSAIRE } from '../data/glossaire';
+import { lien } from '../lib/chemins';
+---
+<Base titre="Comprendre" description="Deux vidéos pour comprendre l’électricité de La Réunion, avec leur transcription et leurs sources, et un glossaire des mots de l’énergie.">
+  <div class="conteneur">
+    <p class="surtitre haut">Pédagogie</p>
+    <h1>Comprendre</h1>
+    <p class="chapo discret">Deux vidéos courtes, sans voix off : les textes s’affichent à l’écran et sont repris intégralement sous chaque vidéo. Elles sont hébergées sur ce site, sans service tiers.</p>
+
+    {VIDEOS.map((v) => (
+      <section class="video" aria-labelledby={`t-${v.id}`} id={v.id}>
+        <h2 id={`t-${v.id}`}>{v.titre}</h2>
+        <p class="discret">{v.resume} <span class="mono petit">({v.duree})</span></p>
+        <video controls preload="metadata" playsinline width="1920" height="1080" poster={lien('/' + v.affiche)} aria-describedby={`tr-${v.id}`}>
+          <source src={lien('/' + v.fichier)} type="video/mp4" />
+          Votre navigateur ne lit pas la vidéo. <a href={lien('/' + v.fichier)}>Télécharger le fichier MP4</a>.
+        </video>
+
+        <details class="transcription" id={`tr-${v.id}`}>
+          <summary>Transcription (textes affichés, scène par scène)</summary>
+          <ol>
+            {v.scenes.map((s) => (
+              <li><h3>{s.titre}</h3>{s.texte.map((p) => <p>{p}</p>)}</li>
+            ))}
+          </ol>
+        </details>
+
+        <div class="infos">
+          <div>
+            <h3>Sources de la vidéo</h3>
+            <ul class="sources-liste">{v.sources.map((s) => <li>{s}</li>)}</ul>
+          </div>
+          <div class="note-verif">
+            <h3>Note de vérification</h3>
+            <ul class="sources-liste">{v.verification.map((s) => <li>{s}</li>)}</ul>
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <section aria-labelledby="glossaire" class="glossaire">
+      <h2 id="glossaire">Glossaire</h2>
+      <dl>
+        {GLOSSAIRE.map((g) => (
+          <div id={g.id}>
+            <dt>{g.terme}</dt>
+            <dd>{g.definition}{g.source && <span class="petit tres-discret src"> Source : {g.source}.</span>}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="petit tres-discret">Toutes les sources sont détaillées sur la page <a href={lien('/sources')}>Sources et méthode</a>.</p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .haut { margin-top: 2rem; }
+  .chapo { max-width: 46rem; }
+  .video { margin-top: 2.5rem; }
+  .video h2 { margin-top: 0; }
+  video { width: 100%; height: auto; border-radius: var(--rayon); background: #0A1C27; border: 1px solid var(--ligne); }
+  .transcription { margin-top: 1rem; background: var(--surface); border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 0.75rem 1rem; }
+  summary { cursor: pointer; font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+  .transcription ol { padding-left: 1.3rem; }
+  .transcription h3 { font-size: 1rem; margin: 1rem 0 0.3rem; }
+  .transcription p { margin: 0 0 0.35rem; color: var(--texte-2); }
+  .infos { display: grid; gap: 1rem; margin-top: 1rem; }
+  @media (min-width: 52rem) { .infos { grid-template-columns: 1fr 1fr; } }
+  .infos h3 { margin-top: 0.5rem; font-size: 1rem; }
+  .note-verif { border-left: 3px solid var(--accent); padding-left: 1rem; }
+  .glossaire dl { margin: 0; }
+  .glossaire div { padding: 0.9rem 0; border-bottom: 1px solid var(--ligne); }
+  dt { font-family: var(--f-display); font-weight: 700; font-size: 1.1rem; }
+  dd { margin: 0.25rem 0 0; color: var(--texte-2); max-width: 48rem; }
+</style>
