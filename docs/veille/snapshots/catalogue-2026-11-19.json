@@ -1,0 +1,3958 @@
+{
+ "captured": "2026-11-19",
+ "source": "https://opendata-reunion.edf.fr/data-fair/api/v1/datasets",
+ "count": 439,
+ "datasets": [
+  {
+   "id": "8ksiaqxrgvedvg7i2slcx1nt",
+   "slug": "rpg",
+   "title": "Registre parcellaire graphique (RPG) 2025",
+   "updatedAt": "2026-11-05T10:35:49.824Z",
+   "dataUpdatedAt": "2026-11-03T11:54:18.049Z",
+   "count": 9776204,
+   "status": "finalized"
+  },
+  {
+   "id": "xc20a1whejq67801nj3lgzgj",
+   "slug": "contours-des-communes-petite-echelle",
+   "title": "Contours des communes (petite échelle)",
+   "updatedAt": "2026-11-04T14:30:29.391Z",
+   "dataUpdatedAt": "2026-09-24T15:55:09.328Z",
+   "count": 34877,
+   "status": "finalized"
+  },
+  {
+   "id": "-8iof5shsi7-7flxka07w-wo",
+   "slug": "populations-municipales-de-1968-a-2023-recensement-de-la-population-com",
+   "title": "Populations municipales 1968-2023 (RP)",
+   "updatedAt": "2026-11-10T15:02:33.980Z",
+   "dataUpdatedAt": "2026-11-05T05:00:46.796Z",
+   "count": 801734,
+   "status": "finalized"
+  },
+  {
+   "id": "6mq2oaboc9vz106tqz8kzmc9",
+   "slug": "nombre-de-naissances-annuelles-par-commune-etat-civil-naissances-enregistrees-et-domiciliees-en-france-ventilees-au-lieu-de-domicile-de-la-mere-com",
+   "title": "Naissances annuelles par commune (état civil)",
+   "updatedAt": "2026-11-10T15:02:24.938Z",
+   "dataUpdatedAt": "2026-11-05T05:00:53.289Z",
+   "count": 627750,
+   "status": "finalized"
+  },
+  {
+   "id": "cuu3r8ab-ixind3ausbxx49w",
+   "slug": "nombre-de-deces-annuels-par-commune-etat-civil-deces-enregistres-et-domicilies-en-france-ventiles-au-lieu-de-domicile-du-defunt-com",
+   "title": "Décès annuels par commune (état civil)",
+   "updatedAt": "2026-11-10T15:02:17.755Z",
+   "dataUpdatedAt": "2026-11-05T05:02:59.318Z",
+   "count": 627750,
+   "status": "finalized"
+  },
+  {
+   "id": "ul0zbjn31wg7app44mtcjqxb",
+   "slug": "fr-en-indicateurs-de-resultat-des-lycees-gt_v2",
+   "title": "IVAL — lycées généraux et technologiques",
+   "updatedAt": "2026-11-01T03:00:59.136Z",
+   "dataUpdatedAt": "2026-11-01T03:00:59.136Z",
+   "count": 32485,
+   "status": "finalized"
+  },
+  {
+   "id": "fu-yi111-jm09wx8blvnpax0",
+   "slug": "fr-en-indicateurs-de-resultat-des-lycees-pro_v2",
+   "title": "IVAL — lycées professionnels",
+   "updatedAt": "2026-11-01T03:00:40.724Z",
+   "dataUpdatedAt": "2026-11-01T03:00:40.724Z",
+   "count": 28258,
+   "status": "finalized"
+  },
+  {
+   "id": "gl6euikejt8o7y0bt3hz631f",
+   "slug": "menages-principaux-indicateurs-dossier-complet-recensement-de-la-population-exploitation-complementaire-com",
+   "title": "Indicateurs détaillés — Ménages par type",
+   "updatedAt": "2026-11-10T15:02:09.287Z",
+   "dataUpdatedAt": "2026-11-05T05:01:42.451Z",
+   "count": 941166,
+   "status": "finalized"
+  },
+  {
+   "id": "4mmb15qmkdtf5bo-xixk2703",
+   "slug": "logements-principaux-indicateurs-dossier-complet-recensement-de-la-population-exploitation-principale-com-3",
+   "title": "Logements par époque de construction",
+   "updatedAt": "2026-11-10T15:01:59.613Z",
+   "dataUpdatedAt": "2026-11-05T05:02:47.162Z",
+   "count": 732018,
+   "status": "finalized"
+  },
+  {
+   "id": "l84xpaikudbhn9hm486353fh",
+   "slug": "evolution-et-structure-de-la-population-principaux-indicateurs-dossier-complet-recensement-de-la-population-exploitation-complementaire-com",
+   "title": "Population par catégorie socioprofessionnelle",
+   "updatedAt": "2026-11-10T15:01:52.453Z",
+   "dataUpdatedAt": "2026-11-05T05:03:13.112Z",
+   "count": 941166,
+   "status": "finalized"
+  },
+  {
+   "id": "6w9g0ecy779g9-xlhz4aktdz",
+   "slug": "logements-principaux-indicateurs-dossier-complet-recensement-de-la-population-exploitation-principale-com-2",
+   "title": "Indicateurs détaillés — Logements par type",
+   "updatedAt": "2026-11-10T15:01:44.635Z",
+   "dataUpdatedAt": "2026-11-05T05:01:55.518Z",
+   "count": 418296,
+   "status": "finalized"
+  },
+  {
+   "id": "mztx5oqlgsi4-aa3hanval7t",
+   "slug": "logements-principaux-indicateurs-dossier-complet-recensement-de-la-population-exploitation-principale-com",
+   "title": "Logements par catégorie d'occupation",
+   "updatedAt": "2026-11-10T15:01:35.498Z",
+   "dataUpdatedAt": "2026-11-05T05:03:38.186Z",
+   "count": 418296,
+   "status": "finalized"
+  },
+  {
+   "id": "qn0vh63krhs1dece8j5r13iq",
+   "slug": "nombre-detablissements-et-effectifs-salaries-en-5-grands-secteurs-fichier-localise-des-remunerations-et-de-lemploi-salarie-flores-com-2",
+   "title": "Établissements et effectifs par grand secteur",
+   "updatedAt": "2026-11-10T15:01:27.220Z",
+   "dataUpdatedAt": "2026-11-05T05:03:30.875Z",
+   "count": 209250,
+   "status": "finalized"
+  },
+  {
+   "id": "fexhgks1oct5ft0q59dktmco",
+   "slug": "deplacements-domicile-travail-principaux-indicateurs-dossier-complet-recensement-de-la-population-exploitation-principale-com-2",
+   "title": "Déplacements domicile-travail par mode",
+   "updatedAt": "2026-11-10T15:01:19.775Z",
+   "dataUpdatedAt": "2026-11-05T05:01:33.538Z",
+   "count": 697160,
+   "status": "finalized"
+  },
+  {
+   "id": "e9bwzb7mdw9p-jga4et23ip7",
+   "slug": "deplacements-domicile-travail-principaux-indicateurs-dossier-complet-recensement-de-la-population-exploitation-principale-com",
+   "title": "Déplacements domicile-travail par lieu de travail",
+   "updatedAt": "2026-11-10T15:01:11.922Z",
+   "dataUpdatedAt": "2026-11-05T05:03:27.869Z",
+   "count": 732018,
+   "status": "finalized"
+  },
+  {
+   "id": "8yhsj-nelbn0i3gtej-0m892",
+   "slug": "famille-principaux-indicateurs-dossier-complet-recensement-de-la-population-exploitation-complementaire-com-2",
+   "title": "Indicateurs détaillés — Familles par type",
+   "updatedAt": "2026-11-10T15:01:03.755Z",
+   "dataUpdatedAt": "2026-11-05T05:02:10.918Z",
+   "count": 697160,
+   "status": "finalized"
+  },
+  {
+   "id": "-j5yyxjhes8mks55nyv9rr3f",
+   "slug": "nombre-detablissements-et-effectifs-salaries-en-5-grands-secteurs-fichier-localise-des-remunerations-et-de-lemploi-salarie-flores-com",
+   "title": "Établissements par tranche d'effectif",
+   "updatedAt": "2026-11-10T15:00:55.768Z",
+   "dataUpdatedAt": "2026-11-05T05:02:56.172Z",
+   "count": 348750,
+   "status": "finalized"
+  },
+  {
+   "id": "mj9qodsi92w4auwflushnf21",
+   "slug": "famille-principaux-indicateurs-dossier-complet-recensement-de-la-population-exploitation-complementaire-com",
+   "title": "Familles par nombre d'enfants",
+   "updatedAt": "2026-11-10T15:00:46.701Z",
+   "dataUpdatedAt": "2026-11-05T05:01:00.978Z",
+   "count": 627444,
+   "status": "finalized"
+  },
+  {
+   "id": "ut6i00yo3wyo7a6g9fjgv5tb",
+   "slug": "migrations-residentielles-principaux-indicateurs-dossier-complet-recensement-de-la-population-exploitation-principale-com",
+   "title": "Migrations résidentielles par résidence antérieure",
+   "updatedAt": "2026-11-10T15:00:27.584Z",
+   "dataUpdatedAt": "2026-11-05T05:00:38.565Z",
+   "count": 941166,
+   "status": "finalized"
+  },
+  {
+   "id": "rplhas9ye16nx0n1ml-8xxze",
+   "slug": "geodae-base-nationale-des-defibrillateurs",
+   "title": "Géo'DAE - Base Nationale des Défibrillateurs",
+   "updatedAt": "2026-11-13T21:00:32.246Z",
+   "dataUpdatedAt": "2026-11-13T21:00:32.246Z",
+   "count": 191898,
+   "status": "finalized"
+  },
+  {
+   "id": "lpkranejiwf2wxu-8g01xm77",
+   "slug": "schema-indice-de-reparabilite",
+   "title": "Schéma Indice de réparabilité",
+   "updatedAt": "2026-09-14T14:26:14.336Z",
+   "dataUpdatedAt": "2026-09-14T14:19:10.013Z",
+   "count": 3,
+   "status": "finalized"
+  },
+  {
+   "id": "pd5f6lhtit7f3-sw6d6nw5x9",
+   "slug": "schema-indice-de-durabilite-lave-linge",
+   "title": "Schéma Indice de durabilité - Lave-linge",
+   "updatedAt": "2026-09-14T14:26:46.099Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "udoksk90xku9sqf0jtu0tg7f",
+   "slug": "schema-indice-de-durabilite-televiseur",
+   "title": "Schéma Indice de durabilité - Téléviseur",
+   "updatedAt": "2026-09-14T14:26:35.845Z",
+   "dataUpdatedAt": "2026-09-14T14:18:40.991Z",
+   "count": 3,
+   "status": "finalized"
+  },
+  {
+   "id": "67e5ovm0nc13rksrrg08phg1",
+   "slug": "schema-part-des-vehicules-a-faibles-emissions-dans-le-renouvellement-des-parcs-dentreprises-de-location-location-vente-de-credit-bail-de-vehicules-des-plateformes-de-livraisons-et-des-centrales-de-reservation-de-taxi-et-vtc",
+   "title": "Schéma Part des véhicules à faibles émissions dans le renouvellement des parcs d’entreprises de location, location-vente, de crédit-bail de véhicules, des plateformes de livraisons et des centrales de réservation de taxi et VTC",
+   "updatedAt": "2026-09-14T14:19:11.944Z",
+   "dataUpdatedAt": "2026-09-11T15:09:51.058Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "0p3dz1gkshrs4huzatc9dq8y",
+   "slug": "schema-declaration-de-lacquisition-de-biens-issus-du-reemploi-de-la-reutilisation-ou-integrant-des-matieres-recyclees",
+   "title": "Schéma Déclaration de l'acquisition de biens issus du réemploi, de la réutilisation ou intégrant des matières recyclées",
+   "updatedAt": "2026-09-14T14:19:11.815Z",
+   "dataUpdatedAt": "2026-09-11T15:09:45.781Z",
+   "count": 3,
+   "status": "finalized"
+  },
+  {
+   "id": "yqz8z2fh0kzfkxzge3mim5hw",
+   "slug": "schema-part-des-vehicules-a-faibles-emissions-dans-le-renouvellement-dun-parc",
+   "title": "Schéma Part des véhicules à faibles émissions dans le renouvellement d'un parc",
+   "updatedAt": "2026-09-14T14:19:11.694Z",
+   "dataUpdatedAt": "2026-09-11T15:09:40.777Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "fzo2jzp1udx-c89pc8j2zot-",
+   "slug": "schema-collectivites",
+   "title": "Schéma Collectivités",
+   "updatedAt": "2026-09-14T14:19:11.572Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "x1e8r3o7pokp94h5dek9c1uo",
+   "slug": "schema-projets-de-collectivites",
+   "title": "Schéma Projets de collectivités",
+   "updatedAt": "2026-09-14T14:19:11.448Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "3w3ktzwr65obovgj0e4xfsoo",
+   "slug": "schema-impact-dun-service-public-numerique",
+   "title": "Schéma Impact d’un service public numérique",
+   "updatedAt": "2026-09-14T14:19:11.328Z",
+   "dataUpdatedAt": "2026-09-11T15:09:30.125Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "7101ca9zpw8hpmy2yd5eukps",
+   "slug": "schema-arretes-permanents-de-circulation-pour-le-transport-de-marchandises",
+   "title": "Schéma Arrêtés permanents de circulation pour le transport de marchandises",
+   "updatedAt": "2026-09-14T14:41:50.852Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "ggdtto5eoc95440dfrg7y4fn",
+   "slug": "schema-lieux-de-mediation-numerique",
+   "title": "Schéma Lieux de médiation numérique",
+   "updatedAt": "2026-09-14T14:33:17.698Z",
+   "dataUpdatedAt": "2026-09-11T15:08:23.384Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "dkqtm2ghaoe51bunv8bwofia",
+   "slug": "schema-stationnement-cyclable",
+   "title": "Schéma Stationnement cyclable",
+   "updatedAt": "2026-09-14T14:28:13.336Z",
+   "dataUpdatedAt": "2026-09-11T15:08:16.563Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "h-ddln8l6uin0dqa-w7yrjn6",
+   "slug": "schema-classe-programme-du-standard-cnig-operations-damenagement",
+   "title": "Schéma Classe PROGRAMME du standard CNIG Opérations d'aménagement",
+   "updatedAt": "2026-09-14T14:33:58.624Z",
+   "dataUpdatedAt": "2026-09-11T15:08:11.734Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "s17w04nltt3h2obed9vkqhfa",
+   "slug": "schema-classe-secteur-du-standard-cnig-operations-damenagement",
+   "title": "Schéma Classe SECTEUR du standard CNIG Opérations d'aménagement",
+   "updatedAt": "2026-09-14T14:33:53.515Z",
+   "dataUpdatedAt": "2026-09-11T15:08:07.341Z",
+   "count": null,
+   "status": "error"
+  },
+  {
+   "id": "363cfewsqgt0yt7unpsovgfg",
+   "slug": "schema-classe-operation-amenagement-du-standard-cnig-operations-damenagement",
+   "title": "Schéma Classe OPERATION-AMENAGEMENT du standard CNIG Opérations d'aménagement",
+   "updatedAt": "2026-09-14T14:34:35.211Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "afo7mesik1wxeh9u4idwkzsx",
+   "slug": "schema-hautes-remunerations-dans-la-fonction-publique",
+   "title": "Schéma Hautes rémunérations dans la fonction publique",
+   "updatedAt": "2026-09-14T14:33:31.525Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "jwl8ybhbd09qu3owtdf650t-",
+   "slug": "schema-point-deau-incendie-pei",
+   "title": "Schéma Point d'Eau Incendie (PEI)",
+   "updatedAt": "2026-09-14T14:32:01.647Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "rv780osl299odwqz7o8n84fg",
+   "slug": "schema-composition-des-plats-des-menus-de-la-restauration-collective",
+   "title": "Schéma Composition des plats des menus de la restauration collective",
+   "updatedAt": "2026-09-14T14:27:31.672Z",
+   "dataUpdatedAt": "2026-09-11T15:07:49.000Z",
+   "count": 205,
+   "status": "finalized"
+  },
+  {
+   "id": "o2k17x-qhypho6v8rii7cfgj",
+   "slug": "schema-menus-de-la-restauration-collective",
+   "title": "Schéma Menus de la restauration collective",
+   "updatedAt": "2026-09-14T14:27:04.914Z",
+   "dataUpdatedAt": "2026-09-11T15:07:29.252Z",
+   "count": 146,
+   "status": "finalized"
+  },
+  {
+   "id": "tgtof9h3k3xxuonu6gdtx9e-",
+   "slug": "schema-classe-etablissement-du-standard-cnig-sites-economiques",
+   "title": "Schéma Classe ETABLISSEMENT du standard CNIG Sites Economiques",
+   "updatedAt": "2026-09-14T14:33:45.620Z",
+   "dataUpdatedAt": null,
+   "count": 0,
+   "status": "finalized"
+  },
+  {
+   "id": "it24mk8xtdu7g4-o34ty0olv",
+   "slug": "schema-classe-terrain-eco-du-standard-cnig-sites-economiques",
+   "title": "Schéma Classe TERRAIN-ECO du standard CNIG Sites Economiques",
+   "updatedAt": "2026-09-14T14:34:07.358Z",
+   "dataUpdatedAt": "2026-09-11T15:07:15.949Z",
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "-rny2w5w7e6fo77unx7viq4h",
+   "slug": "schema-classe-site-eco-du-standard-cnig-sites-economiques",
+   "title": "Schéma Classe SITE-ECO du standard CNIG Sites Economiques",
+   "updatedAt": "2026-09-14T14:34:21.615Z",
+   "dataUpdatedAt": null,
+   "count": 0,
+   "status": "finalized"
+  },
+  {
+   "id": "ph2ag1lcmp1-qtl3otwqv1yr",
+   "slug": "schema-classe-pole-eco-du-standard-cnig-sites-economiques",
+   "title": "Schéma Classe POLE-ECO du standard CNIG Sites Economiques",
+   "updatedAt": "2026-09-14T14:34:02.756Z",
+   "dataUpdatedAt": "2026-09-11T15:07:07.223Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "0sowc3qs0dwou9xso7c2zi1a",
+   "slug": "schema-comptage-des-mobilites-measure",
+   "title": "Schéma Comptage des mobilités (Measure)",
+   "updatedAt": "2026-09-14T14:32:43.752Z",
+   "dataUpdatedAt": "2026-09-11T15:07:00.589Z",
+   "count": 9,
+   "status": "finalized"
+  },
+  {
+   "id": "1iyr2tu7848juqn5jugkrpic",
+   "slug": "schema-comptage-des-mobilites-channel",
+   "title": "Schéma Comptage des mobilités (Channel)",
+   "updatedAt": "2026-09-14T14:32:37.906Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "r5gri15swzrrubuuxy14awn6",
+   "slug": "schema-comptage-des-mobilites-site",
+   "title": "Schéma Comptage des mobilités (Site)",
+   "updatedAt": "2026-09-14T14:32:50.518Z",
+   "dataUpdatedAt": "2026-09-11T15:06:22.885Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "-mb5z6lqfkvsxlhmwjhp5flg",
+   "slug": "schema-accessibilite-erp-etablissements-sportifs",
+   "title": "Schéma Accessibilité ERP — Établissements sportifs",
+   "updatedAt": "2026-09-14T14:33:12.463Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "usmg65og2nkqk3ju7zsbe8pd",
+   "slug": "schema-accessibilite-erp-sante",
+   "title": "Schéma Accessibilité ERP — Santé",
+   "updatedAt": "2026-09-14T14:31:42.545Z",
+   "dataUpdatedAt": "2026-09-11T15:06:14.284Z",
+   "count": 6,
+   "status": "finalized"
+  },
+  {
+   "id": "lp21dw34n-wro583f370-701",
+   "slug": "schema-accessibilite-erp-etablissements-scolaires",
+   "title": "Schéma Accessibilité ERP — Établissements scolaires",
+   "updatedAt": "2026-09-14T14:32:56.048Z",
+   "dataUpdatedAt": "2026-09-11T15:06:08.863Z",
+   "count": 6,
+   "status": "finalized"
+  },
+  {
+   "id": "-q99iziheeqp2xnw60uln0lz",
+   "slug": "schema-accessibilite-erp-bureau-de-vote",
+   "title": "Schéma Accessibilité ERP — Bureau de vote",
+   "updatedAt": "2026-09-14T14:33:36.020Z",
+   "dataUpdatedAt": "2026-09-11T15:06:02.887Z",
+   "count": 6,
+   "status": "finalized"
+  },
+  {
+   "id": "esx1e6-sa3jujyzkxfs8dg7r",
+   "slug": "schema-accessibilite-erp-hebergement",
+   "title": "Schéma Accessibilité ERP — Hébergement",
+   "updatedAt": "2026-09-14T14:31:47.787Z",
+   "dataUpdatedAt": "2026-09-11T15:05:58.254Z",
+   "count": 6,
+   "status": "finalized"
+  },
+  {
+   "id": "7w6-90vg8a9z12fmmjwi37rj",
+   "slug": "schema-accessibilite-erp-grands-etablissements",
+   "title": "Schéma Accessibilité ERP — Grands établissements",
+   "updatedAt": "2026-09-14T14:33:03.773Z",
+   "dataUpdatedAt": "2026-09-11T15:05:53.809Z",
+   "count": 6,
+   "status": "finalized"
+  },
+  {
+   "id": "nj3ndnkmdwjrhossvqjaj-84",
+   "slug": "schema-accessibilite-erp-base",
+   "title": "Schéma Accessibilité ERP — Base",
+   "updatedAt": "2026-09-14T14:31:36.835Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "fwxxgw2vfaw6xb9w3g7v5n51",
+   "slug": "schema-registre-dentree-darchives",
+   "title": "Schéma Registre d'entrée d'archives",
+   "updatedAt": "2026-09-14T14:31:32.117Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "-i65dsf8cr934h133uopj-25",
+   "slug": "schema-pour-les-passages-a-niveau",
+   "title": "Schéma pour les passages à niveau",
+   "updatedAt": "2026-09-14T14:33:22.225Z",
+   "dataUpdatedAt": "2026-09-11T15:05:41.505Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "sjo84w58n8j9jb4l7fan3jtw",
+   "slug": "schema-dispositifs-daides-pour-les-professionnels",
+   "title": "Schéma Dispositifs d'aides pour les professionnels",
+   "updatedAt": "2026-09-14T14:26:53.957Z",
+   "dataUpdatedAt": "2026-09-11T15:05:36.145Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "n9f5b39lr3skdhifhq9rbywy",
+   "slug": "schema-dispositifs-daides",
+   "title": "Schéma Dispositifs d'aides",
+   "updatedAt": "2026-09-14T14:28:08.221Z",
+   "dataUpdatedAt": "2026-09-11T15:05:06.288Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "9gzk1sbrwzi9uml04iic5-wc",
+   "slug": "schema-aires-de-livraison",
+   "title": "Schéma Aires de livraison",
+   "updatedAt": "2026-09-14T14:31:11.438Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "nv3bpe0cgj3-wkhn2859ojb8",
+   "slug": "schema-stations-de-taxi",
+   "title": "Schéma Stations de taxi",
+   "updatedAt": "2026-09-14T14:31:06.593Z",
+   "dataUpdatedAt": "2026-09-11T15:04:50.350Z",
+   "count": 17,
+   "status": "finalized"
+  },
+  {
+   "id": "zab09em7j-lqb-nr5wjsgbhy",
+   "slug": "schema-lieux-de-stationnement",
+   "title": "Schéma Lieux de stationnement",
+   "updatedAt": "2026-09-14T14:31:17.291Z",
+   "dataUpdatedAt": "2026-09-11T15:04:45.130Z",
+   "count": 2,
+   "status": "finalized"
+  },
+  {
+   "id": "scmxsj7r7keiv1uyjwt1f7f0",
+   "slug": "schema-deliberations",
+   "title": "Schéma Délibérations",
+   "updatedAt": "2026-09-14T14:27:55.964Z",
+   "dataUpdatedAt": "2026-09-11T15:04:39.641Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "wwu9jnvd0ern2jqb4xg3obmd",
+   "slug": "schema-des-fontaines-a-eau",
+   "title": "Schéma des fontaines à eau",
+   "updatedAt": "2026-09-14T14:32:33.103Z",
+   "dataUpdatedAt": "2026-09-11T15:04:34.732Z",
+   "count": 3,
+   "status": "finalized"
+  },
+  {
+   "id": "pbr6q8v4luvt3au075hav9ag",
+   "slug": "schema-subventions",
+   "title": "Schéma Subventions",
+   "updatedAt": "2026-09-14T14:27:41.437Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "ms1r0glp13jadvf2rq7c1apt",
+   "slug": "schema-equipements",
+   "title": "Schéma Équipements",
+   "updatedAt": "2026-09-14T14:27:49.398Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "vorv1ywm9sz9a1xaentrtxif",
+   "slug": "schema-lieux-de-covoiturage",
+   "title": "Schéma Lieux de covoiturage",
+   "updatedAt": "2026-09-14T14:31:26.141Z",
+   "dataUpdatedAt": "2026-09-11T15:03:58.866Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "mk760v6n-t7wqxkqd4nckjsi",
+   "slug": "schema-catalogue-simplifie",
+   "title": "Schéma Catalogue simplifié",
+   "updatedAt": "2026-09-14T14:28:28.014Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "gz7-dsc7pc2vg4sa-le3px26",
+   "slug": "schema-specification-du-fichier-de-declaration-de-profil-dacheteur",
+   "title": "Schéma Spécification du fichier de déclaration de profil d'acheteur",
+   "updatedAt": "2026-09-14T14:33:40.536Z",
+   "dataUpdatedAt": null,
+   "count": 0,
+   "status": "finalized"
+  },
+  {
+   "id": "tulzi3gi-kvjhdo621gm1qu8",
+   "slug": "schema-prenoms-des-nouveaux-nes",
+   "title": "Schéma Prénoms des nouveaux-nés",
+   "updatedAt": "2026-09-14T14:33:27.089Z",
+   "dataUpdatedAt": "2026-09-11T15:03:45.650Z",
+   "count": 16,
+   "status": "finalized"
+  },
+  {
+   "id": "bv3c8pj60smygtolhk6tofcz",
+   "slug": "schema-unite-paysagere",
+   "title": "Schéma Unité Paysagère",
+   "updatedAt": "2026-09-14T14:30:58.682Z",
+   "dataUpdatedAt": "2026-09-11T15:03:40.520Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "pm794y9z2ekmr0nn6u3elpp7",
+   "slug": "schema-sous-unite-paysagere",
+   "title": "Schéma Sous-unité Paysagère",
+   "updatedAt": "2026-09-14T14:32:05.694Z",
+   "dataUpdatedAt": null,
+   "count": 0,
+   "status": "finalized"
+  },
+  {
+   "id": "vex5xeeqksx3daxkxrdgn7d-",
+   "slug": "schema-limite-decoupage-paysager",
+   "title": "Schéma Limite Découpage Paysager",
+   "updatedAt": "2026-09-14T14:31:52.097Z",
+   "dataUpdatedAt": null,
+   "count": 0,
+   "status": "finalized"
+  },
+  {
+   "id": "4pf5i9r9094fvhosez6bgx1a",
+   "slug": "schema-ensemble-paysager",
+   "title": "Schéma Ensemble Paysager",
+   "updatedAt": "2026-09-14T14:30:53.292Z",
+   "dataUpdatedAt": null,
+   "count": 0,
+   "status": "finalized"
+  },
+  {
+   "id": "f4z6zvth7am7tu1wft00tyog",
+   "slug": "schema-dynamique",
+   "title": "Schéma Dynamique",
+   "updatedAt": "2026-09-14T14:28:02.948Z",
+   "dataUpdatedAt": "2026-09-11T15:03:22.914Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "2fmubccgu58hykfjsl4mlhes",
+   "slug": "schema-document-paysage",
+   "title": "Schéma Document Paysage",
+   "updatedAt": "2026-09-14T14:28:18.004Z",
+   "dataUpdatedAt": null,
+   "count": 0,
+   "status": "finalized"
+  },
+  {
+   "id": "752-e5t26wbayd53bnaccgl5",
+   "slug": "schema-atlas-paysager",
+   "title": "Schéma Atlas Paysager",
+   "updatedAt": "2026-09-14T14:28:22.661Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "t2l6sujv4nn7vkntse93qfu9",
+   "slug": "schema-standard-cnig-friches",
+   "title": "Schéma Standard CNIG Friches",
+   "updatedAt": "2026-09-14T14:31:56.597Z",
+   "dataUpdatedAt": null,
+   "count": 0,
+   "status": "finalized"
+  },
+  {
+   "id": "sqj0fwtop2x4bdzqq6n7y-sk",
+   "slug": "schema-directeur-des-infrastructures-de-recharge-pour-vehicules-electriques-et-hybrides-rechargeables",
+   "title": "Schéma directeur des infrastructures de recharge pour véhicules électriques et hybrides rechargeables",
+   "updatedAt": "2026-09-14T14:27:26.300Z",
+   "dataUpdatedAt": "2026-09-11T15:02:31.169Z",
+   "count": 1,
+   "status": "finalized"
+  },
+  {
+   "id": "v8s4m2cyxiu8rzotmqomkd1x",
+   "slug": "schema-budget-des-collectivites-et-etablissements-publics-locaux",
+   "title": "Schéma Budget des collectivités et établissements publics locaux",
+   "updatedAt": "2026-09-14T14:34:30.344Z",
+   "dataUpdatedAt": "2026-09-11T15:02:26.665Z",
+   "count": 3458,
+   "status": "finalized"
+  },
+  {
+   "id": "rppocax-lhacoa9e3kr5zqd5",
+   "slug": "schema-irve-dynamique",
+   "title": "Schéma IRVE dynamique",
+   "updatedAt": "2026-09-14T14:26:29.663Z",
+   "dataUpdatedAt": "2026-09-11T15:02:18.505Z",
+   "count": 2,
+   "status": "finalized"
+  },
+  {
+   "id": "cyijiungso6xnw5cdkt14mza",
+   "slug": "schema-irve-statique",
+   "title": "Schéma IRVE statique",
+   "updatedAt": "2026-09-14T14:29:41.555Z",
+   "dataUpdatedAt": "2026-09-11T15:02:13.483Z",
+   "count": 2,
+   "status": "finalized"
+  },
+  {
+   "id": "oqvw03dlpmuie2m76qim9s1b",
+   "slug": "schema-dae",
+   "title": "Schéma DAE",
+   "updatedAt": "2026-09-14T14:27:36.139Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": "finalized"
+  },
+  {
+   "id": "wkschhxrfc-vnxbzkn0y5luh",
+   "slug": "capacites-eoliennes-installees-dedf-power-solutions",
+   "title": "Capacités éoliennes installées d'EDF power solutions",
+   "updatedAt": "2026-09-01T07:50:33.811Z",
+   "dataUpdatedAt": "2026-09-01T07:46:22.810Z",
+   "count": 142,
+   "status": "finalized"
+  },
+  {
+   "id": "ahprbxnoiafrpr6-zk9unpqy",
+   "slug": "production-hydraulique-takamaka-1-2026",
+   "title": "Production hydraulique Takamaka 1 - 2026",
+   "updatedAt": "2026-11-19T10:56:28.570Z",
+   "dataUpdatedAt": "2026-11-19T10:56:28.570Z",
+   "count": 1440,
+   "status": "finalized"
+  },
+  {
+   "id": "aoxziknf32z-osjojmorabww",
+   "slug": "base-permanente-des-equipements",
+   "title": "Base Permanente des Equipements - 2025",
+   "updatedAt": "2026-09-28T08:48:13.163Z",
+   "dataUpdatedAt": "2026-07-21T13:21:02.638Z",
+   "count": 2921770,
+   "status": "finalized"
+  },
+  {
+   "id": "0kd11htprz-63ggcbmghsps9",
+   "slug": "enquete-dopinion-internationale-sur-le-changement-climatique-obscop-2025",
+   "title": "Enquête d'opinion internationale sur le changement climatique - Obs'COP - 2025",
+   "updatedAt": "2026-10-06T08:59:35.701Z",
+   "dataUpdatedAt": "2026-07-20T09:37:56.462Z",
+   "count": 146275,
+   "status": "finalized"
+  },
+  {
+   "id": "x9gb-vmbqzr0g1hrf243ut3x",
+   "slug": "enquete-dopinion-internationale-sur-le-changement-climatique-obscop-2024",
+   "title": "Enquête d'opinion internationale sur le changement climatique - Obs'COP - 2024",
+   "updatedAt": "2026-10-06T08:59:53.853Z",
+   "dataUpdatedAt": "2026-07-17T12:06:47.716Z",
+   "count": 150208,
+   "status": "finalized"
+  },
+  {
+   "id": "njq-knwu0diqrdup6tya8qxi",
+   "slug": "prod-electricite-temps-reel-974",
+   "title": "Production d'électricité par filière en temps réel - La Réunion",
+   "updatedAt": "2026-11-02T14:22:17.556Z",
+   "dataUpdatedAt": "2026-11-19T10:55:19.421Z",
+   "count": 289,
+   "status": "finalized"
+  },
+  {
+   "id": "eua6h7wc9lm8upptrutp76kc",
+   "slug": "production-delectricite-par-filiere-en-temps-reel-martinique",
+   "title": "Production d'électricité par filière en temps réel - Martinique",
+   "updatedAt": "2026-10-07T15:29:36.845Z",
+   "dataUpdatedAt": "2026-11-19T10:55:14.947Z",
+   "count": 289,
+   "status": "finalized"
+  },
+  {
+   "id": "90wor4x46g95v4zrsfusmtqa",
+   "slug": "production-d-electricite-par-filiere-en-temps-reel-guyane",
+   "title": "Production d'électricité par filière en temps réel - Guyane",
+   "updatedAt": "2026-09-07T06:48:44.250Z",
+   "dataUpdatedAt": "2026-11-19T10:55:23.077Z",
+   "count": 289,
+   "status": "finalized"
+  },
+  {
+   "id": "0ba5scbyc293-o3ysyn0b2e6",
+   "slug": "mix-temps-reel-guadeloupe",
+   "title": "Production d'électricité par filière en temps réel - Guadeloupe",
+   "updatedAt": "2026-10-07T15:30:19.464Z",
+   "dataUpdatedAt": "2026-11-19T10:55:10.155Z",
+   "count": 289,
+   "status": "finalized"
+  },
+  {
+   "id": "k18y10din3b036hq9tt7puwn",
+   "slug": "production-delectricite-par-filiere-en-temps-reel",
+   "title": "Production d'électricité par filière en temps réel - Corse",
+   "updatedAt": "2026-09-07T06:48:50.741Z",
+   "dataUpdatedAt": "2026-11-19T10:45:34.186Z",
+   "count": 1345,
+   "status": "finalized"
+  },
+  {
+   "id": "41f8n3g34m3tkm8eaoug7ywt",
+   "slug": "consommation-quotidienne-brute202605complet",
+   "title": "Consommation quotidienne brute 2026",
+   "updatedAt": "2026-07-02T08:10:05.513Z",
+   "dataUpdatedAt": "2026-07-01T14:58:46.163Z",
+   "count": 17520,
+   "status": "finalized"
+  },
+  {
+   "id": "x-pomfffmxvkol1h94l648dc",
+   "slug": "annuaire-sante-ameli",
+   "title": "Annuaire santé Ameli",
+   "updatedAt": "2026-11-18T05:01:00.593Z",
+   "dataUpdatedAt": "2026-11-18T05:01:00.593Z",
+   "count": 559982,
+   "status": "finalized"
+  },
+  {
+   "id": "37c6c9hunk0t-1qfyy2d-5cu",
+   "slug": "performance-energetique-des-centres-de-donnees-edf",
+   "title": "Performance énergétique des centres de données EDF",
+   "updatedAt": "2026-06-30T13:40:43.013Z",
+   "dataUpdatedAt": "2026-06-30T13:19:10.458Z",
+   "count": 3,
+   "status": "finalized"
+  },
+  {
+   "id": "x-tu749qfe3cu7a2q6o15hoj",
+   "slug": "activite-des-residents-iris-france-hors-mayotte-recensement-de-la-population",
+   "title": "Activité des résidents - IRIS - France hors Mayotte - Recensement de la population",
+   "updatedAt": "2026-06-08T09:36:51.543Z",
+   "dataUpdatedAt": "2026-05-28T15:42:54.014Z",
+   "count": 149780,
+   "status": "finalized"
+  },
+  {
+   "id": "0h220hypu29qbraoomek8y1l",
+   "slug": "couples-familles-menages-iris-france-hors-mayotte-recensement-de-la-population",
+   "title": "Couples - Familles - Ménages - IRIS - France hors Mayotte - Recensement de la population",
+   "updatedAt": "2026-06-08T09:36:59.119Z",
+   "dataUpdatedAt": "2026-05-28T15:33:05.902Z",
+   "count": 149780,
+   "status": "finalized"
+  },
+  {
+   "id": "o700p1g0tg8hnt7ia365ecc-",
+   "slug": "population-iris-france-hors-mayotte-recensement-de-la-population",
+   "title": "Population - IRIS - France hors Mayotte - Recensement de la population",
+   "updatedAt": "2026-06-08T09:37:04.275Z",
+   "dataUpdatedAt": "2026-05-28T15:23:41.946Z",
+   "count": 149780,
+   "status": "finalized"
+  },
+  {
+   "id": "0x7zknt2xckdi6ax293t-4dq",
+   "slug": "logements-iris-france-hors-mayotte-recensement-de-la-population",
+   "title": "Logements - IRIS - France hors Mayotte - Recensement de la population",
+   "updatedAt": "2026-11-09T09:33:21.863Z",
+   "dataUpdatedAt": "2026-05-28T15:14:39.961Z",
+   "count": 149780,
+   "status": "finalized"
+  },
+  {
+   "id": "70b7iyjd5f5i5j7tggvxqvdk",
+   "slug": "famille-exploitation-complementaire",
+   "title": "Famille - Exploitation complémentaire",
+   "updatedAt": "2026-05-19T09:54:08.151Z",
+   "dataUpdatedAt": "2026-05-06T11:59:18.012Z",
+   "count": 104464,
+   "status": "finalized"
+  },
+  {
+   "id": "-y6ugp5sdw5o-ffgm49yd5ku",
+   "slug": "population-active-et-chomage-exploitation-complementaire",
+   "title": "Population active et chômage - Exploitation complémentaire",
+   "updatedAt": "2026-05-19T09:57:08.613Z",
+   "dataUpdatedAt": "2026-05-06T11:55:49.090Z",
+   "count": 104359,
+   "status": "finalized"
+  },
+  {
+   "id": "i003rewb2io-wn08-5uf2y2g",
+   "slug": "logements-exploitation-complementaire",
+   "title": "Logements - Exploitation complémentaire",
+   "updatedAt": "2026-05-19T09:57:48.211Z",
+   "dataUpdatedAt": "2026-05-06T09:59:40.304Z",
+   "count": 104551,
+   "status": "finalized"
+  },
+  {
+   "id": "2q972wwtmj68atdq10-fwjny",
+   "slug": "nombre-detablissements-et-effectifs-salaries-en-5-grands-secteurs",
+   "title": "Nombre d'établissements et effectifs salariés en 5 grands secteurs - Fichier localisé des rémunérations et de l'emploi salarié (Flores)",
+   "updatedAt": "2026-06-05T15:44:58.815Z",
+   "dataUpdatedAt": "2026-05-04T15:50:16.527Z",
+   "count": 34875,
+   "status": "finalized"
+  },
+  {
+   "id": "1fedh2b2b4r80w-5u0gsk56o",
+   "slug": "creations-detablissements-par-secteur-dactivite",
+   "title": "Créations d'établissements par secteur (Side)",
+   "updatedAt": "2026-10-09T12:48:39.553Z",
+   "dataUpdatedAt": "2026-05-04T15:51:04.531Z",
+   "count": 426162,
+   "status": "finalized"
+  },
+  {
+   "id": "yylpemvr-1abhlmqvrvrppd6",
+   "slug": "nombre-detablissements-et-effectifs-salaries-en-17-grands-secteurs",
+   "title": "Nombre d'établissements et effectifs salariés en 17 grands secteurs - Fichier localisé des rémunérations et de l'emploi salarié (Flores)",
+   "updatedAt": "2026-05-19T09:56:54.655Z",
+   "dataUpdatedAt": "2026-05-04T08:39:45.757Z",
+   "count": 627750,
+   "status": "finalized"
+  },
+  {
+   "id": "sqn403s6d63uhip-cwfk5vwb",
+   "slug": "menages-exploitation-complementaire",
+   "title": "Ménages - Exploitation complémentaire",
+   "updatedAt": "2026-05-19T09:52:10.747Z",
+   "dataUpdatedAt": "2026-04-29T14:49:16.862Z",
+   "count": 104527,
+   "status": "finalized"
+  },
+  {
+   "id": "lywbntci7fuor90mjxsbwmye",
+   "slug": "emploi-au-lieu-de-travai-exploitation-complementaire",
+   "title": "Emploi au lieu de travail - Exploitation complémentaire",
+   "updatedAt": "2026-05-19T10:00:27.012Z",
+   "dataUpdatedAt": "2026-04-29T14:44:21.014Z",
+   "count": 102265,
+   "status": "finalized"
+  },
+  {
+   "id": "wv4zpf-d79yort6g9q71ehka",
+   "slug": "population-exploitation-complementaire",
+   "title": "Population - Exploitation complémentaire",
+   "updatedAt": "2026-05-19T09:56:39.241Z",
+   "dataUpdatedAt": "2026-04-29T14:41:01.200Z",
+   "count": 104527,
+   "status": "finalized"
+  },
+  {
+   "id": "b93j4pbyzvjlyd7d85n1cmzp",
+   "slug": "capacites-daccueil-du-reseau-corse-outre-mer",
+   "title": "Capacités d'accueil du réseau - Corse & Outre-Mer",
+   "updatedAt": "2026-11-10T10:46:00.622Z",
+   "dataUpdatedAt": "2026-11-10T10:46:00.622Z",
+   "count": 101,
+   "status": "finalized"
+  },
+  {
+   "id": "2rkctur--j35-hc36008blc1",
+   "slug": "deplacements-domicile-travail-exploitation-principale",
+   "title": "Déplacements domicile-travail - Exploitation principale",
+   "updatedAt": "2026-05-19T09:56:02.404Z",
+   "dataUpdatedAt": "2026-04-28T07:44:16.469Z",
+   "count": 104536,
+   "status": "finalized"
+  },
+  {
+   "id": "7xsi0thcin8w9ykc3h-vnpch",
+   "slug": "emploi-au-lieu-de-travail-exploitation-principale",
+   "title": "Emploi au lieu de travail - Exploitation principale",
+   "updatedAt": "2026-05-19T09:54:57.169Z",
+   "dataUpdatedAt": "2026-04-28T07:43:51.055Z",
+   "count": 104440,
+   "status": "finalized"
+  },
+  {
+   "id": "lx682zbmt4hiacz74s8gtf4b",
+   "slug": "migrations-residentielles-exploitation-principale",
+   "title": "Migrations résidentielles - Exploitation principale",
+   "updatedAt": "2026-05-19T09:55:14.661Z",
+   "dataUpdatedAt": "2026-04-28T07:51:11.153Z",
+   "count": 104542,
+   "status": "finalized"
+  },
+  {
+   "id": "-95u6mcsqteu1ye140htros3",
+   "slug": "logements-exploitation-principale",
+   "title": "Logements - Exploitation principale",
+   "updatedAt": "2026-05-19T09:52:30.897Z",
+   "dataUpdatedAt": "2026-04-28T07:58:54.152Z",
+   "count": 104545,
+   "status": "finalized"
+  },
+  {
+   "id": "g5-5giz4l5pguiysgbrahl-d",
+   "slug": "diplomes-et-formation-exploitation-principale",
+   "title": "Diplômes et formation — exploitation principale",
+   "updatedAt": "2026-10-09T12:48:47.587Z",
+   "dataUpdatedAt": "2026-04-28T07:44:07.516Z",
+   "count": 104574,
+   "status": "finalized"
+  },
+  {
+   "id": "dli0xqvqsnp122arklj3aj2o",
+   "slug": "population-exploitation-principale",
+   "title": "Population - Exploitation principale",
+   "updatedAt": "2026-05-19T09:53:38.004Z",
+   "dataUpdatedAt": "2026-04-28T07:42:43.772Z",
+   "count": 104542,
+   "status": "finalized"
+  },
+  {
+   "id": "sxps6156bb87yu-z2ak6uert",
+   "slug": "menages-et-couple-exploitation-principale",
+   "title": "Ménages et couple - Exploitation principale",
+   "updatedAt": "2026-05-19T10:13:20.766Z",
+   "dataUpdatedAt": "2026-04-28T07:42:57.978Z",
+   "count": 104542,
+   "status": "finalized"
+  },
+  {
+   "id": "d582j7ub13nk6drtnhf6vgqn",
+   "slug": "caracteristiques-de-lemploi-exploitation-principale",
+   "title": "Caractéristiques de l'emploi — exploitation principale",
+   "updatedAt": "2026-10-09T12:48:45.581Z",
+   "dataUpdatedAt": "2026-04-28T07:42:01.573Z",
+   "count": 104542,
+   "status": "finalized"
+  },
+  {
+   "id": "kkz5ib-1hkur65kdjfqixj07",
+   "slug": "education-scolarisation-exploitation-principale",
+   "title": "Éducation et scolarisation — exploitation principale",
+   "updatedAt": "2026-10-09T12:48:47.055Z",
+   "dataUpdatedAt": "2026-04-28T07:43:32.094Z",
+   "count": 104574,
+   "status": "finalized"
+  },
+  {
+   "id": "qbe6as5osp23a8052faadsrz",
+   "slug": "population-active-et-chomage-exploitation-principale",
+   "title": "Population active et chômage - Exploitation principale",
+   "updatedAt": "2026-05-19T09:55:32.087Z",
+   "dataUpdatedAt": "2026-04-28T07:52:15.046Z",
+   "count": 104542,
+   "status": "finalized"
+  },
+  {
+   "id": "izl-deq63oaro9dtrm4kzr13",
+   "slug": "previsions-production-agregees-ij-sous-oa-dedf-oa",
+   "title": "Prévisions de production agrégées IJ sous OA d'EDF OA",
+   "updatedAt": "2026-10-29T11:11:30.680Z",
+   "dataUpdatedAt": "2026-11-19T10:07:00.640Z",
+   "count": 74473,
+   "status": "finalized"
+  },
+  {
+   "id": "rt4g2zh2s1d5b-bx9ca7vnix",
+   "slug": "previsions-production-agregees-jo-sous-oa-dedf-oa",
+   "title": "Prévisions de production agrégées JO sous OA d'EDF OA",
+   "updatedAt": "2026-10-15T12:11:33.770Z",
+   "dataUpdatedAt": "2026-11-19T09:37:01.559Z",
+   "count": 7296,
+   "status": "finalized"
+  },
+  {
+   "id": "kkjvt7pwhxhphs641a3c5y5g",
+   "slug": "previsions-production-potentielle-cogenerations-msde-sous-oa-dedf-oa",
+   "title": "Prévisions de production potentielle des cogénérations MSDE sous OA d'EDF OA",
+   "updatedAt": "2026-10-15T12:11:55.854Z",
+   "dataUpdatedAt": "2026-11-19T09:37:00.625Z",
+   "count": 24960,
+   "status": "finalized"
+  },
+  {
+   "id": "ds4utyrdlu6-0alcfbda97ox",
+   "slug": "puissance-installee-sous-oa-dedf-oa",
+   "title": "Puissance installée sous OA d'EDF OA",
+   "updatedAt": "2026-10-15T07:47:35.417Z",
+   "dataUpdatedAt": "2026-06-08T11:12:38.064Z",
+   "count": 0,
+   "status": "finalized"
+  },
+  {
+   "id": "i623t6nc9tesnrc24nqzckvl",
+   "slug": "signal-reseau-corse-recharge-vehicule-electrique",
+   "title": "Signal réseau Corse - Recharge véhicule électrique - Corse",
+   "updatedAt": "2026-11-04T13:14:49.260Z",
+   "dataUpdatedAt": "2026-11-18T18:01:50.843Z",
+   "count": 3744,
+   "status": "finalized"
+  },
+  {
+   "id": "-cecqw7gfcf4eqsivd2v82nz",
+   "slug": "seuils-et-limites-des-rejets-thermiques-aux-abords-des-centrales-nucleaires-d-edf-sa",
+   "title": "Seuils et limites des rejets thermiques aux abords des centrales nucléaires d'EDF",
+   "updatedAt": "2026-11-05T13:22:50.950Z",
+   "dataUpdatedAt": "2026-02-20T10:09:40.365Z",
+   "count": 51,
+   "status": "finalized"
+  },
+  {
+   "id": "1he6pqtljo8t0db4h6jdypb0",
+   "slug": "previsions-production-flexible-sous-oa-dedf-oa",
+   "title": "Prévisions de production flexible sous OA d'EDF OA",
+   "updatedAt": "2026-10-21T08:02:28.154Z",
+   "dataUpdatedAt": "2026-11-19T09:37:01.317Z",
+   "count": 12384,
+   "status": "finalized"
+  },
+  {
+   "id": "6ndcfrai25e81un5nk73ovhy",
+   "slug": "ecorsicawatt",
+   "title": "eCorsicaWatt",
+   "updatedAt": "2026-07-08T15:18:48.040Z",
+   "dataUpdatedAt": "2026-11-18T18:01:50.843Z",
+   "count": 3744,
+   "status": "finalized"
+  },
+  {
+   "id": "358lpu2hhbmw7l560-uskijn",
+   "slug": "indicateurs-de-loyers-dannonce-par-commune-maison-2025",
+   "title": "Indicateurs de loyers d'annonce par commune - maison - 2025",
+   "updatedAt": "2026-04-22T15:46:20.895Z",
+   "dataUpdatedAt": "2026-01-12T09:01:37.278Z",
+   "count": 34900,
+   "status": "finalized"
+  },
+  {
+   "id": "cq96s8zmnn1eba1jt06yky-6",
+   "slug": "dv3f",
+   "title": "DV3F",
+   "updatedAt": "2026-02-11T10:47:59.763Z",
+   "dataUpdatedAt": "2025-12-23T09:07:49.903Z",
+   "count": 530010,
+   "status": "finalized"
+  },
+  {
+   "id": "q-tgrzep4ulhkdgp2nenfkoe",
+   "slug": "cartofriches",
+   "title": "cartofriches",
+   "updatedAt": "2026-02-11T10:47:48.681Z",
+   "dataUpdatedAt": "2025-12-22T13:32:22.437Z",
+   "count": 28373,
+   "status": "finalized"
+  },
+  {
+   "id": "mhd0b-3olqlb56n9nufgy267",
+   "slug": "consommation-annuelle-par-commune-iles-du-ponant",
+   "title": "Consommation annuelle par commune - Îles du Ponant",
+   "updatedAt": "2026-10-06T09:03:15.101Z",
+   "dataUpdatedAt": "2025-11-25T13:51:37.391Z",
+   "count": 16,
+   "status": "finalized"
+  },
+  {
+   "id": "qgkdrq4knk147b7no6jnktvl",
+   "slug": "indicateurs-de-loyers-dannonce-par-commune-appartements-2025",
+   "title": "Loyers d'annonce — appartements 2025",
+   "updatedAt": "2026-10-09T12:48:43.775Z",
+   "dataUpdatedAt": "2026-01-12T08:56:30.365Z",
+   "count": 34900,
+   "status": "finalized"
+  },
+  {
+   "id": "phf-u85sfk2rq1z7rm02bhna",
+   "slug": "donnees-essentielles-de-la-commande-publique-decp-d-edf-sa",
+   "title": "Données Essentielles de la Commande Publique (DECP) d'EDF SA",
+   "updatedAt": "2026-10-06T09:04:27.156Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "va2p-eh14qlyxk67moq9dec7",
+   "slug": "catalogue-des-donnees-izivia-des-bornes-electriques-de-recharge",
+   "title": "Catalogue des données IZIVIA des bornes électriques de recharge",
+   "updatedAt": "2026-10-06T09:04:47.799Z",
+   "dataUpdatedAt": "2026-11-18T23:02:36.755Z",
+   "count": 25,
+   "status": "finalized"
+  },
+  {
+   "id": "a6u13bsve1ssfckot-pj97qf",
+   "slug": "publications-transparence-et-remit-liste-des-messages-edf-sa",
+   "title": "Publications transparence et remit - liste des messages d'EDF SA",
+   "updatedAt": "2026-10-06T09:05:05.246Z",
+   "dataUpdatedAt": "2026-11-19T10:00:18.994Z",
+   "count": 3137,
+   "status": "finalized"
+  },
+  {
+   "id": "h5cbcvlxa2slzwr4v4hgoeah",
+   "slug": "registre-des-installations-de-production-et-de-stockage-d-electricite",
+   "title": "Registre national des installations de production et de stockage d'électricité (au 30/09/2025)",
+   "updatedAt": "2026-10-06T09:05:31.393Z",
+   "dataUpdatedAt": "2026-11-08T23:00:32.909Z",
+   "count": 141589,
+   "status": "finalized"
+  },
+  {
+   "id": "eydtgekr285ytj5qxuu-972d",
+   "slug": "registre-national-des-installations-de-production-et-de-stockage-delectricite-corse",
+   "title": "Registre national des installations de production et de stockage d'électricité - Corse",
+   "updatedAt": "2026-10-06T09:05:57.132Z",
+   "dataUpdatedAt": "2026-11-08T23:00:32.909Z",
+   "count": 1035,
+   "status": "finalized"
+  },
+  {
+   "id": "2ne0caym1gcwtbpsdtb3u511",
+   "slug": "registre-national-des-installations-de-production-et-de-stockage-d-electricite-reunion",
+   "title": "Registre national des installations de production et de stockage d'électricité - La Réunion",
+   "updatedAt": "2026-10-06T09:06:13.818Z",
+   "dataUpdatedAt": "2026-11-08T23:00:32.909Z",
+   "count": 737,
+   "status": "finalized"
+  },
+  {
+   "id": "y074i0p6o2wfrle1c2v071w9",
+   "slug": "registre-national-des-installations-de-production-et-de-stockage-d-electricite-martinique",
+   "title": "Registre national des installations de production et de stockage d'électricité - Martinique",
+   "updatedAt": "2026-10-06T09:07:02.992Z",
+   "dataUpdatedAt": "2026-11-08T23:00:32.909Z",
+   "count": 709,
+   "status": "finalized"
+  },
+  {
+   "id": "d6847omb-anx8t6zb-sbqg37",
+   "slug": "registre-national-des-installations-de-production-et-de-stockage-delectricite-guyane",
+   "title": "Registre national des installations de production et de stockage d'électricité - Guyane",
+   "updatedAt": "2026-10-06T09:06:47.342Z",
+   "dataUpdatedAt": "2026-11-08T23:00:32.909Z",
+   "count": 258,
+   "status": "finalized"
+  },
+  {
+   "id": "coklsw4cnqo8f8xk6he818dg",
+   "slug": "registre-national-des-installations-de-production-et-de-stockage-d-electricite-guadeloupe",
+   "title": "Registre national des installations de production et de stockage d'électricité - Guadeloupe",
+   "updatedAt": "2026-10-06T09:06:28.783Z",
+   "dataUpdatedAt": "2026-11-08T23:00:32.909Z",
+   "count": 551,
+   "status": "finalized"
+  },
+  {
+   "id": "2enqhg2egq8wz9x3kt0wudri",
+   "slug": "prix-de-vente-suite-aux-encheres-rubans-d-edf-sa",
+   "title": "Prix de vente suite aux enchères rubans d’EDF SA",
+   "updatedAt": "2026-10-07T13:02:21.900Z",
+   "dataUpdatedAt": "2026-11-19T10:01:06.139Z",
+   "count": 1566,
+   "status": "finalized"
+  },
+  {
+   "id": "7tgfic35sejxtbi0ose84dbx",
+   "slug": "meteo-reseau-reunion",
+   "title": "Météo de l'électricité - Réunion",
+   "updatedAt": "2026-08-20T10:52:26.393Z",
+   "dataUpdatedAt": "2026-11-18T18:01:48.675Z",
+   "count": 4224,
+   "status": "finalized"
+  },
+  {
+   "id": "omcinfo9f9parnhutk8a-xmp",
+   "slug": "historique-des-indisponibilites-des-moyens-de-production-de-edf-sa-depuis-2015",
+   "title": "Historique des indisponibilités des moyens de production de EDF SA -  depuis 2015",
+   "updatedAt": "2026-10-06T09:08:27.248Z",
+   "dataUpdatedAt": "2026-09-07T07:36:29.348Z",
+   "count": 413289,
+   "status": "finalized"
+  },
+  {
+   "id": "lx9d05xhs5mckd5tprw8wqo6",
+   "slug": "pylones-htb-cor",
+   "title": "Pylônes HTB - Corse",
+   "updatedAt": "2026-11-04T16:41:11.521Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "791ugnip-vfbvagyhku8tilv",
+   "slug": "postes-sources-cor",
+   "title": "Postes sources - Corse",
+   "updatedAt": "2025-12-24T12:47:16.513Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "ltel66d02r4ghtgkvo9rzrmi",
+   "slug": "lignes-haute-tension-htb-aerien-cor",
+   "title": "Lignes haute tension (HTB aérien) - Corse",
+   "updatedAt": "2026-11-04T16:41:16.193Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "zuylshdxx10ijqvi8czkcc30",
+   "slug": "lignes-haute-tension-htb-souterrain-cor",
+   "title": "Lignes haute tension (HTB souterrain) - Corse",
+   "updatedAt": "2026-11-05T08:39:29.323Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "xnrzd4znd4qkthrhhbb0pty9",
+   "slug": "pylones-htb-run",
+   "title": "Pylônes HTB - La Réunion",
+   "updatedAt": "2025-12-24T13:05:29.537Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "4n3sjlr6rss8vy637yupnqlb",
+   "slug": "lignes-haute-tension-htb-souterrain-run",
+   "title": "Lignes haute tension (HTB souterrain) - La Réunion",
+   "updatedAt": "2025-12-24T12:56:20.518Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "pqy700y9i6x21075hq23kxek",
+   "slug": "postes-sources-reunion",
+   "title": "Postes sources - La Réunion",
+   "updatedAt": "2025-12-24T12:56:29.281Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "oa0p-ajpm08-n6vgk2c-orul",
+   "slug": "lignes-haute-tension-htb-aerien-run",
+   "title": "Lignes haute tension (HTB aérien) - La Réunion",
+   "updatedAt": "2025-12-24T12:56:35.057Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "15ufz0igjgqqxsxeo2jpinu2",
+   "slug": "pylones-htb-mar",
+   "title": "Pylônes HTB - Martinique",
+   "updatedAt": "2025-12-24T11:32:56.506Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "g3kbtz8fco2n8s36bx7mbkg3",
+   "slug": "lignes-haute-tension-htb-aerien-mar",
+   "title": "Lignes haute tension (HTB aérien) - Martinique",
+   "updatedAt": "2025-12-24T11:33:07.483Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "0o68-u1kuj71n57p-o8k9adi",
+   "slug": "postes-sources-mar",
+   "title": "Postes Sources - Martinique",
+   "updatedAt": "2025-12-24T11:34:28.434Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "wpinkbrgk3mbvmwgnlr676b2",
+   "slug": "lignes-haute-tension-htb-souterrain-mar",
+   "title": "Lignes haute tension (HTB souterrain) - Martinique",
+   "updatedAt": "2025-12-24T11:34:31.600Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "9lfq3z6r89o-tas58vxxk5p0",
+   "slug": "postes-sources-guy",
+   "title": "Postes sources - Guyane",
+   "updatedAt": "2025-12-24T11:01:06.291Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "t5pwgi819h4sg25ext9vpcmv",
+   "slug": "pylones-htb-guy",
+   "title": "Pylônes HTB - Guyane",
+   "updatedAt": "2025-12-24T11:01:20.423Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "b9wmhaaesm1wvfhe0f7do2ex",
+   "slug": "lignes-haute-tension-htb-aerien-guy",
+   "title": "Lignes haute tension (HTB aérien) - Guyane",
+   "updatedAt": "2025-12-24T11:01:28.345Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "hha1wo6utadbquyofofr93k5",
+   "slug": "lignes-haute-tension-htb-souterrain-guy",
+   "title": "Lignes haute tension (HTB souterrain) - Guyane",
+   "updatedAt": "2025-12-24T11:01:34.402Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "wkbzsowy9hzi4-musz0xhxvf",
+   "slug": "pylones-htb-gua",
+   "title": "Pylônes HTB - Guadeloupe",
+   "updatedAt": "2025-12-24T10:41:41.527Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "4rnqu2zbdvlnay6hz2da98p1",
+   "slug": "lignes-haute-tension-htb-aerien-gua",
+   "title": "Lignes haute tension (HTB aérien) - Guadeloupe",
+   "updatedAt": "2025-12-24T10:41:48.939Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "5gcw4fumq6crrsfizdxljhj0",
+   "slug": "postes-sources-gua",
+   "title": "Postes sources - Guadeloupe",
+   "updatedAt": "2025-12-24T10:42:13.324Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "i5i7z0jecxa8j9wzv13g48zi",
+   "slug": "lignes-haute-tension-htb-souterrain-gua",
+   "title": "Lignes haute tension (HTB souterrain) - Guadeloupe",
+   "updatedAt": "2025-12-24T10:42:30.949Z",
+   "dataUpdatedAt": null,
+   "count": null,
+   "status": null
+  },
+  {
+   "id": "fcdutau-wy9paxl-k-8-x0hq",
+   "slug": "bilan-electrique-demi-heure",
+   "title": "Puissances électriques au pas 15 minutes publiés en S+1 (5 ans d'historique)",
+   "updatedAt": "2026-06-08T13:58:21.947Z",
+   "dataUpdatedAt": "2026-11-19T02:01:18.021Z",
+   "count": 124274,
+   "status": "finalized"
+  },
+  {
+   "id": "2lrpe5z6j5efd5m85vwrhjfy",
+   "slug": "organigramme-du-groupe-edf",
+   "title": "Organigramme simplifié du groupe EDF",
+   "updatedAt": "2026-04-29T14:10:09.892Z",
+   "dataUpdatedAt": "2026-09-07T14:37:38.765Z",
+   "count": 431,
+   "status": "finalized"
+  },
+  {
+   "id": "oxmjrw0y75izizfioegu23os",
+   "slug": "bilan-electrique-jour",
+   "title": "Puissances Électriques au pas journalier",
+   "updatedAt": "2026-06-08T13:47:18.744Z",
+   "dataUpdatedAt": "2026-11-19T02:05:10.939Z",
+   "count": 1826,
+   "status": "finalized"
+  },
+  {
+   "id": "haqk2fpmdz21sjiwhva-0n2x",
+   "slug": "indisponibilites-des-moyens-de-production-edf-sa",
+   "title": "Indisponibilités des moyens de production de EDF SA",
+   "updatedAt": "2026-11-19T10:00:06.308Z",
+   "dataUpdatedAt": "2026-11-19T10:00:06.308Z",
+   "count": 29984,
+   "status": "finalized"
+  },
+  {
+   "id": "3f6et1q09oarxn7afaj0reop",
+   "slug": "registre-national-installation-production-stockage-electricite-agrege",
+   "title": "Registre national des installations de production et de stockage d'électricité (au 31/08/2026)",
+   "updatedAt": "2026-11-09T15:45:36.869Z",
+   "dataUpdatedAt": "2026-11-08T23:00:32.909Z",
+   "count": 141589,
+   "status": "finalized"
+  },
+  {
+   "id": "340xmalrdssf7yy35uk0i85p",
+   "slug": "effectifs-du-groupe-edf",
+   "title": "Effectifs du groupe EDF",
+   "updatedAt": "2026-04-21T09:13:41.815Z",
+   "dataUpdatedAt": "2025-11-06T13:59:49.164Z",
+   "count": 395,
+   "status": "finalized"
+  },
+  {
+   "id": "zlb2ajbuqjiy9rstnr9rgo62",
+   "slug": "evenementscalendriersallesautre",
+   "title": "EVENEMENTS_calendrier_salles_autre",
+   "updatedAt": "2026-10-12T12:27:40.714Z",
+   "dataUpdatedAt": "2026-11-17T14:25:43.110Z",
+   "count": 107,
+   "status": "finalized"
+  },
+  {
+   "id": "p71tn4v1flbx5345oaj0xmfn",
+   "slug": "production-d-electricite-par-filiere-et-couts-de-production-au-pas-horaire-974",
+   "title": "Production d’électricité par filière et coûts de production au pas horaire - La Réunion",
+   "updatedAt": "2026-02-24T09:03:54.626Z",
+   "dataUpdatedAt": "2026-01-21T17:51:23.911Z",
+   "count": 52608,
+   "status": "finalized"
+  },
+  {
+   "id": "j-52hkpz8u5ia4qwfytvnimm",
+   "slug": "production-d-electricite-par-filiere-et-couts-de-production-au-pas-horaire-martinique",
+   "title": "Production d’électricité par filière et coûts de production au pas horaire - Martinique",
+   "updatedAt": "2026-02-24T09:03:54.626Z",
+   "dataUpdatedAt": "2026-01-21T17:51:23.911Z",
+   "count": 52608,
+   "status": "finalized"
+  },
+  {
+   "id": "s7xriyuo381dn8hbr3trk6a-",
+   "slug": "production-d-electricite-par-filiere-et-couts-de-production-au-pas-horaire-guyane",
+   "title": "Production d’électricité par filière et coûts de production au pas horaire - Guyane",
+   "updatedAt": "2026-02-24T09:03:54.626Z",
+   "dataUpdatedAt": "2026-01-21T17:51:23.911Z",
+   "count": 52608,
+   "status": "finalized"
+  },
+  {
+   "id": "xolk1awpaae5vpubp5dgl11c",
+   "slug": "production-d-electricite-par-filiere-et-couts-de-production-au-pas-horaire-guadeloupe",
+   "title": "Production d’électricité par filière et coûts de production au pas horaire - Guadeloupe",
+   "updatedAt": "2026-02-24T09:03:54.626Z",
+   "dataUpdatedAt": "2026-01-21T17:51:23.911Z",
+   "count": 52608,
+   "status": "finalized"
+  },
+  {
+   "id": "p57z3vkij2q8njk2z74ih-ne",
+   "slug": "production-d-electricite-par-filiere-et-couts-de-production-au-pas-horaire-corse",
+   "title": "Production d’électricité par filière et coûts de production au pas horaire - Corse",
+   "updatedAt": "2026-02-24T09:03:54.626Z",
+   "dataUpdatedAt": "2026-01-21T17:51:23.911Z",
+   "count": 52608,
+   "status": "finalized"
+  },
+  {
+   "id": "fdmtxji2pt-daetiwgmodzsa",
+   "slug": "emissions-annuelles-de-co2-guyane",
+   "title": "Emissions annuelles de CO2 - Guyane",
+   "updatedAt": "2026-10-06T09:11:02.709Z",
+   "dataUpdatedAt": "2025-11-12T14:01:08.687Z",
+   "count": 11,
+   "status": "finalized"
+  },
+  {
+   "id": "bgsxf72q0jmza3q4ed6qon2n",
+   "slug": "production-annuelle-delectricite-par-filiere-reunion",
+   "title": "Production annuelle d'électricité par filière - La Réunion",
+   "updatedAt": "2025-12-24T13:06:52.444Z",
+   "dataUpdatedAt": "2025-10-23T13:23:26.437Z",
+   "count": 7,
+   "status": "finalized"
+  },
+  {
+   "id": "lip-fvwxnaxjqkgt27eqigxp",
+   "slug": "production-annuelle-delectricite-par-filiere-martinique",
+   "title": "Production annuelle d'électricité par filière - Martinique",
+   "updatedAt": "2025-12-24T12:43:52.269Z",
+   "dataUpdatedAt": "2025-10-23T13:23:26.437Z",
+   "count": 7,
+   "status": "finalized"
+  },
+  {
+   "id": "90l3g1oohp7melz0v7f2zurl",
+   "slug": "production-annuelle-delectricite-par-filiere-guyane",
+   "title": "Production annuelle d'électricité par filière - Guyane",
+   "updatedAt": "2025-12-24T11:03:43.404Z",
+   "dataUpdatedAt": "2025-10-23T13:23:26.437Z",
+   "count": 7,
+   "status": "finalized"
+  },
+  {
+   "id": "3xq2pg9tz8wyrqmm5-8eax41",
+   "slug": "production-annuelle-d-electricite-par-filiere-guadeloupe",
+   "title": "Production annuelle d'électricité par filière - Guadeloupe",
+   "updatedAt": "2025-12-24T10:46:04.532Z",
+   "dataUpdatedAt": "2025-10-23T13:23:26.437Z",
+   "count": 7,
+   "status": "finalized"
+  },
+  {
+   "id": "98-2cczg8va3m84w8fiicd-l",
+   "slug": "production-annuelle-delectricite-par-filiere-corse",
+   "title": "Production annuelle d'électricité par filière - Corse",
+   "updatedAt": "2025-12-05T12:44:17.711Z",
+   "dataUpdatedAt": "2025-10-23T13:23:26.437Z",
+   "count": 7,
+   "status": "finalized"
+  },
+  {
+   "id": "ru98o44dpiqn6zlm4m4yq78z",
+   "slug": "deconnexion-maximale-des-installations-photovoltaiques-974",
+   "title": "Limitations de production au titre de la sûreté système - La Réunion",
+   "updatedAt": "2025-12-24T12:58:30.550Z",
+   "dataUpdatedAt": "2025-11-12T14:31:55.594Z",
+   "count": 96,
+   "status": "finalized"
+  },
+  {
+   "id": "pq32xfpvz1sic41ypjdvb43o",
+   "slug": "deconnexion-maximale-des-installations-photovoltaiques-martinique",
+   "title": "Limitations de production au titre de la sûreté système - Martinique",
+   "updatedAt": "2025-12-24T11:35:33.493Z",
+   "dataUpdatedAt": "2025-11-12T14:31:55.594Z",
+   "count": 96,
+   "status": "finalized"
+  },
+  {
+   "id": "9z7ass523eq-jeolgwnzuc7f",
+   "slug": "deconnexion-maximale-des-installations-photovoltaiques-guyane",
+   "title": "Limitations de production au titre de la sûreté système - Guyane",
+   "updatedAt": "2025-12-24T11:04:02.594Z",
+   "dataUpdatedAt": "2025-11-12T14:31:55.594Z",
+   "count": 96,
+   "status": "finalized"
+  },
+  {
+   "id": "knre9g1u1yiazmldtp6f43y6",
+   "slug": "deconnexion-maximale-des-installations-photovoltaiques-guadeloupe",
+   "title": "Limitations de production au titre de la sûreté système - Guadeloupe",
+   "updatedAt": "2025-12-24T10:46:40.350Z",
+   "dataUpdatedAt": "2025-11-12T14:31:55.594Z",
+   "count": 96,
+   "status": "finalized"
+  },
+  {
+   "id": "-loom5g9u-cpg3or2i-i5ibo",
+   "slug": "deconnexions-des-installations-photovoltaiques-corse",
+   "title": "Limitations de production au titre de la sûreté système - Corse",
+   "updatedAt": "2025-12-24T12:48:02.382Z",
+   "dataUpdatedAt": "2025-11-12T14:31:55.594Z",
+   "count": 96,
+   "status": "finalized"
+  },
+  {
+   "id": "gym2hh2aki9fgsjh6c5tz5nf",
+   "slug": "lignes-et-postes-electriques-974",
+   "title": "Lignes et postes électriques - La Réunion",
+   "updatedAt": "2025-12-24T12:58:43.914Z",
+   "dataUpdatedAt": "2026-02-10T11:11:34.712Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "rbc5aghtlopygnjby02brxeq",
+   "slug": "lignes-et-postes-electriques-martinique",
+   "title": "Lignes et postes électriques - Martinique",
+   "updatedAt": "2025-12-24T11:35:51.377Z",
+   "dataUpdatedAt": "2026-02-10T11:11:34.712Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "vwpp3upq2ubf18f9nqabc3fb",
+   "slug": "lignes-et-postes-electriques-guyane",
+   "title": "Lignes et postes électriques - Guyane",
+   "updatedAt": "2025-12-24T11:04:18.863Z",
+   "dataUpdatedAt": "2026-02-10T11:11:34.712Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "1gnvd9bw2iwjmryh0l7iyj11",
+   "slug": "lignes-et-postes-electriques-guadeloupe",
+   "title": "Lignes et postes électriques - Guadeloupe",
+   "updatedAt": "2025-12-24T10:47:04.492Z",
+   "dataUpdatedAt": "2026-02-10T11:11:34.712Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "-b76iuqmd76lguiqc0a5d-eo",
+   "slug": "lignes-et-postes-electriques-corse",
+   "title": "Lignes et postes électriques - Corse",
+   "updatedAt": "2025-12-24T12:48:41.979Z",
+   "dataUpdatedAt": "2026-02-10T11:11:34.712Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "so910ycy-752rusnppcovxdp",
+   "slug": "file-dattente-producteur-974",
+   "title": "File d'attente producteur - La Réunion",
+   "updatedAt": "2026-05-13T09:16:17.690Z",
+   "dataUpdatedAt": "2026-05-13T09:12:30.660Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "62bn3sv7sew0shzllrpo1r7-",
+   "slug": "file-dattente-producteur-martinique",
+   "title": "File d'attente producteur - Martinique",
+   "updatedAt": "2026-05-13T09:17:24.013Z",
+   "dataUpdatedAt": "2026-05-13T09:12:30.660Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "ppt-g09s8r7v4u-xjgdggwwq",
+   "slug": "file-dattente-producteur-guyane",
+   "title": "File d'attente producteur - Guyane",
+   "updatedAt": "2026-05-13T09:17:41.697Z",
+   "dataUpdatedAt": "2026-05-13T09:12:30.660Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "1b6dxcoyk-3yt5az6hd2gohf",
+   "slug": "file-dattente-producteur-guadeloupe",
+   "title": "File d'attente producteur - Guadeloupe",
+   "updatedAt": "2026-05-13T09:17:58.304Z",
+   "dataUpdatedAt": "2026-05-13T09:12:30.660Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "tiuzsohgjq4fy1f2uier6gy8",
+   "slug": "file-dattente-producteur-corse",
+   "title": "File d'attente producteur - Corse",
+   "updatedAt": "2026-05-13T09:18:16.952Z",
+   "dataUpdatedAt": "2026-05-13T09:12:30.660Z",
+   "count": 15,
+   "status": "finalized"
+  },
+  {
+   "id": "zmuebeju721pnwjf7g6m1cdg",
+   "slug": "emissions-annuelles-de-c02-974",
+   "title": "Emissions annuelles de CO2 - La Réunion",
+   "updatedAt": "2026-10-06T09:12:50.693Z",
+   "dataUpdatedAt": "2025-11-12T14:01:08.687Z",
+   "count": 11,
+   "status": "finalized"
+  },
+  {
+   "id": "ks-qr1k-1gmbsxbkqx-vvhdw",
+   "slug": "emissions-annuelles-de-co2-martinique",
+   "title": "Emissions annuelles de CO2 - Martinique",
+   "updatedAt": "2026-10-06T09:13:03.069Z",
+   "dataUpdatedAt": "2025-11-12T14:01:08.687Z",
+   "count": 11,
+   "status": "finalized"
+  },
+  {
+   "id": "6ohf8xpn3ki6fdck86ma3eyr",
+   "slug": "emissions-annuelles-de-c02-guadeloupe",
+   "title": "Emissions annuelles de CO2 - Guadeloupe",
+   "updatedAt": "2026-10-06T09:13:13.899Z",
+   "dataUpdatedAt": "2025-11-12T14:01:08.687Z",
+   "count": 11,
+   "status": "finalized"
+  },
+  {
+   "id": "au6jf6py-06by0-lp6vxtdnc",
+   "slug": "emissions-c02-corse",
+   "title": "Emissions annuelles de CO2 - Corse",
+   "updatedAt": "2026-10-06T09:13:27.791Z",
+   "dataUpdatedAt": "2025-11-12T14:01:08.687Z",
+   "count": 11,
+   "status": "finalized"
+  },
+  {
+   "id": "ipjprr4yaeof4kew43p6sb8c",
+   "slug": "effacements-de-consommation-mensuels-974",
+   "title": "Effacements de consommation mensuels - La Réunion",
+   "updatedAt": "2026-01-22T09:05:41.045Z",
+   "dataUpdatedAt": "2025-10-23T13:29:43.275Z",
+   "count": 62,
+   "status": "finalized"
+  },
+  {
+   "id": "jumcf3fur2qa42jwmey4yaxd",
+   "slug": "effacements-de-consommation-mensuels-martinique",
+   "title": "Effacements de consommation mensuels - Martinique",
+   "updatedAt": "2026-01-22T09:05:41.045Z",
+   "dataUpdatedAt": "2025-10-23T13:29:43.275Z",
+   "count": 29,
+   "status": "finalized"
+  },
+  {
+   "id": "67u5lwyzmtxo136wk0zsxih8",
+   "slug": "effacements-de-consommation-mensuels-guyane",
+   "title": "Effacements de consommation mensuels - Guyane",
+   "updatedAt": "2026-01-22T09:05:41.045Z",
+   "dataUpdatedAt": "2025-10-23T13:29:43.275Z",
+   "count": 5,
+   "status": "finalized"
+  },
+  {
+   "id": "qfq03zm4g8nce4tbun6w-4-m",
+   "slug": "effacements-de-consommation-mensuels-corse",
+   "title": "Effacements de consommation mensuels - Corse",
+   "updatedAt": "2026-01-22T09:05:41.045Z",
+   "dataUpdatedAt": "2025-10-23T13:29:43.275Z",
+   "count": 41,
+   "status": "finalized"
+  },
+  {
+   "id": "y-lrvrtj10y9rmewc5vigrh-",
+   "slug": "consommation-annuelle-par-commune-reunion",
+   "title": "Consommation annuelle par commune - La Réunion",
+   "updatedAt": "2026-10-06T09:14:36.354Z",
+   "dataUpdatedAt": "2025-11-25T13:51:37.391Z",
+   "count": 1174,
+   "status": "finalized"
+  },
+  {
+   "id": "arwnmd1vyjg0asuy4oj7p0o4",
+   "slug": "consommation-annuelle-par-commune-martinique",
+   "title": "Consommation annuelle par commune - Martinique",
+   "updatedAt": "2026-10-06T09:14:45.418Z",
+   "dataUpdatedAt": "2025-11-25T13:51:37.391Z",
+   "count": 1558,
+   "status": "finalized"
+  },
+  {
+   "id": "0v62q6x0bejajq2xv0yvbft3",
+   "slug": "consommation-annuelle-par-commune-guyane",
+   "title": "Consommation annuelle par commune - Guyane",
+   "updatedAt": "2026-10-06T09:14:53.373Z",
+   "dataUpdatedAt": "2025-11-25T13:51:37.391Z",
+   "count": 824,
+   "status": "finalized"
+  },
+  {
+   "id": "1m3ddt3nche771-bqrb9i67z",
+   "slug": "consommation-annuelle-par-commune-guadeloupe",
+   "title": "Consommation annuelle par commune - Guadeloupe",
+   "updatedAt": "2026-10-06T09:15:00.722Z",
+   "dataUpdatedAt": "2025-11-25T13:51:37.391Z",
+   "count": 1535,
+   "status": "finalized"
+  },
+  {
+   "id": "309bjtsvjfa764dfu9l0xgtf",
+   "slug": "consommation-annuelle-par-commune-corse",
+   "title": "Consommation annuelle par commune - Corse",
+   "updatedAt": "2026-10-06T09:15:06.568Z",
+   "dataUpdatedAt": "2025-11-25T13:51:37.391Z",
+   "count": 11395,
+   "status": "finalized"
+  },
+  {
+   "id": "69yu4ztwfp9s2a6czorxpsfh",
+   "slug": "capacites-reseau-reunion",
+   "title": "Capacités d'accueil du réseau - La Réunion",
+   "updatedAt": "2026-10-19T07:10:29.417Z",
+   "dataUpdatedAt": "2026-11-10T10:46:00.622Z",
+   "count": 24,
+   "status": "finalized"
+  },
+  {
+   "id": "biqesqje-c-siq6i9tfg8qq2",
+   "slug": "capacites-reseau-martinique",
+   "title": "Capacités d'accueil du réseau - Martinique",
+   "updatedAt": "2026-10-19T07:09:43.612Z",
+   "dataUpdatedAt": "2026-11-10T10:46:00.622Z",
+   "count": 14,
+   "status": "finalized"
+  },
+  {
+   "id": "4k8o2ym7g3lv2hz2abs2jxjv",
+   "slug": "capacites-reseau-guyane",
+   "title": "Capacités d'accueil du réseau - Guyane",
+   "updatedAt": "2026-10-19T07:08:57.688Z",
+   "dataUpdatedAt": "2026-11-10T10:46:00.622Z",
+   "count": 13,
+   "status": "finalized"
+  },
+  {
+   "id": "6b3voso4knphe07gkzsh5yph",
+   "slug": "capacites-reseau-guadeloupe",
+   "title": "Capacités d'accueil du réseau - Guadeloupe",
+   "updatedAt": "2026-10-19T07:08:03.602Z",
+   "dataUpdatedAt": "2026-11-10T10:46:00.622Z",
+   "count": 16,
+   "status": "finalized"
+  },
+  {
+   "id": "g2wxe-03pfyiy5x7l7573w9l",
+   "slug": "capacites-reseau-corse",
+   "title": "Capacités d'accueil du réseau - Corse",
+   "updatedAt": "2026-10-19T07:06:45.442Z",
+   "dataUpdatedAt": "2026-11-10T10:46:00.622Z",
+   "count": 34,
+   "status": "finalized"
+  },
+  {
+   "id": "l-n4asnlhtw914pqq5psd1-t",
+   "slug": "actions-defficacite-energetique-974",
+   "title": "Actions d'Efficacité Énergétique - La Réunion",
+   "updatedAt": "2025-12-24T13:01:19.550Z",
+   "dataUpdatedAt": "2025-11-12T13:46:05.407Z",
+   "count": 82,
+   "status": "finalized"
+  },
+  {
+   "id": "c-ox6j0xoan9c0pt8ftw-rc9",
+   "slug": "actions-defficacite-energetique-martinique",
+   "title": "Actions d'Efficacité Énergétique - Martinique",
+   "updatedAt": "2025-12-24T12:37:16.835Z",
+   "dataUpdatedAt": "2025-11-12T13:46:05.407Z",
+   "count": 104,
+   "status": "finalized"
+  },
+  {
+   "id": "dmg5y7qg6kya0u8kpkbnlqmm",
+   "slug": "actions-defficacite-energetique-guyane",
+   "title": "Actions d'Efficacité Énergétique - Guyane",
+   "updatedAt": "2025-12-24T11:08:55.112Z",
+   "dataUpdatedAt": "2025-11-12T13:46:05.407Z",
+   "count": 91,
+   "status": "finalized"
+  },
+  {
+   "id": "wpptsn55llegdr50pkolsdef",
+   "slug": "actions-defficacite-energetique-guadeloupe",
+   "title": "Actions d'Efficacité Énergétique - Guadeloupe",
+   "updatedAt": "2025-12-24T10:52:29.740Z",
+   "dataUpdatedAt": "2025-11-12T13:46:05.407Z",
+   "count": 91,
+   "status": "finalized"
+  },
+  {
+   "id": "7zotf21brsbirrymhudl5tsa",
+   "slug": "actions-defficacite-energetique-corse",
+   "title": "Actions d'Efficacité Énergétique - Corse",
+   "updatedAt": "2025-12-24T12:49:57.125Z",
+   "dataUpdatedAt": "2025-11-12T13:46:05.407Z",
+   "count": 102,
+   "status": "finalized"
+  },
+  {
+   "id": "ko0lkx85rdu6mfns8i-jmg60",
+   "slug": "centrales-de-production-thermique-a-flamme-d-edf-sa-fioul-gaz-charbon",
+   "title": "Centrales de production thermique à flamme d'EDF SA (Fioul, Gaz, Charbon...)",
+   "updatedAt": "2026-08-24T15:16:15.204Z",
+   "dataUpdatedAt": "2026-03-11T14:57:09.671Z",
+   "count": 19,
+   "status": "finalized"
+  },
+  {
+   "id": "ohco3c11wq2fz546oumq6oxr",
+   "slug": "centrales-de-production-nucleaire-edf",
+   "title": "Centrales de production nucléaire d'EDF SA",
+   "updatedAt": "2026-10-05T12:42:25.052Z",
+   "dataUpdatedAt": "2026-10-05T12:42:25.052Z",
+   "count": 57,
+   "status": "finalized"
+  },
+  {
+   "id": "od0oo1bf-9oidk5ab8aujmam",
+   "slug": "centrales-de-production-hydraulique-de-edf-sa",
+   "title": "Centrales de production hydraulique de EDF SA",
+   "updatedAt": "2026-10-19T07:59:29.239Z",
+   "dataUpdatedAt": "2026-10-19T07:59:29.239Z",
+   "count": 51,
+   "status": "finalized"
+  },
+  {
+   "id": "p8yu5pni2n6g2l9ig42fbrzx",
+   "slug": "productions-consolidees-par-pays-du-groupe-edf",
+   "title": "Productions consolidées par pays du groupe EDF",
+   "updatedAt": "2026-08-25T07:29:55.523Z",
+   "dataUpdatedAt": "2026-06-18T14:24:25.481Z",
+   "count": 688,
+   "status": "finalized"
+  },
+  {
+   "id": "-doq-bog8zzayx-5c9xsel5i",
+   "slug": "emissions-de-co2-consolidees-par-pays-du-groupe-edf",
+   "title": "Émissions de CO2 consolidées par pays du groupe EDF",
+   "updatedAt": "2026-08-24T15:20:16.411Z",
+   "dataUpdatedAt": "2026-06-18T14:24:44.911Z",
+   "count": 107,
+   "status": "finalized"
+  },
+  {
+   "id": "fq5u6raylns8m9vje22sviog",
+   "slug": "debit-des-rivieres-aux-abords-de-centrales-hydrauliques-depuis-2001",
+   "title": "Débit des rivières aux abords de centrales hydrauliques (depuis 2001)",
+   "updatedAt": "2026-10-06T09:16:31.373Z",
+   "dataUpdatedAt": "2026-03-30T11:50:12.191Z",
+   "count": 608659,
+   "status": "finalized"
+  },
+  {
+   "id": "fg0kbgb77-rm9miqzp-pda9c",
+   "slug": "compte-de-resultat-consolide-du-groupe-edf",
+   "title": "Compte de résultat consolidé du groupe EDF",
+   "updatedAt": "2026-08-24T15:16:39.803Z",
+   "dataUpdatedAt": "2026-04-29T15:28:55.253Z",
+   "count": 378,
+   "status": "finalized"
+  },
+  {
+   "id": "3248s841eb04gt9akhpikgyj",
+   "slug": "capacites-solaires-installees-edf-power-solutions",
+   "title": "Capacités solaires installées d'EDF power solutions",
+   "updatedAt": "2026-08-31T15:50:52.723Z",
+   "dataUpdatedAt": "2026-08-31T15:44:59.295Z",
+   "count": 132,
+   "status": "finalized"
+  },
+  {
+   "id": "at-d8xjchsolcolw3nxf7wfh",
+   "slug": "capacites-de-production-par-pays-du-groupe-edf",
+   "title": "Capacités de production par pays du groupe EDF",
+   "updatedAt": "2026-09-04T13:51:58.247Z",
+   "dataUpdatedAt": "2026-06-18T14:24:06.504Z",
+   "count": 585,
+   "status": "finalized"
+  },
+  {
+   "id": "z1k3rxguwb0u4q0d0eq6c2ky",
+   "slug": "capacites-de-production-consolidees-du-groupe-edf",
+   "title": "Capacités de production consolidées du groupe EDF",
+   "updatedAt": "2026-09-04T13:53:22.377Z",
+   "dataUpdatedAt": "2026-06-18T14:23:41.926Z",
+   "count": 224,
+   "status": "finalized"
+  },
+  {
+   "id": "qjl5f5v2mfxajth6gk2t8u7h",
+   "slug": "consommation-annuelle-entreprise-par-adresse",
+   "title": "Consommation d'électricité annuelle des entreprises par adresse (jusqu'à 2025)",
+   "updatedAt": "2026-10-13T15:37:56.666Z",
+   "dataUpdatedAt": "2026-10-13T12:32:00.510Z",
+   "count": 2788421,
+   "status": "finalized"
+  },
+  {
+   "id": "1alxmuprz7tdkrl2d049zz6a",
+   "slug": "bilan-social-d-edf-sa-travailleurs-exterieurs",
+   "title": "Bilan social d'EDF SA - Travailleurs extérieurs",
+   "updatedAt": "2026-08-24T15:14:32.864Z",
+   "dataUpdatedAt": "2025-10-28T12:59:23.421Z",
+   "count": 104,
+   "status": "finalized"
+  },
+  {
+   "id": "0w7ofo8xupf6mtf75kp-jlh9",
+   "slug": "bilan-social-d-edf-sa-salaries-en-situation-de-handicap",
+   "title": "Bilan social d'EDF SA - Salariés en situation de handicap",
+   "updatedAt": "2026-08-24T15:14:03.827Z",
+   "dataUpdatedAt": "2025-10-28T13:04:12.115Z",
+   "count": 216,
+   "status": "finalized"
+  },
+  {
+   "id": "6q6z9ki44jzg7159j0q6dwyc",
+   "slug": "sobriete-consommation-electrique",
+   "title": "Sobriété de la consommation d'électricité",
+   "updatedAt": "2026-03-20T10:28:39.213Z",
+   "dataUpdatedAt": "2025-10-07T13:05:49.610Z",
+   "count": 156,
+   "status": "finalized"
+  },
+  {
+   "id": "1bur625bhp5782479anyrvfo",
+   "slug": "bilan-social-d-edf-sa-remuneration-et-promotions",
+   "title": "Bilan social d'EDF SA - Rémunération et promotions",
+   "updatedAt": "2026-08-24T15:13:48.502Z",
+   "dataUpdatedAt": "2025-10-28T08:18:23.048Z",
+   "count": 544,
+   "status": "finalized"
+  },
+  {
+   "id": "x4-oyc289caj5xhs2zpv3uqy",
+   "slug": "bilan-social-d-edf-sa-formation",
+   "title": "Bilan social d'EDF SA - Formation",
+   "updatedAt": "2026-08-24T15:13:33.861Z",
+   "dataUpdatedAt": "2025-10-28T08:14:41.842Z",
+   "count": 504,
+   "status": "finalized"
+  },
+  {
+   "id": "3ei0u5u73yetr285e0n425f1",
+   "slug": "bilan-social-d-edf-sa-effectifs-et-repartition-par-age-statut-et-sexe",
+   "title": "Bilan social d'EDF SA - Effectifs et répartition par âge, statut et sexe",
+   "updatedAt": "2026-08-24T15:13:18.507Z",
+   "dataUpdatedAt": "2025-12-08T10:01:28.795Z",
+   "count": 2652,
+   "status": "finalized"
+  },
+  {
+   "id": "yy3syl5umjgm94ue-0gb2-nb",
+   "slug": "bilan-social-d-edf-sa-droit-du-travail",
+   "title": "Bilan social d'EDF SA - Droit du travail",
+   "updatedAt": "2026-08-24T15:13:03.048Z",
+   "dataUpdatedAt": "2025-10-27T13:00:18.148Z",
+   "count": 48,
+   "status": "finalized"
+  },
+  {
+   "id": "mi3v1umhz1fa4jj2mv0uplzj",
+   "slug": "bilan-social-d-edf-sa-autres-conditions-de-travail",
+   "title": "Bilan social d'EDF SA - Autres conditions de travail",
+   "updatedAt": "2026-08-24T15:12:16.879Z",
+   "dataUpdatedAt": "2025-10-28T13:02:00.167Z",
+   "count": 1556,
+   "status": "finalized"
+  },
+  {
+   "id": "5wqfhsxr1019mroktl50y5gw",
+   "slug": "bilan-social-d-edf-sa-absenteisme",
+   "title": "Bilan social d'EDF SA - Absentéisme",
+   "updatedAt": "2026-08-24T15:11:49.628Z",
+   "dataUpdatedAt": "2025-10-27T09:54:46.772Z",
+   "count": 288,
+   "status": "finalized"
+  },
+  {
+   "id": "kpernondn56oe61p8n-79lp4",
+   "slug": "prod-region",
+   "title": "Agrégats segmentés de production électrique au pas 1/2 h – Maille régionale",
+   "updatedAt": "2026-11-02T18:10:57.009Z",
+   "dataUpdatedAt": "2026-11-02T17:21:03.334Z",
+   "count": 36951552,
+   "status": "finalized"
+  },
+  {
+   "id": "we97lchmuqmey1dwpqglh62c",
+   "slug": "prod",
+   "title": "Agrégats segmentés de production électrique au pas 1/2 h – Maille nationale",
+   "updatedAt": "2026-11-02T17:20:04.790Z",
+   "dataUpdatedAt": "2026-11-02T17:15:50.025Z",
+   "count": 6153408,
+   "status": "finalized"
+  },
+  {
+   "id": "08pw8stfvv4sij6rsyhcq117",
+   "slug": "conso-inf36-region",
+   "title": "Agrégats segmentés de consommation électrique au pas 1/2 h des points de soutirage <= 36kVA – Maille régionale",
+   "updatedAt": "2026-11-02T17:27:44.978Z",
+   "dataUpdatedAt": "2026-11-02T17:26:42.870Z",
+   "count": 56111616,
+   "status": "finalized"
+  },
+  {
+   "id": "42v9a682e2cotmu1x9zt45rd",
+   "slug": "conso-sup36-region",
+   "title": "Agrégats segmentés de consommation électrique au pas 1/2 h des points de soutirage > 36kVA – Maille régionale",
+   "updatedAt": "2026-11-02T17:27:35.259Z",
+   "dataUpdatedAt": "2026-11-02T17:26:51.540Z",
+   "count": 37577904,
+   "status": "finalized"
+  },
+  {
+   "id": "7joiuiwwulk41c0pn8hzldqq",
+   "slug": "production-annuelle-d-electricite-par-filiere-saint-pierre-et-miquelon",
+   "title": "Production annuelle d’électricité par filière - Saint-Pierre-et-Miquelon",
+   "updatedAt": "2026-04-28T06:57:42.576Z",
+   "dataUpdatedAt": "2026-04-28T06:55:32.610Z",
+   "count": 9,
+   "status": "finalized"
+  },
+  {
+   "id": "9i2ssulrs3z-ig3baoxlh9ny",
+   "slug": "courbe-de-charge-de-la-production-delectricite-par-filiere",
+   "title": "Production d’électricité par filière et coûts de production au pas horaire",
+   "updatedAt": "2026-04-21T09:17:35.928Z",
+   "dataUpdatedAt": "2026-01-21T17:51:23.911Z",
+   "count": 263040,
+   "status": "finalized"
+  },
+  {
+   "id": "a0osrw0tx2ql39i04vs3swvj",
+   "slug": "registre-national-des-installations-de-production-et-de-stockage-d-electricite",
+   "title": "Registre national des installations de production et de stockage d'électricité - Saint-Pierre-et-Miquelon",
+   "updatedAt": "2026-04-27T15:04:40.435Z",
+   "dataUpdatedAt": "2026-04-27T15:04:40.435Z",
+   "count": 2,
+   "status": "finalized"
+  },
+  {
+   "id": "voq5fnof-tzqwmydzc-qed73",
+   "slug": "production-annuelle-delectricite-par-filiere",
+   "title": "Production annuelle d'électricité par filière d'EDF SA en Corse & Outremer",
+   "updatedAt": "2026-04-21T09:17:25.227Z",
+   "dataUpdatedAt": "2025-10-23T13:23:26.437Z",
+   "count": 58,
+   "status": "finalized"
+  },
+  {
+   "id": "fgg0oqqf65k32g7q3fu4l1q2",
+   "slug": "parc-de-production-et-de-stockage-sein-ouessant-molene",
+   "title": "Parc de production et de stockage - Sein Ouessant Molene",
+   "updatedAt": "2026-04-30T07:46:15.050Z",
+   "dataUpdatedAt": "2025-11-12T15:51:26.735Z",
+   "count": 18,
+   "status": "finalized"
+  },
+  {
+   "id": "mvk7w1kf13r54burxaolkkeo",
+   "slug": "deconnexions-des-installations-photovoltaiques",
+   "title": "Limitations de production au titre de la sûreté système d'EDF SA Corse Outremer",
+   "updatedAt": "2025-12-26T11:01:20.053Z",
+   "dataUpdatedAt": "2025-11-12T14:31:55.594Z",
+   "count": 480,
+   "status": "finalized"
+  },
+  {
+   "id": "mplt4l-30d6lsy00lpgepe9-",
+   "slug": "lignes-et-postes-electriques",
+   "title": "Lignes et postes électriques",
+   "updatedAt": "2026-02-10T11:13:23.146Z",
+   "dataUpdatedAt": "2026-02-10T11:11:34.712Z",
+   "count": 75,
+   "status": "finalized"
+  },
+  {
+   "id": "53k5k3vigj15l86ryk4cfhpk",
+   "slug": "file-d-attente-producteurs-iles-du-ponant",
+   "title": "File d'attente producteurs - Iles du Ponant",
+   "updatedAt": "2026-01-14T12:33:38.969Z",
+   "dataUpdatedAt": "2025-11-12T15:39:27.338Z",
+   "count": 3,
+   "status": "finalized"
+  },
+  {
+   "id": "bb1cvjw7rb59zn44gqn9qf7x",
+   "slug": "file-dattente-producteur",
+   "title": "File d'attente producteur d'EDF SA Corse Outremer",
+   "updatedAt": "2026-05-13T09:15:15.997Z",
+   "dataUpdatedAt": "2026-05-13T09:12:30.660Z",
+   "count": 75,
+   "status": "finalized"
+  },
+  {
+   "id": "iorzua8b8n8sblrt9rxpms1t",
+   "slug": "emissions-c02",
+   "title": "Emissions annuelles de CO2 - Corse & Outre-mer",
+   "updatedAt": "2026-10-06T09:18:38.336Z",
+   "dataUpdatedAt": "2025-11-12T14:01:08.687Z",
+   "count": 55,
+   "status": "finalized"
+  },
+  {
+   "id": "f616t92cn8bbeg67qdyw2cbq",
+   "slug": "effacements-mensuels",
+   "title": "Effacements de consommation mensuels",
+   "updatedAt": "2026-04-21T09:18:32.903Z",
+   "dataUpdatedAt": "2025-10-23T13:29:43.275Z",
+   "count": 148,
+   "status": "finalized"
+  },
+  {
+   "id": "2svtzuim-e26ujgeyx0e37iy",
+   "slug": "consommation-annuelle-par-commune-saint-pierre-et-miquelon",
+   "title": "Consommation annuelle par commune - Saint-Pierre-et-Miquelon",
+   "updatedAt": "2026-04-28T07:07:01.489Z",
+   "dataUpdatedAt": "2026-04-28T06:54:08.949Z",
+   "count": 18,
+   "status": "finalized"
+  },
+  {
+   "id": "5vrg2uoltttm8h-38su1rykx",
+   "slug": "consommation-annuelle-par-commune-new",
+   "title": "Consommation annuelle par commune d'EDF SA Corse Outremer",
+   "updatedAt": "2026-10-06T09:18:52.214Z",
+   "dataUpdatedAt": "2025-11-25T13:51:37.391Z",
+   "count": 16502,
+   "status": "finalized"
+  },
+  {
+   "id": "9s6rpw3mz3bxca-l0f8jn13z",
+   "slug": "conso-inf36",
+   "title": "Agrégats segmentés de consommation électrique au pas 1/2 h des points de soutirage <= 36kVA – Maille nationale",
+   "updatedAt": "2026-11-02T17:27:09.150Z",
+   "dataUpdatedAt": "2026-11-02T17:21:19.454Z",
+   "count": 9344064,
+   "status": "finalized"
+  },
+  {
+   "id": "h31m7ruvzo5vq6ph07rdtgi3",
+   "slug": "actions-defficacite-energetique",
+   "title": "Actions d'Efficacité Énergétique - Corse & Outre-mer",
+   "updatedAt": "2026-01-07T09:24:13.476Z",
+   "dataUpdatedAt": "2025-11-12T13:46:05.407Z",
+   "count": 523,
+   "status": "finalized"
+  },
+  {
+   "id": "qv06h4-7xdk73qxiknagvnqm",
+   "slug": "conso-sup36",
+   "title": "Agrégats segmentés de consommation électrique au pas 1/2 h des points de soutirage > 36kVA – Maille nationale",
+   "updatedAt": "2026-11-02T17:27:20.440Z",
+   "dataUpdatedAt": "2026-11-02T17:20:49.628Z",
+   "count": 8526196,
+   "status": "finalized"
+  },
+  {
+   "id": "qm8pwboy4vdfbmwyg-x-xb01",
+   "slug": "nb-clients-prod-region",
+   "title": "Nombre de points d'injection par filière de production et puissance d'injection – Maille régionale",
+   "updatedAt": "2026-11-02T17:10:58.430Z",
+   "dataUpdatedAt": "2026-11-02T17:09:28.039Z",
+   "count": 1839376,
+   "status": "finalized"
+  },
+  {
+   "id": "6walxbniuyqdyrkecdic2euj",
+   "slug": "nb-clients-prod",
+   "title": "Nombre de points d'injection par filière de production et puissance d'injection – Maille nationale",
+   "updatedAt": "2026-11-02T17:07:41.005Z",
+   "dataUpdatedAt": "2026-11-02T17:06:28.532Z",
+   "count": 173500,
+   "status": "finalized"
+  },
+  {
+   "id": "ucg2y37gw05kve4f1fz873uu",
+   "slug": "nb-clients-inf-36-region",
+   "title": "Nombre de points de soutirage <= 36kVA par profil et puissance souscrite – Maille régionale",
+   "updatedAt": "2026-11-02T17:05:05.264Z",
+   "dataUpdatedAt": "2026-11-02T17:02:18.277Z",
+   "count": 4711110,
+   "status": "finalized"
+  },
+  {
+   "id": "4t28fig52vuwl58f5hyvy-k-",
+   "slug": "nb-clients-sup-36-region",
+   "title": "Nombre de points de soutirage > 36kVA par profil, puissance souscrite et secteur d'activité – Maille régionale",
+   "updatedAt": "2026-11-02T17:13:40.757Z",
+   "dataUpdatedAt": "2026-11-02T17:10:40.511Z",
+   "count": 6615175,
+   "status": "finalized"
+  },
+  {
+   "id": "msevy38s3ddly25n79bh8v-r",
+   "slug": "consommation-annuelle-residentielle-par-adresse",
+   "title": "Consommation d'électricité annuelle résidentielle par adresse (jusqu'à 2025)",
+   "updatedAt": "2026-10-13T20:49:32.165Z",
+   "dataUpdatedAt": "2026-10-13T12:31:57.089Z",
+   "count": 3254528,
+   "status": "finalized"
+  },
+  {
+   "id": "txnh2fnglp8mi2-mbudsu96u",
+   "slug": "consommation-electrique-par-secteur-dactivite-iris",
+   "title": "Consommation et thermosensibilité d'électricité à la maille IRIS de 2011 à 2025 (par secteur d'activité)",
+   "updatedAt": "2026-10-13T12:24:01.621Z",
+   "dataUpdatedAt": "2026-10-12T08:10:38.880Z",
+   "count": 5590731,
+   "status": "finalized"
+  },
+  {
+   "id": "hglfu3uyfjh-uloblviipq5r",
+   "slug": "lignes-basse-tension-bt-aerien-gua",
+   "title": "Lignes basse tension (BT aérien) - Guadeloupe",
+   "updatedAt": "2025-12-24T10:53:12.592Z",
+   "dataUpdatedAt": "2025-10-16T12:24:20.406Z",
+   "count": 30319,
+   "status": "finalized"
+  },
+  {
+   "id": "0jwgqezctqgwn0he-9z2iwro",
+   "slug": "lignes-haute-tension-hta-aerien-gua",
+   "title": "Lignes haute tension (HTA aérien) - Guadeloupe",
+   "updatedAt": "2025-12-24T10:53:33.812Z",
+   "dataUpdatedAt": "2025-10-16T12:24:05.744Z",
+   "count": 1819,
+   "status": "finalized"
+  },
+  {
+   "id": "fc50ww8ymv12ehjfcm7jmt2-",
+   "slug": "lignes-haute-tension-hta-souterrain-gua",
+   "title": "Lignes haute tension (HTA souterrain) - Guadeloupe",
+   "updatedAt": "2025-12-24T10:54:35.764Z",
+   "dataUpdatedAt": "2025-10-16T12:21:34.433Z",
+   "count": 7766,
+   "status": "finalized"
+  },
+  {
+   "id": "279vs5zf2ekw0rzyt0egsvor",
+   "slug": "signal-reseau-guadeloupe-recharge-vehicule-electrique",
+   "title": "Signal réseau Guadeloupe - Recharge véhicule électrique - Guadeloupe",
+   "updatedAt": "2026-01-14T12:36:29.416Z",
+   "dataUpdatedAt": "2025-12-24T13:29:37.928Z",
+   "count": 105120,
+   "status": "finalized"
+  },
+  {
+   "id": "u4wkozwdhpi5k-ht7e9oclhr",
+   "slug": "lignes-basse-tension-bt-souterrain-gua",
+   "title": "Lignes basse tension (BT souterrain) - Guadeloupe",
+   "updatedAt": "2025-12-24T10:55:57.897Z",
+   "dataUpdatedAt": "2025-10-16T12:21:14.855Z",
+   "count": 33085,
+   "status": "finalized"
+  },
+  {
+   "id": "eneqflvrr8o6-p4lcipoe8pj",
+   "slug": "lignes-haute-tension-hta-souterrain-guy",
+   "title": "Lignes haute tension (HTA souterrain) - Guyane",
+   "updatedAt": "2025-12-24T11:09:12.694Z",
+   "dataUpdatedAt": "2025-10-16T09:50:06.099Z",
+   "count": 3419,
+   "status": "finalized"
+  },
+  {
+   "id": "nno27b9ij8owflfv4ylq0w-e",
+   "slug": "signal-reseau-guyane-recharge-vehicule-electrique",
+   "title": "Signal réseau Guyane - Recharge véhicule électrique - Guyane",
+   "updatedAt": "2026-01-14T12:35:41.031Z",
+   "dataUpdatedAt": "2025-12-23T14:10:36.540Z",
+   "count": 105120,
+   "status": "finalized"
+  },
+  {
+   "id": "yx3qups39m8z6h6ll9xw24mm",
+   "slug": "lignes-haute-tension-hta-aerien-guy",
+   "title": "Lignes haute tension (HTA aérien) - Guyane",
+   "updatedAt": "2025-12-24T11:10:45.310Z",
+   "dataUpdatedAt": "2025-10-16T09:49:22.124Z",
+   "count": 1904,
+   "status": "finalized"
+  },
+  {
+   "id": "i5omrlol2-1-p4v76jp9clnk",
+   "slug": "lignes-basse-tension-bt-aerien-guy",
+   "title": "Lignes basse tension (BT aérien) - Guyane",
+   "updatedAt": "2025-12-24T11:11:06.428Z",
+   "dataUpdatedAt": "2025-10-16T09:48:55.272Z",
+   "count": 10211,
+   "status": "finalized"
+  },
+  {
+   "id": "2kfuoc-ccb3u825sv1jc7g9o",
+   "slug": "lignes-basse-tension-bt-souterrain-guy",
+   "title": "Lignes basse tension (BT souterrain) - Guyane",
+   "updatedAt": "2025-12-24T11:11:27.317Z",
+   "dataUpdatedAt": "2025-10-16T09:48:24.673Z",
+   "count": 20383,
+   "status": "finalized"
+  },
+  {
+   "id": "ltr0uexhlctjh6od39hd8hjg",
+   "slug": "lignes-basse-tension-bt-souterrain-mar",
+   "title": "Lignes basse tension (BT souterrain) - Martinique",
+   "updatedAt": "2025-12-24T12:37:36.624Z",
+   "dataUpdatedAt": "2025-10-16T08:50:09.943Z",
+   "count": 21512,
+   "status": "finalized"
+  },
+  {
+   "id": "2hxcyvcs4nghbzb6clurlnnd",
+   "slug": "lignes-haute-tension-hta-aerien-mar",
+   "title": "Lignes haute tension (HTA aérien) - Martinique",
+   "updatedAt": "2025-12-24T12:37:51.087Z",
+   "dataUpdatedAt": "2025-10-16T08:49:40.490Z",
+   "count": 2665,
+   "status": "finalized"
+  },
+  {
+   "id": "lfsb3kagvm-wpia1ah2le7k2",
+   "slug": "lignes-haute-tension-hta-souterrain-mar",
+   "title": "Lignes haute tension (HTA souterrain) - Martinique",
+   "updatedAt": "2025-12-24T12:39:59.888Z",
+   "dataUpdatedAt": "2025-10-16T08:44:06.337Z",
+   "count": 4877,
+   "status": "finalized"
+  },
+  {
+   "id": "-rhkkntbcgj1soaj4pbzm8de",
+   "slug": "signal-reseau-martinique-recharge-vehicule-electrique",
+   "title": "Signal réseau Martinique - Recharge véhicule électrique - Martinique",
+   "updatedAt": "2026-01-14T12:36:02.531Z",
+   "dataUpdatedAt": "2025-12-24T13:23:38.819Z",
+   "count": 105120,
+   "status": "finalized"
+  },
+  {
+   "id": "qgk8fyq2tu8-2e4x-1u4fls8",
+   "slug": "lignes-basse-tension-bt-aerien-mar",
+   "title": "Lignes basse tension (BT aérien) - Martinique",
+   "updatedAt": "2025-12-24T12:40:45.994Z",
+   "dataUpdatedAt": "2025-10-16T08:43:50.271Z",
+   "count": 27071,
+   "status": "finalized"
+  },
+  {
+   "id": "l034et0jh84agf75y9m-0fu6",
+   "slug": "2-lignes-haute-tension-hta-souterrain",
+   "title": "Lignes haute tension (HTA souterrain) - La Réunion",
+   "updatedAt": "2025-12-24T13:02:44.179Z",
+   "dataUpdatedAt": "2025-10-16T08:21:09.160Z",
+   "count": 15269,
+   "status": "finalized"
+  },
+  {
+   "id": "ll83s1ian6yy5rmf6kohfkht",
+   "slug": "bt-souterrain-974",
+   "title": "Lignes basse tension (BT souterrain) - La Réunion",
+   "updatedAt": "2025-12-24T13:03:10.432Z",
+   "dataUpdatedAt": "2025-10-16T08:21:18.187Z",
+   "count": 62930,
+   "status": "finalized"
+  },
+  {
+   "id": "3zpa84tp0630v2th067qa7lg",
+   "slug": "signal-reseau-reunion-recharge-vehicule-electrique",
+   "title": "Signal réseau Réunion - Recharge véhicule électrique - La Réunion",
+   "updatedAt": "2026-01-14T12:35:17.724Z",
+   "dataUpdatedAt": "2025-12-24T13:35:25.438Z",
+   "count": 105120,
+   "status": "finalized"
+  },
+  {
+   "id": "lihub-72mnuv47c249qzvlhv",
+   "slug": "lignes-haute-tension-hta-aerien-run",
+   "title": "Lignes haute tension (HTA aérien) - La Réunion",
+   "updatedAt": "2025-12-24T13:04:11.778Z",
+   "dataUpdatedAt": "2025-10-16T08:21:57.993Z",
+   "count": 4211,
+   "status": "finalized"
+  },
+  {
+   "id": "9n5enjje0czompbxdn6ywg2q",
+   "slug": "lignes-basse-tension-bt-aerien-run",
+   "title": "Lignes basse tension (BT aérien) - La Réunion",
+   "updatedAt": "2025-12-24T13:05:00.106Z",
+   "dataUpdatedAt": "2025-10-16T08:25:56.058Z",
+   "count": 46278,
+   "status": "finalized"
+  },
+  {
+   "id": "1halo6vsx-x3mckabda1-ca-",
+   "slug": "volume-de-clients-du-groupe-edf",
+   "title": "Volume de clients du groupe EDF",
+   "updatedAt": "2026-08-25T07:30:35.135Z",
+   "dataUpdatedAt": "2026-04-22T13:10:18.973Z",
+   "count": 18,
+   "status": "finalized"
+  },
+  {
+   "id": "v0illwir4o3n-e3epq1kfv96",
+   "slug": "siret-et-siren-des-principales-societes-du-groupe-edf-en-france",
+   "title": "SIRET et SIREN des principales sociétés du groupe EDF en France",
+   "updatedAt": "2026-10-06T09:20:44.338Z",
+   "dataUpdatedAt": "2026-04-23T14:19:42.220Z",
+   "count": 26,
+   "status": "finalized"
+  },
+  {
+   "id": "x8v4it2n48zakt68r-9a-zk4",
+   "slug": "reserves-secondaires-des-centrales-de-production-edf-sa",
+   "title": "Réserves secondaires des centrales de production EDF SA",
+   "updatedAt": "2026-10-06T08:37:49.400Z",
+   "dataUpdatedAt": "2026-10-19T07:57:16.342Z",
+   "count": 103,
+   "status": "finalized"
+  },
+  {
+   "id": "5kgjxxwbrdx7cf821dyima5f",
+   "slug": "pourcentage-de-vehicules-a-faible-emission-dans-la-flotte-du-groupe-edf",
+   "title": "Pourcentage de véhicules à faible émission dans la flotte du groupe EDF",
+   "updatedAt": "2026-08-25T07:28:19.601Z",
+   "dataUpdatedAt": "2025-10-16T13:09:38.957Z",
+   "count": 6,
+   "status": "finalized"
+  },
+  {
+   "id": "te8b41vkzw7pdste6l08zo6n",
+   "slug": "origine-de-lelectricite-fournie-par-edf-sa",
+   "title": "Origine de l'électricité fournie par EDF SA",
+   "updatedAt": "2026-10-08T09:25:35.920Z",
+   "dataUpdatedAt": "2026-09-28T14:09:20.465Z",
+   "count": 95,
+   "status": "finalized"
+  },
+  {
+   "id": "sf-ul23y15dgivl1hay0k2bl",
+   "slug": "nationalites-des-employes-d-edf-sa",
+   "title": "Nationalités des employés d'EDF SA",
+   "updatedAt": "2026-08-25T07:27:43.567Z",
+   "dataUpdatedAt": "2025-10-16T13:09:00.115Z",
+   "count": 88,
+   "status": "finalized"
+  },
+  {
+   "id": "wn7nhiyckr8a40w9v5ndta4y",
+   "slug": "mixite-dans-le-groupe-edf",
+   "title": "Mixité dans le groupe EDF",
+   "updatedAt": "2026-09-04T14:02:31.215Z",
+   "dataUpdatedAt": "2025-12-08T09:43:33.406Z",
+   "count": 80,
+   "status": "finalized"
+  },
+  {
+   "id": "k9yty37ryiyweea059gewo1f",
+   "slug": "investissements-recherche-et-developpement-edf",
+   "title": "Investissements en recherche et développement du groupe EDF",
+   "updatedAt": "2026-09-04T13:31:20.047Z",
+   "dataUpdatedAt": "2025-12-08T14:44:37.784Z",
+   "count": 20,
+   "status": "finalized"
+  },
+  {
+   "id": "m7ydwr40i07q83tunaju238h",
+   "slug": "insertion-des-travailleurs-en-situation-de-handicap-dans-le-groupe-edf",
+   "title": "Insertion des travailleurs en situation de handicap dans le groupe EDF",
+   "updatedAt": "2026-08-25T07:26:17.919Z",
+   "dataUpdatedAt": "2025-12-08T11:05:46.784Z",
+   "count": 21,
+   "status": "finalized"
+  },
+  {
+   "id": "f20nhr2jdb0wuqqbsc-cfsas",
+   "slug": "indicateurs-sociaux",
+   "title": "Indicateurs sociaux du groupe EDF",
+   "updatedAt": "2026-08-25T07:25:56.585Z",
+   "dataUpdatedAt": "2025-12-05T14:39:28.016Z",
+   "count": 366,
+   "status": "finalized"
+  },
+  {
+   "id": "kw-4-h3qqr7xe5ehnqyv04xd",
+   "slug": "historique-du-capital-social-d-edf-sa",
+   "title": "Historique du capital social d'EDF SA",
+   "updatedAt": "2026-10-06T09:21:50.935Z",
+   "dataUpdatedAt": "2026-04-22T13:03:29.862Z",
+   "count": 21,
+   "status": "finalized"
+  },
+  {
+   "id": "6jf-zbbwhqgpw2vbto1k9yhc",
+   "slug": "historique-des-productions-edf-sa",
+   "title": "Historique des productions EDF SA : Nucléaire, Thermique et Hydraulique (depuis 1948)",
+   "updatedAt": "2026-10-06T09:22:20.055Z",
+   "dataUpdatedAt": "2026-04-03T08:30:48.377Z",
+   "count": 217,
+   "status": "finalized"
+  },
+  {
+   "id": "39m26qunqdyhbu7gubiki5m7",
+   "slug": "engagements-extra-financiers-du-groupe-edf",
+   "title": "Engagements extra-financiers du groupe EDF",
+   "updatedAt": "2026-08-24T15:20:26.573Z",
+   "dataUpdatedAt": "2026-07-10T13:16:04.161Z",
+   "count": 124,
+   "status": "finalized"
+  },
+  {
+   "id": "8szgn88yw5y4dr82enqbazwb",
+   "slug": "disponibilite-du-parc-nucleaire-d-edf-sa-depuis-2002",
+   "title": "Disponibilité du parc nucléaire d'EDF SA - Depuis 2002",
+   "updatedAt": "2026-10-06T09:22:33.312Z",
+   "dataUpdatedAt": "2026-04-22T12:49:19.302Z",
+   "count": 24,
+   "status": "finalized"
+  },
+  {
+   "id": "u3sxnrz-fgzy75sj8p3je2h2",
+   "slug": "dechets-radioactifs-du-groupe-edf",
+   "title": "Déchets radioactifs du groupe EDF",
+   "updatedAt": "2026-09-04T13:55:03.736Z",
+   "dataUpdatedAt": "2025-12-08T09:38:38.451Z",
+   "count": 116,
+   "status": "finalized"
+  },
+  {
+   "id": "dbbdxi5o-bsj-2sdqwvttlzw",
+   "slug": "chiffres-cles-du-groupe-edf",
+   "title": "Chiffres clés du groupe EDF",
+   "updatedAt": "2026-10-06T09:22:43.643Z",
+   "dataUpdatedAt": "2026-04-22T12:40:22.082Z",
+   "count": 30,
+   "status": "finalized"
+  },
+  {
+   "id": "a-6k77pgindfq3tyect9hj34",
+   "slug": "lignes-basse-tension-bt-souterrain-cor",
+   "title": "Lignes basse tension (BT souterrain) - Corse",
+   "updatedAt": "2025-12-24T12:50:11.708Z",
+   "dataUpdatedAt": "2025-10-15T09:07:25.490Z",
+   "count": 61011,
+   "status": "finalized"
+  },
+  {
+   "id": "1sigo68q812h0p8l47nppvv9",
+   "slug": "lignes-haute-tension-hta-souterrain-cor",
+   "title": "Lignes haute tension (HTA souterrain) - Corse",
+   "updatedAt": "2026-11-04T16:50:33.098Z",
+   "dataUpdatedAt": "2025-10-15T09:04:49.873Z",
+   "count": 13238,
+   "status": "finalized"
+  },
+  {
+   "id": "em2hugg9zm5e4jgz3x2l8pqq",
+   "slug": "lignes-basse-tension-bt-aerien-cor",
+   "title": "Lignes basse tension (BT aérien) - Corse",
+   "updatedAt": "2026-01-07T10:06:35.368Z",
+   "dataUpdatedAt": "2025-10-15T08:55:43.293Z",
+   "count": 39054,
+   "status": "finalized"
+  },
+  {
+   "id": "krhf8kay2myt6akha8zc-iz1",
+   "slug": "lignes-haute-tension-hta-aerien-cor",
+   "title": "Lignes haute tension (HTA aérien) - Corse",
+   "updatedAt": "2025-12-24T12:51:13.621Z",
+   "dataUpdatedAt": "2025-10-15T08:53:18.764Z",
+   "count": 8387,
+   "status": "finalized"
+  },
+  {
+   "id": "j75xc8cglfk5cp800y9uwqx9",
+   "slug": "consommation-electrique-par-secteur-dactivite-commune",
+   "title": "Consommation et thermosensibilité d'électricité à la maille commune de 2011 à 2025 (par secteur d'activité)",
+   "updatedAt": "2026-10-13T12:24:04.372Z",
+   "dataUpdatedAt": "2026-10-12T08:07:59.992Z",
+   "count": 3763258,
+   "status": "finalized"
+  },
+  {
+   "id": "hxor2dd5ei1ngmmfs63tpe12",
+   "slug": "enquete-dopinion-internationale-sur-le-changement-climatique-obscop-2023",
+   "title": "Enquête d'opinion internationale sur le changement climatique - Obs'COP - 2023",
+   "updatedAt": "2026-10-06T09:23:36.633Z",
+   "dataUpdatedAt": "2025-10-14T09:14:40.521Z",
+   "count": 128690,
+   "status": "finalized"
+  },
+  {
+   "id": "ememxlbfrm9vgweooap3broe",
+   "slug": "enquete-dopinion-internationale-sur-le-changement-climatique-obscop-2021",
+   "title": "Enquête d'opinion internationale sur le changement climatique - Obs'COP - 2021",
+   "updatedAt": "2026-10-06T09:23:47.584Z",
+   "dataUpdatedAt": "2025-10-14T09:06:12.780Z",
+   "count": 48300,
+   "status": "finalized"
+  },
+  {
+   "id": "kya8-zete1-dlft4-dfzq29o",
+   "slug": "consommation-electrique-par-secteur-dactivite-epci",
+   "title": "Consommation et thermosensibilité d'électricité à la maille EPCI de 2011 à 2025 (par secteur d'activité)",
+   "updatedAt": "2026-10-13T12:24:07.449Z",
+   "dataUpdatedAt": "2026-10-12T08:04:57.097Z",
+   "count": 502422,
+   "status": "finalized"
+  },
+  {
+   "id": "rgx2jrlxrb6f1hvo6-b6mcrq",
+   "slug": "consommation-electrique-par-secteur-dactivite-region",
+   "title": "Consommation et thermosensibilité d'électricité à la maille région de 2011 à 2025 (par secteur d'activité)",
+   "updatedAt": "2026-10-13T12:26:36.556Z",
+   "dataUpdatedAt": "2026-10-12T07:58:29.751Z",
+   "count": 9168,
+   "status": "finalized"
+  },
+  {
+   "id": "8gbmbqzvfsi5s451jw7-f1z-",
+   "slug": "consommation-electrique-par-secteur-dactivite-departement",
+   "title": "Consommation et thermosensibilité d'électricité à la maille département de 2011 à 2025 (par secteur d'activité)",
+   "updatedAt": "2026-10-13T12:24:11.752Z",
+   "dataUpdatedAt": "2026-10-12T08:04:26.367Z",
+   "count": 63502,
+   "status": "finalized"
+  },
+  {
+   "id": "fx2cskdv5u1w4uspeusylz2q",
+   "slug": "enquete-dopinion-internationale-sur-le-changement-climatique-obscop-2020",
+   "title": "Enquête d'opinion internationale sur le changement climatique - Obs'COP - 2020",
+   "updatedAt": "2026-08-24T15:22:14.692Z",
+   "dataUpdatedAt": "2025-10-14T08:50:02.752Z",
+   "count": 39593,
+   "status": "finalized"
+  },
+  {
+   "id": "2a90z9-el5ahg24apok3l6f5",
+   "slug": "nb-clients-inf-36",
+   "title": "Nombre de points de soutirage <= 36kVA par profil et puissance souscrite – Maille nationale",
+   "updatedAt": "2026-11-02T16:59:54.660Z",
+   "dataUpdatedAt": "2026-11-02T16:59:09.031Z",
+   "count": 445729,
+   "status": "finalized"
+  },
+  {
+   "id": "j0d7wyeyjzjtaskpkqtq5ock",
+   "slug": "nb-clients-sup-36",
+   "title": "Nombre de points de soutirage > 36kVA par profil, puissance souscrite et secteur d'activité – Maille nationale",
+   "updatedAt": "2026-11-02T17:07:59.732Z",
+   "dataUpdatedAt": "2026-11-02T17:07:20.785Z",
+   "count": 623143,
+   "status": "finalized"
+  },
+  {
+   "id": "swbjpp-d0-3539oclq0pkgjw",
+   "slug": "production-electrique-par-filiere-a-la-maille-iris",
+   "title": "Production d'électricité annuelle par filière à la maille IRIS (de 2011 à 2016)",
+   "updatedAt": "2026-06-08T14:00:29.734Z",
+   "dataUpdatedAt": "2025-10-10T12:18:59.538Z",
+   "count": 283857,
+   "status": "finalized"
+  },
+  {
+   "id": "h7oheyb4ddtxjye4z675ff58",
+   "slug": "production-electrique-par-filiere-a-la-maille-commune",
+   "title": "Production d'électricité annuelle par filière à la maille commune (de 2011 à 2016)",
+   "updatedAt": "2026-06-08T14:00:47.711Z",
+   "dataUpdatedAt": "2025-10-10T12:00:28.814Z",
+   "count": 222192,
+   "status": "finalized"
+  },
+  {
+   "id": "-57ezbcqiw4f5kd7dn9pasgo",
+   "slug": "production-electrique-par-filiere-a-la-maille-departement",
+   "title": "Production d'électricité annuelle par filière à la maille département (de 2011 à 2016)",
+   "updatedAt": "2026-06-08T14:01:12.880Z",
+   "dataUpdatedAt": "2025-10-10T11:59:54.138Z",
+   "count": 1692,
+   "status": "finalized"
+  },
+  {
+   "id": "uy73jsumgp3dpti-2isqcuny",
+   "slug": "production-electrique-par-filiere-a-la-maille-epci",
+   "title": "Production d'électricité annuelle par filière à la maille EPCI (de 2011 à 2016)",
+   "updatedAt": "2026-06-08T14:00:58.325Z",
+   "dataUpdatedAt": "2025-10-10T11:59:52.121Z",
+   "count": 31725,
+   "status": "finalized"
+  },
+  {
+   "id": "qofje-lq6s-0ma3oxpufjm-s",
+   "slug": "production-electrique-par-filiere-a-la-maille-region",
+   "title": "Production d'électricité annuelle par filière à la maille région (de 2011 à 2016)",
+   "updatedAt": "2026-06-08T14:01:32.025Z",
+   "dataUpdatedAt": "2025-10-10T11:59:21.733Z",
+   "count": 216,
+   "status": "finalized"
+  },
+  {
+   "id": "rf7c--nnyt6y4ca3tey-oxwz",
+   "slug": "repartition-de-la-file-dattente-producteur-par-departement-historique",
+   "title": "Projets en développement – Maille régionale & départementale – Historiques cumulés",
+   "updatedAt": "2026-10-20T15:32:56.182Z",
+   "dataUpdatedAt": "2026-10-20T15:31:57.744Z",
+   "count": 103143,
+   "status": "finalized"
+  },
+  {
+   "id": "cbw8453lmvv8eq627sgbsf4x",
+   "slug": "parc-des-installations-de-production-raccordees-par-departement-historique",
+   "title": "Parc de production – Maille régionale & départementale – Historique cumulés",
+   "updatedAt": "2026-10-20T15:32:25.473Z",
+   "dataUpdatedAt": "2026-10-20T15:30:43.118Z",
+   "count": 68141,
+   "status": "finalized"
+  },
+  {
+   "id": "fsmu-hahnl5ah7whxpq917ld",
+   "slug": "raccord_tranches_modalite-historique",
+   "title": "Parc de production – Tranches de puissance et modalités d'injection – Historiques cumulés",
+   "updatedAt": "2026-10-20T15:32:23.776Z",
+   "dataUpdatedAt": "2026-10-20T15:30:36.179Z",
+   "count": 4905,
+   "status": "finalized"
+  },
+  {
+   "id": "2a7jnd9-lurovagv3mstmwt7",
+   "slug": "fa_nat_tranches_modalite-historique",
+   "title": "Projets en développement – Demandes en cours par tranches de puissance et modalités d'injection – Historiques cumulés",
+   "updatedAt": "2026-10-20T15:32:21.630Z",
+   "dataUpdatedAt": "2026-10-20T15:30:28.126Z",
+   "count": 3295,
+   "status": "finalized"
+  },
+  {
+   "id": "ou44sb5oki98q242ibf2w8zb",
+   "slug": "repartition-de-la-file-dattente-producteur-par-departement",
+   "title": "Projets en développement – Maille régionale & départementale – Répartition",
+   "updatedAt": "2026-10-20T15:22:14.084Z",
+   "dataUpdatedAt": "2026-10-20T15:22:14.084Z",
+   "count": 4745,
+   "status": "finalized"
+  },
+  {
+   "id": "9lji7kf2xigb0yk6bb6pdmpe",
+   "slug": "raccord_tranches_modalite",
+   "title": "Parc de production – Tranches de puissance et modalités d'injection – Répartition",
+   "updatedAt": "2026-10-20T15:22:22.845Z",
+   "dataUpdatedAt": "2026-10-20T15:22:22.845Z",
+   "count": 251,
+   "status": "finalized"
+  },
+  {
+   "id": "e57veou6k31lnhys5216b8yo",
+   "slug": "parc-des-installations-de-production-raccordees-par-departement",
+   "title": "Parc de production – Maille régionale & départementale – Répartition",
+   "updatedAt": "2026-10-20T15:22:35.090Z",
+   "dataUpdatedAt": "2026-10-20T15:22:35.090Z",
+   "count": 2979,
+   "status": "finalized"
+  },
+  {
+   "id": "eghl42amy8unzh9mb3iuzmbj",
+   "slug": "historique-file-dattente-des-demandes-de-raccordement-de-production",
+   "title": "Projets en développement – Demandes en cours et sorties par tranches de puissance et modalités d'injection – Dernier Historique connu",
+   "updatedAt": "2026-10-20T15:22:47.464Z",
+   "dataUpdatedAt": "2026-10-20T15:22:47.464Z",
+   "count": 4894,
+   "status": "finalized"
+  },
+  {
+   "id": "2b-p4a54j70-y76irctqhh4c",
+   "slug": "historique-du-parc-des-installations-de-production-par-tranche-de-puissance-racc",
+   "title": "Parc de production – Tranches de puissance et modalités d'injection – Dernier historique connu",
+   "updatedAt": "2026-10-20T15:23:00.253Z",
+   "dataUpdatedAt": "2026-10-20T15:23:00.253Z",
+   "count": 4141,
+   "status": "finalized"
+  },
+  {
+   "id": "050oyodh-6ai94i1r6i2d7v5",
+   "slug": "fa-sorties",
+   "title": "Projets en développement – Sorties des demandes – Évolution",
+   "updatedAt": "2026-10-20T15:23:06.919Z",
+   "dataUpdatedAt": "2026-10-20T15:23:06.919Z",
+   "count": 2402,
+   "status": "finalized"
+  },
+  {
+   "id": "-0ba10dtu83zyqholwxc2rog",
+   "slug": "fa-entrees",
+   "title": "Projets en développement – Nouvelles demandes par tranches de puissance et modalités d'injection – Dernier historique connu",
+   "updatedAt": "2026-10-20T15:23:13.203Z",
+   "dataUpdatedAt": "2026-10-20T15:23:13.203Z",
+   "count": 2623,
+   "status": "finalized"
+  },
+  {
+   "id": "1l-ii0fxz33nys5ahdz3ix-7",
+   "slug": "fa_nat_tranches_modalite",
+   "title": "Projets en développement – Demandes en cours par tranches de puissance et modalités d'injection – Répartition",
+   "updatedAt": "2026-10-20T15:23:21.439Z",
+   "dataUpdatedAt": "2026-10-20T15:23:21.439Z",
+   "count": 142,
+   "status": "finalized"
+  },
+  {
+   "id": "o37gvue9yx09-vlmp2a7td2-",
+   "slug": "evol_parc_trimestre_modalite",
+   "title": "Parc de production – Tranches de puissance et modalités d'injection – Évolution trimestrielle",
+   "updatedAt": "2026-10-20T15:23:29.452Z",
+   "dataUpdatedAt": "2026-10-20T15:23:29.452Z",
+   "count": 8682,
+   "status": "finalized"
+  },
+  {
+   "id": "0x6xks8ujiijeerhr5363xj7",
+   "slug": "autoconsommation-collective-maille-region",
+   "title": "Répartition des opérations d’autoconsommation collective actives – maille régionale",
+   "updatedAt": "2026-10-13T12:59:05.938Z",
+   "dataUpdatedAt": "2026-10-13T12:55:32.193Z",
+   "count": 276,
+   "status": "finalized"
+  },
+  {
+   "id": "g8teomll834hppu5x9qubvws",
+   "slug": "autoconsommation-collective-maille-enedis",
+   "title": "Répartition des opérations d’autoconsommation collective actives – maille Enedis",
+   "updatedAt": "2026-10-13T12:58:40.593Z",
+   "dataUpdatedAt": "2026-10-13T12:55:56.283Z",
+   "count": 23,
+   "status": "finalized"
+  },
+  {
+   "id": "tvh8csc7u2dohqf4ltb02gc5",
+   "slug": "bilan-des-entrees-et-sorties-des-activites-de-production-de-edf-sa",
+   "title": "Bilan des entrées et sorties des activités de production d'EDF SA",
+   "updatedAt": "2026-04-21T09:20:05.541Z",
+   "dataUpdatedAt": "2025-10-08T09:26:59.554Z",
+   "count": 159,
+   "status": "finalized"
+  },
+  {
+   "id": "qdi26658lo2e4pz3c26r6k9s",
+   "slug": "trajectoire-du-nombre-de-points-de-charge-accessibles-au-public",
+   "title": "Trajectoire du nombre de points de charge ouverts au public en France",
+   "updatedAt": "2026-10-20T13:42:16.595Z",
+   "dataUpdatedAt": "2026-10-20T13:42:16.595Z",
+   "count": 21,
+   "status": "finalized"
+  },
+  {
+   "id": "hcxk5kma1xme8ggg9ir75d72",
+   "slug": "puissance-moyenne-installee-par-point-de-charge-par-region-et-son-evolution-sur",
+   "title": "Puissance moyenne installée par point de charge par région et son évolution sur 12 mois (kVA)",
+   "updatedAt": "2026-10-20T13:37:07.600Z",
+   "dataUpdatedAt": "2026-10-20T13:37:07.600Z",
+   "count": 13,
+   "status": "finalized"
+  },
+  {
+   "id": "5-g8mlpku9u9yy4rieqwl9mz",
+   "slug": "puissance-moyenne-installee-par-point-de-charge-par-dept-et-son-evolution-sur",
+   "title": "Puissance moyenne installée par point de charge par département et son évolution sur 12 mois (kVA)",
+   "updatedAt": "2026-10-20T13:32:10.117Z",
+   "dataUpdatedAt": "2026-10-20T13:32:10.117Z",
+   "count": 96,
+   "status": "finalized"
+  },
+  {
+   "id": "bxrttqv69xfzlzho2kpa0ow0",
+   "slug": "puissance-installee-totale",
+   "title": "Puissance installée pour les points de charge en France",
+   "updatedAt": "2026-10-20T13:40:09.490Z",
+   "dataUpdatedAt": "2026-10-20T13:40:09.490Z",
+   "count": 47,
+   "status": "finalized"
+  },
+  {
+   "id": "7z5o28jrgnom83nvjttfqupb",
+   "slug": "nombre-total-de-points-de-charge",
+   "title": "Nombre total de points de charge en France",
+   "updatedAt": "2026-10-20T13:47:16.713Z",
+   "dataUpdatedAt": "2026-10-20T13:47:16.713Z",
+   "count": 47,
+   "status": "finalized"
+  },
+  {
+   "id": "477jls6eukf6fedcvypz43g7",
+   "slug": "nombre-de-points-de-charge-par-typologie",
+   "title": "Nombre de points de charge en France par typologie",
+   "updatedAt": "2026-10-20T13:45:14.538Z",
+   "dataUpdatedAt": "2026-10-20T13:45:14.538Z",
+   "count": 132,
+   "status": "finalized"
+  },
+  {
+   "id": "1tv7e5v3n8b1p445t4dwvy3o",
+   "slug": "nombre-de-points-de-charge-accessibles-au-public-pour-100-000-habitants-par-reg",
+   "title": "Nombre de points de charge ouverts au public pour 100 000 habitants par région et son évolution sur les 12 derniers mois",
+   "updatedAt": "2026-10-20T13:35:28.383Z",
+   "dataUpdatedAt": "2026-10-20T13:35:28.383Z",
+   "count": 13,
+   "status": "finalized"
+  },
+  {
+   "id": "gks91z-7ajurltjnyu-485bd",
+   "slug": "nombre-de-points-de-charge-accessibles-au-public-pour-100-000-habitants-par-dept",
+   "title": "Nombre de points de charge ouverts au public pour 100 000 habitants par département et son évolution sur les 12 derniers mois",
+   "updatedAt": "2026-10-20T13:30:18.394Z",
+   "dataUpdatedAt": "2026-10-20T13:30:18.394Z",
+   "count": 96,
+   "status": "finalized"
+  },
+  {
+   "id": "dfzjjebhuk4zu55qzo1ffdd9",
+   "slug": "coefficients-gradients-profils-dynamiques",
+   "title": "Coefficients de gradients des profils dynamiques",
+   "updatedAt": "2026-07-17T15:04:46.450Z",
+   "dataUpdatedAt": "2026-07-17T15:01:27.854Z",
+   "count": 140256,
+   "status": "finalized"
+  },
+  {
+   "id": "g0ypebgvvk7o4e06um5udxux",
+   "slug": "coefficients-des-profils",
+   "title": "Coefficients des profils",
+   "updatedAt": "2026-11-19T02:02:56.902Z",
+   "dataUpdatedAt": "2026-11-19T02:02:56.902Z",
+   "count": 17874142,
+   "status": "finalized"
+  },
+  {
+   "id": "kr14b7cfc5rhnm62qp0v8cs0",
+   "slug": "bilan-electrique",
+   "title": "Bilan électrique",
+   "updatedAt": "2026-11-13T16:06:48.874Z",
+   "dataUpdatedAt": "2026-11-13T16:06:48.874Z",
+   "count": 46,
+   "status": "finalized"
+  },
+  {
+   "id": "ivhslmq-zep548cj4w-62-17",
+   "slug": "flexibilites-participant-au-ma-ou-a-nebef-par-region",
+   "title": "Flexibilités déclarées sur les mécanismes de marché par région",
+   "updatedAt": "2026-07-06T07:20:43.609Z",
+   "dataUpdatedAt": "2025-10-07T06:54:13.865Z",
+   "count": 12,
+   "status": "finalized"
+  },
+  {
+   "id": "0selz6koh5wnc40bgel-pqeo",
+   "slug": "flexibilites-participant-au-ma-ou-a-nebef-au-perimetre-denedis",
+   "title": "Flexibilités déclarées et activées sur les mécanismes de marché par mois",
+   "updatedAt": "2026-09-11T11:26:59.393Z",
+   "dataUpdatedAt": "2026-09-11T11:26:59.393Z",
+   "count": 87,
+   "status": "finalized"
+  },
+  {
+   "id": "58qpvtyzf8l7rpohh9r6iozw",
+   "slug": "coefficients_de_pertes",
+   "title": "Coefficients de pertes",
+   "updatedAt": "2026-02-09T09:41:30.937Z",
+   "dataUpdatedAt": "2025-10-07T06:42:04.161Z",
+   "count": 17,
+   "status": "finalized"
+  },
+  {
+   "id": "ujcwsq-6-rknd0wegybhitcl",
+   "slug": "donnees-de-temperature-et-de-pseudo-rayonnement",
+   "title": "Données de température et de pseudo-rayonnement",
+   "updatedAt": "2026-07-08T09:48:17.640Z",
+   "dataUpdatedAt": "2026-11-19T10:10:17.690Z",
+   "count": 124850,
+   "status": "finalized"
+  },
+  {
+   "id": "7okolrt07nor9cv103spkfzc",
+   "slug": "coefficients-de-profils-dynamiques-anticipes-en-j1",
+   "title": "Coefficients de profils dynamiques en J+1",
+   "updatedAt": "2026-08-24T09:29:40.310Z",
+   "dataUpdatedAt": "2026-11-19T08:30:54.226Z",
+   "count": 157940,
+   "status": "finalized"
+  },
+  {
+   "id": "hxx7-ja0txok7ipb5tgsz4kv",
+   "slug": "reseau-bt",
+   "title": "Lignes électriques aériennes Basse Tension (BT)",
+   "updatedAt": "2026-07-07T09:29:36.165Z",
+   "dataUpdatedAt": "2026-07-06T09:07:54.561Z",
+   "count": 3932896,
+   "status": "finalized"
+  },
+  {
+   "id": "2vyjth8a7xr8m7ejxjjw-g5s",
+   "slug": "position-geographique-des-poteaux-hta-et-bt",
+   "title": "Position géographique des poteaux électriques HTA et BT",
+   "updatedAt": "2026-07-07T09:25:54.707Z",
+   "dataUpdatedAt": "2026-07-07T07:09:40.250Z",
+   "count": 6261000,
+   "status": "finalized"
+  },
+  {
+   "id": "t8t1f6gz4u4jupflxkob-yj2",
+   "slug": "reseau-souterrain-bt",
+   "title": "Lignes électriques souterraines Basse Tension (BT)",
+   "updatedAt": "2026-07-07T13:08:31.456Z",
+   "dataUpdatedAt": "2026-07-07T09:37:53.698Z",
+   "count": 7389691,
+   "status": "finalized"
+  },
+  {
+   "id": "w06kbpkd-qkqnu6zq5lpxer3",
+   "slug": "indicateur-continuite-dalimentation",
+   "title": "Indicateur réglementaire continuité d’alimentation",
+   "updatedAt": "2026-01-06T07:07:04.434Z",
+   "dataUpdatedAt": "2025-12-29T08:43:03.448Z",
+   "count": 94,
+   "status": "finalized"
+  },
+  {
+   "id": "g16qpc-8km90bi7h3db1d58x",
+   "slug": "frequence-moyenne-annuelle-de-coupure-par-client-hta",
+   "title": "Fréquence moyenne de coupure par client HTA",
+   "updatedAt": "2026-06-29T09:39:00.241Z",
+   "dataUpdatedAt": "2026-06-29T09:39:00.241Z",
+   "count": 18,
+   "status": "finalized"
+  },
+  {
+   "id": "hfdd6h8eoz6ov2pkxt4kc595",
+   "slug": "frequence-moyenne-de-coupure-par-client-bt",
+   "title": "Fréquence moyenne de coupure par client BT",
+   "updatedAt": "2026-06-29T09:38:52.824Z",
+   "dataUpdatedAt": "2026-06-29T09:38:52.824Z",
+   "count": 18,
+   "status": "finalized"
+  },
+  {
+   "id": "l0zxar5js4x2cd7n7zj5sn0p",
+   "slug": "duree-moyenne-de-coupure-par-client-hta",
+   "title": "Durée moyenne de coupure par client HTA",
+   "updatedAt": "2026-06-29T09:38:41.993Z",
+   "dataUpdatedAt": "2026-06-29T09:38:41.993Z",
+   "count": 18,
+   "status": "finalized"
+  },
+  {
+   "id": "d7d9k4lc9ncr93iyx65nub-m",
+   "slug": "duree-moyenne-de-coupure-bt",
+   "title": "Durée moyenne de coupure par client BT",
+   "updatedAt": "2026-06-29T09:38:31.209Z",
+   "dataUpdatedAt": "2026-06-29T09:38:31.209Z",
+   "count": 18,
+   "status": "finalized"
+  },
+  {
+   "id": "dld8womlmzxpcox425-7yhma",
+   "slug": "reseau-souterrain-hta",
+   "title": "Lignes électriques souterraines moyenne tension (HTA)",
+   "updatedAt": "2026-07-07T09:12:54.064Z",
+   "dataUpdatedAt": "2026-07-03T13:39:36.413Z",
+   "count": 1863552,
+   "status": "finalized"
+  },
+  {
+   "id": "mz4i8bhjlm0k18i0af3aovtf",
+   "slug": "poste-electrique",
+   "title": "Postes électriques (postes HTA/BT)",
+   "updatedAt": "2026-07-07T09:10:39.066Z",
+   "dataUpdatedAt": "2026-07-03T13:37:13.228Z",
+   "count": 976678,
+   "status": "finalized"
+  },
+  {
+   "id": "7qfw76boszg70pojeei4tvti",
+   "slug": "courbes-de-charges-fictives-caracteristiques",
+   "title": "[Courbes de charge fictives expérimentales] Caractéristiques des courbes",
+   "updatedAt": "2026-06-08T09:11:30.094Z",
+   "dataUpdatedAt": "2026-02-20T11:04:42.293Z",
+   "count": 9500,
+   "status": "finalized"
+  },
+  {
+   "id": "y76ezfzc3hdz2ntzggk0ocbl",
+   "slug": "courbes-de-charges-fictives-ent3-250-sup",
+   "title": "[Courbes de charge fictives expérimentales] Profil ENT3 – Plage >250 kVA",
+   "updatedAt": "2026-06-08T11:58:32.669Z",
+   "dataUpdatedAt": "2025-09-26T17:36:15.552Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "t3cvamau-9hk540aun7ar9o5",
+   "slug": "courbes-de-charges-fictives-ent3-36-120",
+   "title": "[Courbes de charge fictives expérimentales] Profil ENT3 – Plage ]36-120 kVA]",
+   "updatedAt": "2026-06-08T11:57:55.396Z",
+   "dataUpdatedAt": "2025-09-26T17:35:47.864Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "2o0mtekp6trykk8qs7m-3nhr",
+   "slug": "courbes-de-charges-fictives-ent3-120-250",
+   "title": "[Courbes de charge fictives expérimentales] Profil ENT3 – Plage ]120-250 kVA]",
+   "updatedAt": "2026-06-08T11:58:09.962Z",
+   "dataUpdatedAt": "2025-09-26T17:36:03.500Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "wzm3a850ip9dgu7eo3mk456v",
+   "slug": "courbes-de-charges-fictives-ent1-250-sup",
+   "title": "[Courbes de charge fictives expérimentales] Profil ENT1 – Plage >250 kVA",
+   "updatedAt": "2026-06-08T11:58:28.176Z",
+   "dataUpdatedAt": "2025-09-26T17:35:32.228Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "ekm29c596-0qclh8zfnh6z8w",
+   "slug": "courbes-de-charges-fictives-ent1-120-250",
+   "title": "[Courbes de charge fictives expérimentales] Profil ENT1 – Plage ]120-250 kVA]",
+   "updatedAt": "2026-06-10T08:49:33.699Z",
+   "dataUpdatedAt": "2025-09-26T17:35:19.409Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "norz1qusoy7sq9yvkqf1iau6",
+   "slug": "courbes-de-charges-fictives-res11-9-18",
+   "title": "[Courbes de charge fictives expérimentales] Profil RES11 – Plage ]9-18 kVA]",
+   "updatedAt": "2026-06-08T11:57:25.495Z",
+   "dataUpdatedAt": "2025-09-26T15:23:04.482Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "-is2ypbtvf9-pvqdwjxl8a5l",
+   "slug": "courbes-de-charges-fictives-res11-6-9",
+   "title": "[Courbes de charge fictives expérimentales] Profil RES11 – Plage ]6-9 kVA]",
+   "updatedAt": "2026-06-08T11:58:00.082Z",
+   "dataUpdatedAt": "2025-09-26T15:53:19.555Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "k49s9j-34n7ek484z6m28cvi",
+   "slug": "courbes-de-charges-fictives-res2-9-12",
+   "title": "[Courbes de charge fictives expérimentales] Profil RES2 – Plage ]9-12 kVA]",
+   "updatedAt": "2026-06-08T11:58:19.420Z",
+   "dataUpdatedAt": "2025-09-26T12:48:27.380Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "1ynri1yx5uj4ad1uz5l-5hfx",
+   "slug": "courbes-de-charges-fictives-res2-6-9",
+   "title": "[Courbes de charge fictives expérimentales] Profil RES2 – Plage ]6-9 kVA]",
+   "updatedAt": "2026-06-08T11:57:20.050Z",
+   "dataUpdatedAt": "2025-09-26T12:48:44.043Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "abqtc7nb39rpdemk0pm3ssbx",
+   "slug": "courbes-de-charges-fictives-res2-3-6",
+   "title": "[Courbes de charge fictives expérimentales] Profil RES2 – Plage ]3-6 kVA]",
+   "updatedAt": "2026-06-10T08:49:41.861Z",
+   "dataUpdatedAt": "2025-09-26T12:48:58.993Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "3ket93wc3f10d6z-rym-eyn6",
+   "slug": "courbes-de-charges-fictives-res1-3-6",
+   "title": "[Courbes de charge fictives expérimentales] Profil RES1 – Plage ]3-6 kVA]",
+   "updatedAt": "2026-06-08T09:24:29.498Z",
+   "dataUpdatedAt": "2025-09-26T12:49:14.623Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "0t6bmq9t-atvx9fucg28cifp",
+   "slug": "courbes-de-charges-fictives-pro2-24-sup",
+   "title": "[Courbes de charge fictives expérimentales] Profil PRO2 – Plage >24 kVA",
+   "updatedAt": "2026-06-08T11:58:42.049Z",
+   "dataUpdatedAt": "2025-09-26T08:15:02.790Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "f0lzny8gv1-4eyx0d3sl1f5p",
+   "slug": "courbes-de-charges-fictives-pro2-12-24",
+   "title": "[Courbes de charge fictives expérimentales] Profil PRO2 – Plage ]12-24 kVA]",
+   "updatedAt": "2026-06-08T11:57:40.521Z",
+   "dataUpdatedAt": "2025-09-26T08:14:59.801Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "t4omw9-lou5qz577apw83027",
+   "slug": "courbes-de-charges-fictives-pro2-6-12",
+   "title": "[Courbes de charge fictives expérimentales] Profil PRO2 – Plage ]6-12 kVA]",
+   "updatedAt": "2026-06-08T11:57:45.227Z",
+   "dataUpdatedAt": "2025-09-26T08:14:57.801Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "tieppazaxldmyww1afjlkat-",
+   "slug": "courbes-de-charges-fictives-pro2-0-6",
+   "title": "[Courbes de charge fictives expérimentales] Profil PRO2 – Plage ]0-6 kVA]",
+   "updatedAt": "2026-06-08T11:57:15.340Z",
+   "dataUpdatedAt": "2025-09-26T08:14:55.792Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "66h2nkqf-q8d4d0szxmfb9xw",
+   "slug": "donnees-relatives-aux-lignes-et-aux-postes",
+   "title": "Données relatives aux lignes et aux postes électriques",
+   "updatedAt": "2026-06-29T09:31:33.013Z",
+   "dataUpdatedAt": "2026-06-29T09:28:59.292Z",
+   "count": 1605,
+   "status": "finalized"
+  },
+  {
+   "id": "xo1c4yk3r4d9zvf1ddw4cl8h",
+   "slug": "courbes-de-charges-fictives-pro1-6-12",
+   "title": "[Courbes de charge fictives expérimentales] Profil PRO1 – Plage ]6-12 kVA]",
+   "updatedAt": "2026-06-08T12:01:16.962Z",
+   "dataUpdatedAt": "2025-09-25T21:06:04.517Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "8fpllckc5zr1hjqaca1lzhr6",
+   "slug": "courbes-de-charges-fictives-pro1-0-6",
+   "title": "[Courbes de charge fictives expérimentales] Profil PRO1 – Plage ]0-6 kVA]",
+   "updatedAt": "2026-06-08T12:00:59.158Z",
+   "dataUpdatedAt": "2025-09-25T20:04:28.456Z",
+   "count": 8736000,
+   "status": "finalized"
+  },
+  {
+   "id": "7p9-paqaf6cckipnjiubcncw",
+   "slug": "reseau-hta",
+   "title": "Lignes électriques aériennes moyenne tension (HTA)",
+   "updatedAt": "2026-07-07T09:11:09.649Z",
+   "dataUpdatedAt": "2026-07-03T13:36:34.957Z",
+   "count": 1036732,
+   "status": "finalized"
+  },
+  {
+   "id": "5v2ar5y04jjrbuewjpssauy5",
+   "slug": "rpg-2023",
+   "title": "Registre parcellaire graphique (RPG) 2023 - Obsolète",
+   "updatedAt": "2026-11-09T13:30:18.642Z",
+   "dataUpdatedAt": "2025-09-23T07:32:27.463Z",
+   "count": 9797405,
+   "status": "error"
+  },
+  {
+   "id": "p0n5uao-8uo9-3id8im3bytr",
+   "slug": "debit-des-rivieres-aux-abords-de-centrales-hydrauliques",
+   "title": "Débit des rivières aux abords de centrales hydrauliques (au XXème siècle)",
+   "updatedAt": "2026-10-06T09:24:01.932Z",
+   "dataUpdatedAt": "2025-08-12T07:50:17.703Z",
+   "count": 1349561,
+   "status": "finalized"
+  },
+  {
+   "id": "h5jyxhcdiu08u6g8xk4t2mtg",
+   "slug": "lim-admin-quartier-nanterre-shape",
+   "title": "Lim Admin Quartier Nanterre Shape",
+   "updatedAt": "2025-08-05T10:12:45.796Z",
+   "dataUpdatedAt": "2025-08-05T07:18:03.317Z",
+   "count": 11,
+   "status": "finalized"
+  },
+  {
+   "id": "5t8uuapuuqhq296x5aya1tp6",
+   "slug": "enquete-dopinion-internationale-sur-le-changement-climatique-obscop-2022",
+   "title": "Enquête d'opinion internationale sur le changement climatique - Obs'COP - 2022",
+   "updatedAt": "2026-10-06T09:24:29.854Z",
+   "dataUpdatedAt": "2025-10-14T09:00:29.908Z",
+   "count": 120335,
+   "status": "finalized"
+  },
+  {
+   "id": "55p19-b8vh32xjvxcloe27ld",
+   "slug": "evenements-boxoffice",
+   "title": "Evénements Boxoffice",
+   "updatedAt": "2026-11-18T23:10:14.145Z",
+   "dataUpdatedAt": "2026-11-18T23:10:14.145Z",
+   "count": 204,
+   "status": "finalized"
+  },
+  {
+   "id": "hflja538pvkw5l9h6vmu9li9",
+   "slug": "filosofi-carreaux-200m",
+   "title": "Filosofi carreaux 200m",
+   "updatedAt": "2026-04-22T15:48:44.046Z",
+   "dataUpdatedAt": "2026-03-04T11:01:08.232Z",
+   "count": 2324577,
+   "status": "finalized"
+  },
+  {
+   "id": "a382wc6bsagj9elrtihsho3l",
+   "slug": "rne-municipal",
+   "title": "RNE - Conseillers municipaux",
+   "updatedAt": "2026-04-22T15:50:36.904Z",
+   "dataUpdatedAt": "2026-03-23T13:30:57.362Z",
+   "count": 485827,
+   "status": "finalized"
+  },
+  {
+   "id": "k0crdfv27svzq-mbtrj6gd4-",
+   "slug": "annuaire-sante-de-la-cnam",
+   "title": "Annuaire santé de la CNAM",
+   "updatedAt": "2026-05-01T21:01:26.436Z",
+   "dataUpdatedAt": "2026-05-01T21:01:26.436Z",
+   "count": 2291052,
+   "status": "finalized"
+  },
+  {
+   "id": "m1hbww257dzggbdog2zsqup7",
+   "slug": "contours-des-bureaux-de-vote",
+   "title": "Contours des bureaux de vote",
+   "updatedAt": "2025-12-24T14:31:23.580Z",
+   "dataUpdatedAt": "2025-01-15T13:55:28.148Z",
+   "count": 68806,
+   "status": "finalized"
+  },
+  {
+   "id": "whcqayoik4q8wkchi68dqgwr",
+   "slug": "population-par-age",
+   "title": "Population par âge en 2022",
+   "updatedAt": "2026-10-19T07:24:22.046Z",
+   "dataUpdatedAt": "2026-05-05T16:10:21.047Z",
+   "count": 5105279,
+   "status": "finalized"
+  },
+  {
+   "id": "g0riw6xpn2fmyxih1vi8cyat",
+   "slug": "bornes-de-recharge-pour-vehicules-electriques-irve",
+   "title": "Bornes de recharge IRVE",
+   "updatedAt": "2026-11-13T04:00:48.232Z",
+   "dataUpdatedAt": "2026-11-13T04:00:48.232Z",
+   "count": 169279,
+   "status": "finalized"
+  },
+  {
+   "id": "0u-s6zvfpg5978puwbc0dxgk",
+   "slug": "adresse-et-geolocalisation-des-etablissements-denseignement-du-premier-et-second-degres",
+   "title": "Adresse et géolocalisation des établissements d'enseignement du premier et second degrés",
+   "updatedAt": "2025-12-24T13:38:28.678Z",
+   "dataUpdatedAt": "2024-09-24T12:12:09.746Z",
+   "count": 64423,
+   "status": "finalized"
+  },
+  {
+   "id": "gq45q9-dy9hb21yxyd-31t3o",
+   "slug": "accessibilite-des-etablissements-recevant-du-public-erp-pour-les-personnes-en-situation-de-handicap",
+   "title": "Accessibilité ERP (Acceslibre)",
+   "updatedAt": "2026-10-09T12:48:40.610Z",
+   "dataUpdatedAt": "2025-10-13T12:05:55.770Z",
+   "count": 609417,
+   "status": "finalized"
+  },
+  {
+   "id": "4z8i9pdlk1mkpry0xsoh2qjp",
+   "slug": "journees-europeennes-du-patrimoine-2024",
+   "title": "Journées Européennes du Patrimoine 2024",
+   "updatedAt": "2026-02-19T15:22:38.906Z",
+   "dataUpdatedAt": "2024-09-18T08:15:07.270Z",
+   "count": 27616,
+   "status": "finalized"
+  },
+  {
+   "id": "y17cgkayqfjbivlx2c-xv41j",
+   "slug": "principaux-indicateurs-sur-les-revenus-et-la-pauvrete",
+   "title": "Revenus et pauvreté (indicateurs)",
+   "updatedAt": "2026-10-09T12:48:45.931Z",
+   "dataUpdatedAt": "2024-09-17T09:41:26.197Z",
+   "count": 174640,
+   "status": "finalized"
+  },
+  {
+   "id": "8y1wd9-5jt3vecucmrjm9w6t",
+   "slug": "naissances-de-2014-a-2022",
+   "title": "Naissances de 2014 à 2022",
+   "updatedAt": "2025-12-24T13:39:54.154Z",
+   "dataUpdatedAt": "2024-09-10T13:48:55.868Z",
+   "count": 314903,
+   "status": "finalized"
+  },
+  {
+   "id": "1mk155dt0llppntd4x592mi6",
+   "slug": "alimconfiance-old",
+   "title": "Résultats des contrôles officiels sanitaires : dispositif d'information « Alim’confiance »",
+   "updatedAt": "2026-11-18T05:00:29.920Z",
+   "dataUpdatedAt": "2026-11-18T05:00:29.920Z",
+   "count": 71849,
+   "status": "finalized"
+  },
+  {
+   "id": "p7b5suf6zs5mdqnvnqkti9bv",
+   "slug": "questionnairejeunessespm",
+   "title": "Questionnaire de satisfaction de la Jeunesse de Saint-Pierre et Miquelon",
+   "updatedAt": "2026-01-08T17:31:40.502Z",
+   "dataUpdatedAt": "2025-04-22T20:31:31.192Z",
+   "count": 95,
+   "status": "finalized"
+  },
+  {
+   "id": "w7zrtp2cdnkgqbdhyrf2co0o",
+   "slug": "secteurs-carte-communale",
+   "title": "Secteurs Carte Communale",
+   "updatedAt": "2025-12-24T13:40:13.395Z",
+   "dataUpdatedAt": "2024-05-02T15:25:57.258Z",
+   "count": 32131,
+   "status": "finalized"
+  },
+  {
+   "id": "lt2dtlt47mm8z62cy222kdf7",
+   "slug": "zonage-plu-plui",
+   "title": "Zonages PLU / PLUi",
+   "updatedAt": "2025-12-24T13:40:17.805Z",
+   "dataUpdatedAt": "2024-05-07T10:38:53.208Z",
+   "count": 1127538,
+   "status": "finalized"
+  },
+  {
+   "id": "jc9afqe-e73e7z78bf62-41y",
+   "slug": "liste-immeubles-proteges-au-titre-des-monuments-historiques",
+   "title": "Immeubles protégés au titre des Monuments Historiques",
+   "updatedAt": "2026-01-01T21:00:24.674Z",
+   "dataUpdatedAt": "2026-01-01T21:00:24.674Z",
+   "count": 46641,
+   "status": "finalized"
+  },
+  {
+   "id": "0gp2l3gyazonnschk1mxj9hh",
+   "slug": "quartier-prioritaire-metropole-anct",
+   "title": "Quartier prioritaire metropole ANCT",
+   "updatedAt": "2025-12-24T13:40:33.205Z",
+   "dataUpdatedAt": "2024-02-13T14:35:52.212Z",
+   "count": 1362,
+   "status": "finalized"
+  },
+  {
+   "id": "le8lhr64ybe5nwdrt46rrf8r",
+   "slug": "carte-des-centres-de-lavage",
+   "title": "Cartographie 2025 des centres de lavage d'emballages en France",
+   "updatedAt": "2026-06-30T10:17:06.962Z",
+   "dataUpdatedAt": "2026-04-27T07:45:45.146Z",
+   "count": 45,
+   "status": "finalized"
+  },
+  {
+   "id": "q68ivgjj69gcsfs0f92uguaa",
+   "slug": "les-40-communes",
+   "title": "Les 40 communes",
+   "updatedAt": "2026-10-26T14:19:34.035Z",
+   "dataUpdatedAt": "2026-10-14T15:11:56.422Z",
+   "count": 40,
+   "status": "finalized"
+  },
+  {
+   "id": "adresses-france",
+   "slug": "adresses-france",
+   "title": "Base Adresse Nationale",
+   "updatedAt": "2026-11-15T03:06:15.526Z",
+   "dataUpdatedAt": "2026-11-15T03:06:15.526Z",
+   "count": 26122779,
+   "status": "finalized"
+  },
+  {
+   "id": "decoupages-administratifs-quartiers-poitiers-grand-poitiers-donnees-de-reference",
+   "slug": "decoupages-administratifs-quartiers-poitiers-grand-poitiers-donnees-de-reference",
+   "title": "Grands Quartiers de Poitiers",
+   "updatedAt": "2026-10-16T09:08:13.781Z",
+   "dataUpdatedAt": "2023-08-24T12:57:20.346Z",
+   "count": 10,
+   "status": "finalized"
+  },
+  {
+   "id": "base-sirene-des-entreprises",
+   "slug": "base-sirene-des-entreprises",
+   "title": "Base Sirene des entreprises (sièges sociaux)",
+   "updatedAt": "2026-07-23T07:46:41.510Z",
+   "dataUpdatedAt": "2026-11-19T03:08:10.847Z",
+   "count": 31160217,
+   "status": "finalized"
+  },
+  {
+   "id": "sirene",
+   "slug": "sirene",
+   "title": "Base Sirene des entreprises et de leurs établissements (SIREN, SIRET)",
+   "updatedAt": "2026-09-06T04:09:41.293Z",
+   "dataUpdatedAt": "2026-11-19T03:08:10.847Z",
+   "count": 44616230,
+   "status": "finalized"
+  },
+  {
+   "id": "fichier-personnes-decedees",
+   "slug": "fichier-personnes-decedees",
+   "title": "Fichier des personnes décédées",
+   "updatedAt": "2026-11-17T14:52:20.934Z",
+   "dataUpdatedAt": "2026-11-09T14:36:44.071Z",
+   "count": 29047963,
+   "status": "finalized"
+  },
+  {
+   "id": "communes-de-france",
+   "slug": "communes-de-france",
+   "title": "Communes de France",
+   "updatedAt": "2026-11-02T21:54:56.455Z",
+   "dataUpdatedAt": "2026-11-02T21:54:56.455Z",
+   "count": 35005,
+   "status": "finalized"
+  },
+  {
+   "id": "repertoire-national-des-associations",
+   "slug": "repertoire-national-des-associations",
+   "title": "Répertoire national des associations (RNA)",
+   "updatedAt": "2025-12-24T13:42:10.125Z",
+   "dataUpdatedAt": "2024-01-15T02:07:21.303Z",
+   "count": 3289959,
+   "status": "finalized"
+  },
+  {
+   "id": "contours-des-regions",
+   "slug": "contours-des-regions",
+   "title": "Contours des régions",
+   "updatedAt": "2026-11-04T14:30:22.185Z",
+   "dataUpdatedAt": "2026-09-24T15:53:39.665Z",
+   "count": 18,
+   "status": "finalized"
+  },
+  {
+   "id": "contours-des-departements",
+   "slug": "contours-des-departements",
+   "title": "Contours des départements",
+   "updatedAt": "2026-11-04T14:30:22.431Z",
+   "dataUpdatedAt": "2026-09-24T15:53:44.407Z",
+   "count": 101,
+   "status": "finalized"
+  },
+  {
+   "id": "contours-des-epci",
+   "slug": "contours-des-epci",
+   "title": "Contours des EPCI",
+   "updatedAt": "2026-11-04T14:44:06.627Z",
+   "dataUpdatedAt": "2026-09-24T15:53:52.495Z",
+   "count": 1264,
+   "status": "finalized"
+  },
+  {
+   "id": "contours-des-communes",
+   "slug": "contours-des-communes",
+   "title": "Contours des communes",
+   "updatedAt": "2026-11-04T14:30:26.021Z",
+   "dataUpdatedAt": "2026-10-26T15:46:34.532Z",
+   "count": 35003,
+   "status": "finalized"
+  },
+  {
+   "id": "contours-des-iris",
+   "slug": "contours-des-iris",
+   "title": "Contours des IRIS",
+   "updatedAt": "2026-11-04T14:47:19.304Z",
+   "dataUpdatedAt": "2026-09-24T16:00:25.646Z",
+   "count": 49386,
+   "status": "finalized"
+  },
+  {
+   "id": "rnic",
+   "slug": "rnic",
+   "title": "RNIC",
+   "updatedAt": "2026-11-05T23:02:11.896Z",
+   "dataUpdatedAt": "2026-11-05T23:02:11.896Z",
+   "count": 656565,
+   "status": "finalized"
+  },
+  {
+   "id": "test-aides-pv-martinique",
+   "slug": "test-aides-pv-martinique",
+   "title": "Aides photovoltaïque Martinique",
+   "updatedAt": "2026-10-13T13:43:08.573Z",
+   "dataUpdatedAt": "2023-10-17T11:55:51.331Z",
+   "count": 12,
+   "status": "finalized"
+  },
+  {
+   "id": "geolocalisation-des-etablissements-du-repertoire-sirene",
+   "slug": "geolocalisation-des-etablissements-du-repertoire-sirene",
+   "title": "Géolocalisation des établissements du répertoire SIRENE",
+   "updatedAt": "2026-10-22T04:02:15.648Z",
+   "dataUpdatedAt": "2026-10-22T04:02:15.648Z",
+   "count": 38016211,
+   "status": "finalized"
+  },
+  {
+   "id": "prix-des-carburants-par-station",
+   "slug": "prix-des-carburants-par-station",
+   "title": "Prix des carburants par station",
+   "updatedAt": "2026-10-28T16:22:29.278Z",
+   "dataUpdatedAt": "2026-11-19T10:48:09.380Z",
+   "count": 33787,
+   "status": "finalized"
+  },
+  {
+   "id": "base-nationale-des-lieux-de-covoiturage",
+   "slug": "base-nationale-des-lieux-de-covoiturage",
+   "title": "Base nationale des lieux de covoiturage",
+   "updatedAt": "2026-11-04T03:00:45.504Z",
+   "dataUpdatedAt": "2026-11-04T03:00:45.504Z",
+   "count": 14264,
+   "status": "finalized"
+  },
+  {
+   "id": "prix-des-controles-techniques",
+   "slug": "prix-des-controles-techniques",
+   "title": "Prix des contrôles techniques",
+   "updatedAt": "2026-11-11T23:00:51.877Z",
+   "dataUpdatedAt": "2026-11-11T23:00:51.877Z",
+   "count": 146879,
+   "status": "finalized"
+  },
+  {
+   "id": "competence-territoriale-gendarmerie-et-police-nationales",
+   "slug": "competence-territoriale-gendarmerie-et-police-nationales",
+   "title": "Compétence territoriale gendarmerie et police nationales",
+   "updatedAt": "2026-11-15T03:00:35.795Z",
+   "dataUpdatedAt": "2026-11-15T03:00:35.795Z",
+   "count": 35008,
+   "status": "finalized"
+  },
+  {
+   "id": "liste-publique-des-organismes-de-formation",
+   "slug": "liste-publique-des-organismes-de-formation",
+   "title": "Liste Publique des Organismes de Formation",
+   "updatedAt": "2026-11-19T03:01:19.597Z",
+   "dataUpdatedAt": "2026-11-19T03:01:19.597Z",
+   "count": 155888,
+   "status": "finalized"
+  },
+  {
+   "id": "sitadel-pd",
+   "slug": "sitadel-pd",
+   "title": "Sitadel - Permis de démolir depuis 2013",
+   "updatedAt": "2026-11-03T23:23:18.184Z",
+   "dataUpdatedAt": "2026-11-03T23:23:18.184Z",
+   "count": 206223,
+   "status": "finalized"
+  },
+  {
+   "id": "sitadel-locaux",
+   "slug": "sitadel-locaux",
+   "title": "Sitadel - Permis de construire et déclarations préalables de locaux depuis 2013",
+   "updatedAt": "2026-11-05T01:48:05.480Z",
+   "dataUpdatedAt": "2026-11-05T01:48:05.480Z",
+   "count": 805973,
+   "status": "finalized"
+  },
+  {
+   "id": "sitadel-logements",
+   "slug": "sitadel-logements",
+   "title": "Sitadel - Permis de construire et déclarations préalables de logements depuis 2013",
+   "updatedAt": "2026-11-04T03:36:40.153Z",
+   "dataUpdatedAt": "2026-11-04T03:36:40.153Z",
+   "count": 1941999,
+   "status": "finalized"
+  },
+  {
+   "id": "ref-liste-des-departements",
+   "slug": "ref-liste-des-departements",
+   "title": "Ref - Liste des départements",
+   "updatedAt": "2026-11-15T10:07:06.211Z",
+   "dataUpdatedAt": "2026-11-15T10:07:06.211Z",
+   "count": 112,
+   "status": "finalized"
+  },
+  {
+   "id": "sitadel-pa",
+   "slug": "sitadel-pa",
+   "title": "Sitadel - Permis d’aménager depuis 2013",
+   "updatedAt": "2026-11-04T20:18:39.187Z",
+   "dataUpdatedAt": "2026-11-04T20:18:39.187Z",
+   "count": 109624,
+   "status": "finalized"
+  },
+  {
+   "id": "banatic",
+   "slug": "banatic",
+   "title": "Base nationale sur l'intercommunalité",
+   "updatedAt": "2026-08-19T13:48:34.981Z",
+   "dataUpdatedAt": "2021-06-30T15:02:34.364Z",
+   "count": 10285,
+   "status": "finalized"
+  },
+  {
+   "id": "parcelles-des-personnes-morales",
+   "slug": "parcelles-des-personnes-morales",
+   "title": "Parcelles des personnes morales - MAJIC",
+   "updatedAt": "2026-08-25T07:56:10.729Z",
+   "dataUpdatedAt": "2026-08-25T07:56:10.729Z",
+   "count": 17591233,
+   "status": "finalized"
+  },
+  {
+   "id": "amenagements-cyclables",
+   "slug": "amenagements-cyclables",
+   "title": "Aménagements cyclables",
+   "updatedAt": "2026-03-09T08:31:42.557Z",
+   "dataUpdatedAt": "2026-03-09T08:01:13.330Z",
+   "count": 391431,
+   "status": "finalized"
+  },
+  {
+   "id": "demandes-de-valeurs-foncieres-france",
+   "slug": "demandes-de-valeurs-foncieres-france",
+   "title": "Demandes de valeurs foncières - France",
+   "updatedAt": "2026-10-22T14:27:21.861Z",
+   "dataUpdatedAt": "2026-10-22T09:55:53.845Z",
+   "count": 44145539,
+   "status": "finalized"
+  },
+  {
+   "id": "icpe",
+   "slug": "icpe",
+   "title": "Installations Classées pour la Protection de l’Environnement",
+   "updatedAt": "2026-11-19T05:00:48.771Z",
+   "dataUpdatedAt": "2026-11-19T05:00:48.771Z",
+   "count": 136432,
+   "status": "finalized"
+  },
+  {
+   "id": "fr-en-annuaire-education",
+   "slug": "fr-en-annuaire-education",
+   "title": "Annuaire de l'éducation",
+   "updatedAt": "2026-11-02T23:00:54.128Z",
+   "dataUpdatedAt": "2026-11-02T23:00:54.128Z",
+   "count": 68567,
+   "status": "finalized"
+  },
+  {
+   "id": "accidents-velos",
+   "slug": "accidents-velos",
+   "title": "Accidents de vélo",
+   "updatedAt": "2026-10-26T10:29:39.483Z",
+   "dataUpdatedAt": "2026-10-26T10:23:12.501Z",
+   "count": 99393,
+   "status": "finalized"
+  },
+  {
+   "id": "resultats-baccalaureat-etablissement",
+   "slug": "resultats-baccalaureat-etablissement",
+   "title": "Résultats au baccalauréat par établissement",
+   "updatedAt": "2026-08-18T07:02:10.706Z",
+   "dataUpdatedAt": "2019-05-29T23:53:26.644Z",
+   "count": 993758,
+   "status": "finalized"
+  },
+  {
+   "id": "etablissements-finess-france",
+   "slug": "etablissements-finess-france",
+   "title": "Liste des établissements du domaine sanitaire et social",
+   "updatedAt": "2026-11-05T20:00:44.947Z",
+   "dataUpdatedAt": "2026-11-05T20:00:44.947Z",
+   "count": 92954,
+   "status": "finalized"
+  }
+ ]
+}
