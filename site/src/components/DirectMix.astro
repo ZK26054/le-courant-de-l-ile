@@ -35,8 +35,8 @@ const legende = TAXO.ordre.map((k: string) => ({ k, libelle: (TAXO.libelles as R
     <a href="https://opendata-reunion.edf.fr/explore/dataset/prod-electricite-temps-reel-974/">le portail open data d’EDF Réunion</a>.</p></noscript>
 
   <p class="petit tres-discret note">
-    Source : EDF Réunion, open data (« Production d’électricité par filière en temps réel », pas de 5 min). Valeurs au statut
-    <strong>« estimé »</strong>, révisées ensuite par EDF. « Biomasse (ex-Charbon) » et « Bioliquide (ex-Diesel) » sont les
+    Source : EDF Réunion, open data (« Production d’électricité par filière en temps réel », pas de 5 min). Valeurs au statut{' '}
+    <strong>« estimé »</strong>, révisées ensuite par EDF ; certains relevés manquent à la source.<span data-ecartees></span> « Biomasse (ex-Charbon) » et « Bioliquide (ex-Diesel) » sont les
     libellés officiels des colonnes héritées <code>charbon</code> et <code>diesel</code> : ces centrales ne brûlent plus de charbon
     ni de fioul. Une valeur négative (stockage en recharge) est tracée sous l’axe.
   </p>
@@ -45,6 +45,7 @@ const legende = TAXO.ordre.map((k: string) => ({ k, libelle: (TAXO.libelles as R
 <script>
   import taxo from '../data/filieres.json';
   import { COULEURS_FLUX as COULEURS } from '../lib/filieres';
+  import { nettoyer, type Ligne } from '../lib/direct';
   const API = 'https://opendata-reunion.edf.fr/api/explore/v2.1/catalog/datasets/prod-electricite-temps-reel-974/records';
   const ORDRE: string[] = taxo.ordre;
   const API2INT: Record<string, string> = taxo.api_vers_interne;
@@ -53,8 +54,6 @@ const legende = TAXO.ordre.map((k: string) => ({ k, libelle: (TAXO.libelles as R
   const fmtH = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Indian/Reunion', hour: '2-digit', minute: '2-digit' });
   const nf = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
   const nf1 = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
-
-  type Ligne = { t: number; statut: string; total: number; v: Record<string, number> };
 
   async function page(avant?: string) {
     const p = new URLSearchParams({ limit: '100', order_by: 'date desc' });
@@ -70,9 +69,11 @@ const legende = TAXO.ordre.map((k: string) => ({ k, libelle: (TAXO.libelles as R
     } finally { clearTimeout(minuterie); }
   }
 
+  let ecartees = 0;
   async function charger(): Promise<Ligne[]> {
     let brut = await page();
     if (!brut.length) return [];
+    ecartees = 0;
     const fin = Date.parse(brut[0].date);
     for (let i = 0; i < 3; i++) {
       const plusAncien = brut[brut.length - 1].date;
@@ -81,15 +82,10 @@ const legende = TAXO.ordre.map((k: string) => ({ k, libelle: (TAXO.libelles as R
       if (!suite.length) break;
       brut = brut.concat(suite);
     }
-    const vu = new Map<number, Ligne>();
-    for (const r of brut) {
-      const t = Date.parse(r.date);
-      if (Number.isNaN(t) || t < fin - 24 * 3600e3 || vu.has(t)) continue;
-      const v: Record<string, number> = {};
-      for (const [api, k] of Object.entries(API2INT)) v[k] = Number(r[api]) || 0;
-      vu.set(t, { t, statut: String(r.statut ?? ''), total: Number(r.total) || 0, v });
-    }
-    return [...vu.values()].sort((a, b) => a.t - b.t);
+    // Fenêtre 24 h, dédoublonnage, relevés incomplets/incohérents écartés (src/lib/direct.ts, testé).
+    const res = nettoyer(brut, API2INT);
+    ecartees = res.ecartees;
+    return res.lignes;
   }
 
   function dessiner(el: HTMLElement, lignes: Ligne[]) {
@@ -148,8 +144,12 @@ const legende = TAXO.ordre.map((k: string) => ({ k, libelle: (TAXO.libelles as R
       q('[data-resume]').hidden = false;
       racine.querySelectorAll<HTMLElement>('[data-legende] li').forEach((li) => {
         const v = der.v[li.dataset.k as string];
-        (li.querySelector('[data-val]') as HTMLElement).textContent = `${nf1.format(v)} MW`;
+        // Math.abs < 0,05 → 0 : évite l'affichage « -0 MW » d'un stockage quasi nul.
+        (li.querySelector('[data-val]') as HTMLElement).textContent = `${nf1.format(Math.abs(v) < 0.05 ? 0 : v)} MW`;
       });
+      if (ecartees > 0) {
+        q('[data-ecartees]').textContent = ` ${ecartees} relevé${ecartees > 1 ? 's' : ''} incomplet${ecartees > 1 ? 's' : ''} ou incohérent${ecartees > 1 ? 's' : ''} écarté${ecartees > 1 ? 's' : ''} du graphique.`;
+      }
       dessiner(q('[data-graphe]'), lignes);
       racine.dataset.etat = 'ok';
     } catch (e) {
