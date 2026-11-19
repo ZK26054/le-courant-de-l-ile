@@ -1,0 +1,100 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CarteIle from '../../components/CarteIle.astro';
+import Photo from '../../components/Photo.astro';
+import { toutesLesFiches, points, fmtMW, classeStatut } from '../../lib/installations';
+import { FILIERES_SITE } from '../../lib/filieres';
+import { lien } from '../../lib/chemins';
+
+export async function getStaticPaths() {
+  const fiches = await toutesLesFiches();
+  return fiches.map((f) => ({ params: { slug: f.id }, props: { fiche: f, toutes: fiches } }));
+}
+const { fiche, toutes } = Astro.props;
+const d = fiche.data;
+const { Content } = await render(fiche);
+const pts = points(toutes, fiche.id === 'solaire');
+const precision = {
+  osm: 'Position OpenStreetMap',
+  approximative: 'Position approximative (centre de la commune ou point indicatif)',
+  inconnue: 'Position non documentée : aucune position affichée',
+}[d.coordonnees.precision];
+const dateFr = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+<Base titre={d.nom} description={d.resume}>
+  <article class="conteneur">
+    <p class="fil petit"><a href={lien('/installations')}>Installations</a> › {FILIERES_SITE[d.filiere].libelle}</p>
+    <h1>{d.nom}</h1>
+    <p class="chapo discret">{d.resume}</p>
+    <p><span class={`badge ${classeStatut(d.statut)}`}>{d.statut}</span>{d.statut_detail && <span class="petit discret statut-detail">{d.statut_detail}</span>}</p>
+
+    <div class="disposition">
+      <div class="colonne">
+        <dl class="fiche carte-bloc">
+          <div><dt>Puissance</dt><dd><strong class="mono">{fmtMW(d.puissance_mw)}</strong><span class="petit tres-discret source-dd">{d.puissance_source}</span></dd></div>
+          <div><dt>Filière</dt><dd><span class="pastille" style={`background:${FILIERES_SITE[d.filiere].couleur}`}></span>{FILIERES_SITE[d.filiere].libelle}</dd></div>
+          <div><dt>Combustible</dt><dd>{d.combustible}</dd></div>
+          <div><dt>Exploitant</dt><dd>{d.exploitant}</dd></div>
+          <div><dt>Mise en service</dt><dd>{d.mise_en_service}{d.mise_en_service_source && <span class="petit tres-discret source-dd">{d.mise_en_service_source}</span>}</dd></div>
+          <div><dt>Commune</dt><dd>{d.commune}</dd></div>
+          <div><dt>Dernière vérification</dt><dd>{dateFr(d.derniere_verification)}</dd></div>
+        </dl>
+
+        {d.puissances_divergentes.length > 0 && (
+          <section aria-labelledby="div-t">
+            <h2 id="div-t">Les sources ne donnent pas toutes le même chiffre</h2>
+            <div class="defile">
+              <table>
+                <thead><tr><th scope="col">Valeur</th><th scope="col">Date</th><th scope="col">Périmètre</th><th scope="col">Source</th></tr></thead>
+                <tbody>
+                  <tr><td class="mono">{fmtMW(d.puissance_mw)}</td><td>31/12/2024</td><td>retenue par ce site</td><td>{d.puissance_source}</td></tr>
+                  {d.puissances_divergentes.map((v) => <tr><td class="mono">{v.valeur}</td><td>{v.date}</td><td>{v.perimetre}</td><td>{v.source}</td></tr>)}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
+
+        <div class="prose"><Content /></div>
+      </div>
+
+      <aside class="colonne-laterale">
+        <Photo fichier={d.image} filiere={d.filiere} nom={d.nom} />
+        {d.coordonnees.precision !== 'inconnue' || fiche.id === 'solaire' ? (
+          <CarteIle points={pts} selection={fiche.id} titre={`Position de ${d.nom} sur la carte de La Réunion`} />
+        ) : null}
+        <p class="petit tres-discret">{precision}{d.coordonnees.osm && <> · <a href={`https://www.openstreetmap.org/${d.coordonnees.osm}`}>objet OSM {d.coordonnees.osm}</a></>}</p>
+      </aside>
+    </div>
+
+    <section aria-labelledby="src-t">
+      <h2 id="src-t">Sources</h2>
+      <ol class="sources-liste">
+        {d.sources.map((s) => (
+          <li><span class="niveau" title={{ N1: 'Niveau 1 : source institutionnelle', N2: 'Niveau 2 : exploitant ou porteur de projet', N3: 'Niveau 3 : presse ou donnée contributive' }[s.niveau]}>{s.niveau}</span>
+            {s.url ? <a href={s.url}>{s.titre}</a> : s.titre} — {s.editeur}, {s.date}</li>
+        ))}
+      </ol>
+      <p class="petit tres-discret">N1 : institution (OER, EDF SEI, CRE, État) · N2 : exploitant ou porteur de projet · N3 : presse ou donnée contributive. <a href={lien('/sources')}>Méthode</a></p>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .fil { margin-top: 1.5rem; color: var(--texte-3); }
+  .chapo { font-size: 1.12rem; max-width: 46rem; }
+  .statut-detail { display: block; margin-top: 0.5rem; max-width: 46rem; }
+  .disposition { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; margin-top: 1rem; }
+  @media (min-width: 60rem) { .disposition { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: start; } .colonne-laterale { position: sticky; top: 5rem; } }
+  .colonne-laterale { display: grid; gap: 1rem; }
+  .fiche { margin: 0; display: grid; gap: 0.75rem; }
+  .fiche div { display: grid; grid-template-columns: 9.5rem 1fr; gap: 0.75rem; }
+  @media (max-width: 30rem) { .fiche div { grid-template-columns: 1fr; gap: 0.1rem; } }
+  dt { color: var(--texte-3); font-size: 0.88rem; }
+  dd { margin: 0; }
+  .source-dd { display: block; margin-top: 0.15rem; }
+  .prose { max-width: 44rem; }
+  .prose :global(table) { margin: 0.5rem 0 1rem; }
+  .prose :global(.defile), .prose :global(table) { display: block; overflow-x: auto; }
+</style>

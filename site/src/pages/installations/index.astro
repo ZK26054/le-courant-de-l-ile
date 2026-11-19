@@ -1,0 +1,118 @@
+---
+import Base from '../../layouts/Base.astro';
+import CarteIle from '../../components/CarteIle.astro';
+import { toutesLesFiches, points, fmtMW, classeStatut } from '../../lib/installations';
+import { FILIERES_SITE } from '../../lib/filieres';
+import { OER_CC2024 } from '../../data/chiffres-cles';
+import { lien } from '../../lib/chemins';
+
+const fiches = await toutesLesFiches();
+const filieresPresentes = [...new Set(fiches.map((f) => f.data.filiere))];
+const parc: [string, number][] = [
+  ['Solaire', 312.1],
+  ['Bioliquide (huile de colza), Port-Est', 211],
+  ['Biomasse (bagasse, granulés), Le Gol et Bois-Rouge', 195.8],
+  ['Hydraulique', 134.4],
+  ['Turbines à combustion, La Baie et Saint-Pierre', 121],
+  ['Groupes de secours', 24],
+  ['Éolien', 19.8],
+  ['Batteries', 10],
+  ['Biogaz', 6.9],
+];
+const pct = (mw: number) => (mw / 1035 * 100).toLocaleString('fr-FR', { maximumFractionDigits: 1 });
+---
+<Base titre="Installations" description="Les centrales électriques de La Réunion : puissance, combustible, exploitant et sources, sur une carte de l’île.">
+  <div class="conteneur">
+    <p class="surtitre haut">Parc électrique</p>
+    <h1>Les installations</h1>
+    <p class="discret chapo">Fin 2024, l’île comptait <strong>1 035 MW</strong> de puissance installée (OER). Chaque fiche donne la puissance, le combustible, l’exploitant, la position et les sources. Quand deux sources divergent, les deux sont affichées avec leur date.</p>
+
+    <div class="mise-en-page">
+      <section aria-labelledby="carte-t">
+        <h2 id="carte-t" class="visuellement-cache">Carte</h2>
+        <CarteIle points={points(fiches)} titre="Carte de La Réunion avec les principales installations de production électrique" />
+      </section>
+
+      <section aria-labelledby="liste-t">
+        <h2 id="liste-t" class="sans-marge">Toutes les fiches</h2>
+        <fieldset class="filtres" data-filtres hidden>
+          <legend class="petit discret">Filtrer par filière</legend>
+          <button type="button" aria-pressed="true" data-f="tout">Toutes</button>
+          {filieresPresentes.map((f) => (
+            <button type="button" aria-pressed="false" data-f={f}><span class="pastille" style={`background:${FILIERES_SITE[f].couleur}`}></span>{FILIERES_SITE[f].libelle}</button>
+          ))}
+        </fieldset>
+        <p class="petit tres-discret" data-compte aria-live="polite"></p>
+        <ul class="liste">
+          {fiches.map((f) => (
+            <li data-filiere={f.data.filiere}>
+              <a href={lien(`/installations/${f.id}`)}>
+                <span class="pastille" style={`background:${FILIERES_SITE[f.data.filiere].couleur}`}></span>
+                <span class="nom">{f.data.nom}</span>
+                <span class="mw mono">{fmtMW(f.data.puissance_mw)}</span>
+              </a>
+              <span class="meta petit tres-discret">{FILIERES_SITE[f.data.filiere].libelle} · {f.data.commune} · <span class={`badge ${classeStatut(f.data.statut)}`}>{f.data.statut}</span></span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+
+    <section aria-labelledby="parc-t">
+      <h2 id="parc-t">Le parc au 31 décembre 2024</h2>
+      <div class="defile">
+        <table>
+          <caption class="visuellement-cache">Puissance installée par filière au 31/12/2024</caption>
+          <thead><tr><th scope="col">Filière</th><th scope="col" class="num">MW</th><th scope="col" class="num">Part</th></tr></thead>
+          <tbody>
+            {parc.map(([n, mw]) => <tr><td>{n}</td><td class="num">{mw.toLocaleString('fr-FR')}</td><td class="num">{pct(mw)} %</td></tr>)}
+            <tr><th scope="row">Total</th><td class="num"><strong>1 035</strong></td><td class="num">100 %</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="petit tres-discret">Source : <a href={OER_CC2024.url}>OER, chiffres clés 2024</a> (puissances installées et contractuelles). Les parts sont calculées par ce site.</p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  const fs = document.querySelector<HTMLFieldSetElement>('[data-filtres]');
+  const items = [...document.querySelectorAll<HTMLLIElement>('.liste li')];
+  const compte = document.querySelector<HTMLElement>('[data-compte]');
+  if (fs && compte) {
+    fs.hidden = false;
+    const maj = (f: string) => {
+      let n = 0;
+      for (const li of items) {
+        const v = f === 'tout' || li.dataset.filiere === f;
+        li.hidden = !v;
+        if (v) n++;
+      }
+      compte.textContent = `${n} fiche${n > 1 ? 's' : ''} affichée${n > 1 ? 's' : ''}`;
+      fs.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.f === f)));
+    };
+    fs.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest('button');
+      if (b) maj(b.dataset.f as string);
+    });
+    maj('tout');
+  }
+</script>
+
+<style>
+  .haut { margin-top: 2rem; }
+  .sans-marge { margin-top: 0; }
+  .chapo { max-width: 46rem; }
+  .mise-en-page { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; margin-top: 1rem; }
+  @media (min-width: 60rem) { .mise-en-page { grid-template-columns: 1.15fr 1fr; align-items: start; } }
+  .filtres { border: 0; padding: 0; margin: 0 0 0.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .filtres legend { margin-bottom: 0.4rem; }
+  .filtres button { font: inherit; font-size: 0.85rem; min-height: 40px; padding: 0.3rem 0.75rem; border-radius: 999px; border: 1px solid var(--ligne); background: var(--surface); color: var(--texte); cursor: pointer; display: inline-flex; align-items: center; }
+  .filtres button[aria-pressed='true'] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .liste { list-style: none; padding: 0; margin: 0; }
+  .liste li { border-bottom: 1px solid var(--ligne); padding: 0.55rem 0; }
+  .liste a { display: flex; align-items: center; gap: 0.25rem; text-decoration: none; color: var(--texte); font-weight: 600; min-height: 32px; }
+  .liste a:hover .nom { text-decoration: underline; }
+  .mw { margin-left: auto; padding-left: 0.75rem; color: var(--texte-2); font-weight: 400; font-size: 0.9rem; white-space: nowrap; }
+  .meta { display: block; padding-left: 1.2em; }
+</style>

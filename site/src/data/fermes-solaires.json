@@ -1,0 +1,14 @@
+{
+  "_source": "© contributeurs OpenStreetMap, ODbL — objets power=plant (solaire) nommés, données du 2026-06-01, consultées le 2026-11-19. Puissances contributives, non officielles.",
+  "fermes": [
+    { "nom": "Champ Bethléem", "commune": "Saint-Benoît", "mw": 12, "lat": -21.03705, "lon": 55.68503, "osm": "relation/10601110" },
+    { "nom": "La Roseraye", "commune": "Sainte-Rose", "mw": 10.452, "lat": -21.14073, "lon": 55.78742, "osm": "relation/10601111" },
+    { "nom": "Bardzour", "commune": "Le Port", "mw": 9, "lat": -20.95084, "lon": 55.31387, "osm": "way/541748414" },
+    { "nom": "Les Cèdres", "commune": "L’Étang-Salé", "mw": 9, "lat": -21.27319, "lon": 55.37789, "osm": "relation/10601112" },
+    { "nom": "Mangassaye", "commune": "Sainte-Rose", "mw": 5.094, "lat": -21.16384, "lon": 55.80609, "osm": "way/287057289" },
+    { "nom": "Run Market Duparc", "commune": "Sainte-Marie", "mw": 4.4, "lat": -20.89962, "lon": 55.51706, "osm": "relation/10601113" },
+    { "nom": "Hélio La Perrière", "commune": "Sainte-Suzanne", "mw": 3, "lat": -20.9504, "lon": 55.59079, "osm": "way/295030008" },
+    { "nom": "Pierrefonds", "commune": "Saint-Pierre", "mw": 2.1, "lat": -21.29797, "lon": 55.4361, "osm": "way/321076118" },
+    { "nom": "Le Syndicat", "commune": "Saint-Pierre", "mw": 2.1, "lat": -21.3115, "lon": 55.43902, "osm": "way/297961495" }
+  ]
+}

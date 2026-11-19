@@ -1,0 +1,60 @@
+---
+import { CARTE, projeter, rayon } from '../lib/carte';
+import { FILIERES_SITE } from '../lib/filieres';
+import { lien } from '../lib/chemins';
+
+interface Point {
+  id: string;
+  nom: string;
+  filiere: keyof typeof FILIERES_SITE;
+  puissance_mw: number | null;
+  statut: string;
+  lat: number;
+  lon: number;
+  approximative: boolean;
+}
+interface Props { points: Point[]; titre: string; selection?: string }
+const { points, titre, selection } = Astro.props;
+// Les plus gros disques d'abord, pour que les petits restent cliquables par-dessus.
+const tries = [...points].sort((a, b) => (b.puissance_mw ?? 0) - (a.puissance_mw ?? 0));
+const idTitre = `carte-titre-${Math.random().toString(36).slice(2, 8)}`;
+---
+<figure class="carte">
+  <svg viewBox={CARTE.viewBox} role="img" aria-labelledby={idTitre}>
+    <title id={idTitre}>{titre}</title>
+    <g class="communes">
+      {CARTE.communes.map((c) => <path d={c.d}><title>{c.nom}</title></path>)}
+    </g>
+    <g class="points">
+      {tries.map((pt) => {
+        const [x, y] = projeter(pt.lat, pt.lon);
+        const r = rayon(pt.puissance_mw);
+        const projet = pt.statut !== 'en service';
+        return (
+          <a href={lien(`/installations/${pt.id}`)} class:list={['pt', { sel: selection === pt.id }]}>
+            <circle cx={x.toFixed(1)} cy={y.toFixed(1)} r={r.toFixed(1)}
+              fill={projet ? 'none' : FILIERES_SITE[pt.filiere].couleur}
+              stroke={FILIERES_SITE[pt.filiere].couleur}
+              stroke-dasharray={pt.approximative || projet ? '4 3' : undefined} />
+            <title>{`${pt.nom} — ${pt.puissance_mw === null ? 'puissance non définie' : `${pt.puissance_mw.toLocaleString('fr-FR')} MW`} (${pt.statut}${pt.approximative ? ', position approximative' : ''})`}</title>
+          </a>
+        );
+      })}
+    </g>
+  </svg>
+  <figcaption class="petit tres-discret">
+    Surface des disques proportionnelle à la puissance. Contour pointillé : position approximative (centre de la commune) ou projet non construit.
+    Fond : contours des communes, geo.api.gouv.fr (IGN / Etalab, Licence Ouverte 2.0). Positions : © contributeurs OpenStreetMap, ODbL.
+  </figcaption>
+</figure>
+
+<style>
+  .carte { margin: 0; }
+  svg { width: 100%; height: auto; max-height: 78vh; }
+  .communes path { fill: var(--carte-ile); stroke: var(--carte-contour); stroke-width: 1; }
+  .pt circle { fill-opacity: 0.78; stroke-width: 2; transition: fill-opacity 0.15s; }
+  .pt:hover circle, .pt:focus-visible circle { fill-opacity: 1; stroke: var(--texte); stroke-width: 3; }
+  .pt.sel circle { stroke: var(--texte); stroke-width: 4; fill-opacity: 1; }
+  .pt:focus-visible { outline: none; }
+  figcaption { margin-top: 0.5rem; }
+</style>
