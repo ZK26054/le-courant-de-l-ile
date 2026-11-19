@@ -1,0 +1,45 @@
+---
+// Photo d'une installation, avec crédit obligatoire. Sans image autorisée :
+// visuel sobre « Photo à venir » (dessin vectoriel de la filière), jamais une image non licenciée.
+import registre from '../data/images.json';
+import { lien } from '../lib/chemins';
+import { FILIERES_SITE } from '../lib/filieres';
+
+interface Props { fichier?: string; filiere: keyof typeof FILIERES_SITE; nom: string }
+const { fichier, filiere, nom } = Astro.props;
+const im = fichier ? registre.images.find((i: any) => i.fichier === fichier) : undefined;
+if (fichier && !im) throw new Error(`Image « ${fichier} » absente de src/data/images.json`);
+const couleur = FILIERES_SITE[filiere].couleur;
+---
+{im ? (
+  <figure class="photo">
+    <img src={lien('/' + im.fichier)} alt={im.legende} width={im.largeur} height={im.hauteur} loading="lazy" decoding="async" />
+    <figcaption>
+      {im.legende}<br />
+      <span class="credit">Photo : {im.auteur}, {im.licence_url ? <a href={im.licence_url} rel="license noopener">{im.licence}</a> : im.licence}, <a href={im.url_source} rel="noopener">source</a></span>
+    </figcaption>
+  </figure>
+) : (
+  <figure class="photo a-venir">
+    <svg viewBox="0 0 320 180" role="img" aria-label={`Photo à venir : ${nom}`}>
+      <rect width="320" height="180" rx="14" fill="var(--surface)" stroke="var(--ligne)" />
+      <g fill="none" stroke={couleur} stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        {filiere === 'solaire' && <g><circle cx="160" cy="62" r="18" /><path d="M110 140l20-40h60l20 40zM140 100l-6 40M180 100l6 40M120 120h80" /></g>}
+        {(filiere === 'hydraulique' || filiere === 'stockage-step') && <g><path d="M96 70h128v20H96z" /><path d="M120 90v50M200 90v50M100 140c20-10 40 10 60 0s40 10 60 0" /></g>}
+        {filiere === 'eolien' && <g><path d="M160 72v70M160 72l-34-22M160 72l38-14M160 72l-4 40" /><circle cx="160" cy="72" r="4" /></g>}
+        {filiere === 'batteries' && <g><rect x="112" y="62" width="96" height="60" rx="6" /><path d="M208 82h10v20h-10M150 76l-10 18h20l-10 18" /></g>}
+        {!['solaire', 'hydraulique', 'stockage-step', 'eolien', 'batteries'].includes(filiere) && <g><path d="M104 140V96l28-16v16l28-16v16l28-16v60zM204 140V58h14v82M96 140h132" /><path d="M211 50c-6-8 6-12 0-22" /></g>}
+      </g>
+      <text x="160" y="166" text-anchor="middle" fill="var(--texte-3)" font-family="var(--f-mono)" font-size="12">Photo à venir</text>
+    </svg>
+    <figcaption class="credit">Aucune photo sous licence libre trouvée pour l’instant. Dessin : Le courant de l’île.</figcaption>
+  </figure>
+)}
+
+<style>
+  .photo { margin: 0; }
+  .photo img { border-radius: var(--rayon); width: 100%; object-fit: cover; background: var(--surface); }
+  figcaption { font-size: 0.85rem; color: var(--texte-2); margin-top: 0.45rem; }
+  .credit { color: var(--texte-3); font-size: 0.8rem; }
+  .a-venir svg { width: 100%; }
+</style>
