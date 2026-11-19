@@ -1,0 +1,38 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { articlesPublies, tempsDeLecture, dateFr } from '../../lib/articles';
+import { lien } from '../../lib/chemins';
+
+export async function getStaticPaths() {
+  return (await articlesPublies()).map((a) => ({ params: { slug: a.id }, props: { article: a } }));
+}
+const { article } = Astro.props;
+const d = article.data;
+const { Content } = await render(article);
+---
+<Base titre={d.titre} description={d.chapo}>
+  <article class="conteneur page">
+    <p class="fil petit haut"><a href={lien('/articles')}>Articles</a></p>
+    <h1>{d.titre}</h1>
+    <p class="chapo discret">{d.chapo}</p>
+    <p class="petit tres-discret meta">
+      Publié le <time datetime={d.date}>{dateFr(d.date)}</time> · Chiffres vérifiés le <time datetime={d.derniere_verification}>{dateFr(d.derniere_verification)}</time> · {d.auteur} · {tempsDeLecture(article.body)} min de lecture
+    </p>
+    <div class="prose"><Content /></div>
+    <section aria-labelledby="src-t" class="sources">
+      <h2 id="src-t">Sources</h2>
+      <ol class="sources-liste">
+        {d.sources.map((s) => <li><span class="niveau">{s.niveau}</span>{s.url ? <a href={s.url}>{s.titre}</a> : s.titre} — {s.editeur}, {s.date}</li>)}
+      </ol>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .haut { margin-top: 1.5rem; }
+  .page > * { max-width: 44rem; }
+  .chapo { font-size: 1.15rem; }
+  .meta { border-bottom: 1px solid var(--ligne); padding-bottom: 1rem; }
+  .prose { font-size: 1.08rem; }
+</style>

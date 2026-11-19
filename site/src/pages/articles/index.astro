@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import { articlesPublies, tempsDeLecture, dateFr } from '../../lib/articles';
+import { lien } from '../../lib/chemins';
+const articles = await articlesPublies();
+---
+<Base titre="Articles" description="Articles sourcés sur l’électricité de La Réunion.">
+  <div class="conteneur page">
+    <p class="surtitre haut">Articles</p>
+    <h1>Articles</h1>
+    {articles.length === 0 ? (
+      <div class="carte-bloc vide">
+        <p class="vide-titre">Premiers articles bientôt.</p>
+        <p class="discret">Chaque article reposera sur des sources institutionnelles, datera ses chiffres et rapportera les positions des acteurs sans prendre parti. En attendant, les <a href={lien('/installations')}>fiches installations</a> et la page <a href={lien('/comprendre')}>Comprendre</a> sont disponibles.</p>
+      </div>
+    ) : (
+      <ul class="liste">
+        {articles.map((a) => (
+          <li>
+            <h2><a href={lien(`/articles/${a.id}`)}>{a.data.titre}</a></h2>
+            <p class="discret">{a.data.chapo}</p>
+            <p class="petit tres-discret">{dateFr(a.data.date)} · {a.data.auteur} · {tempsDeLecture(a.body)} min de lecture</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</Base>
+
+<style>
+  .haut { margin-top: 2rem; }
+  .page > * { max-width: 48rem; }
+  .vide-titre { font-family: var(--f-display); font-weight: 750; font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .liste { list-style: none; padding: 0; }
+  .liste li { border-bottom: 1px solid var(--ligne); padding: 1rem 0; }
+  .liste h2 { margin: 0 0 0.4rem; font-size: 1.4rem; }
+</style>
