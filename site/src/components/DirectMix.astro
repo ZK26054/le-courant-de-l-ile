@@ -36,7 +36,7 @@ const legende = TAXO.ordre.map((k: string) => ({ k, libelle: (TAXO.libelles as R
 
   <p class="petit tres-discret note">
     Source : EDF Réunion, open data (« Production d’électricité par filière en temps réel », pas de 5 min). Valeurs au statut{' '}
-    <strong>« estimé »</strong>, révisées ensuite par EDF ; certains relevés manquent à la source.<span data-ecartees></span> « Biomasse (ex-Charbon) » et « Bioliquide (ex-Diesel) » sont les
+    <strong>« estimé »</strong>, révisées ensuite par EDF ; certains relevés manquent à la source. Une chute brève de toutes les filières en même temps (un seul relevé de 5 min) est en général une estimation provisoire d’EDF : elle est tracée telle que publiée.<span data-ecartees></span> « Biomasse (ex-Charbon) » et « Bioliquide (ex-Diesel) » sont les
     libellés officiels des colonnes héritées <code>charbon</code> et <code>diesel</code> : ces centrales ne brûlent plus de charbon
     ni de fioul. Une valeur négative (stockage en recharge) est tracée sous l’axe.
   </p>
