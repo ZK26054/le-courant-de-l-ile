@@ -36,7 +36,7 @@ def test_chaque_persona_a_label_prompt_suggestions_non_vides():
 # ─────────────────────────────────────────────
 def test_prompt_souverainete_contient_les_ancres_factuelles_clefs():
     prompt = experts.EXPERTS["souverainete"]["prompt"]
-    ancres = ["57 %", "colza", "pellets", "Rivière de l'Est"]
+    ancres = ["92,4 %", "61,2 %", "colza", "pellets", "Rivière de l'Est", "Garance"]
     for ancre in ancres:
         assert ancre in prompt, f"Ancre factuelle manquante dans le prompt souveraineté : {ancre!r}"
 
@@ -75,11 +75,98 @@ def test_prompt_souverainete_contient_le_garde_fou_instantane_vs_annuel():
 #  Garde-fous transverses — DOIVENT être dans TOUTES les personas
 # ─────────────────────────────────────────────
 def test_garde_fou_eolien_present_dans_toutes_les_personas():
+    """D9 (19/11/2026) : l'éolien est redevenu variable. Le garde-fou reste dans
+    TOUTES les personas, mais devient CONDITIONNEL à la mention « donnée figée »
+    injectée par build_data_context (voir test_contexte_et_pause.py)."""
     for key, expert in experts.EXPERTS.items():
         prompt = expert["prompt"]
         assert "figée" in prompt, f"{key}: garde-fou éolien (donnée figée) absent"
-        assert "2,36" in prompt, f"{key}: valeur figée éolienne (2,36 MW) absente"
+        assert "2,36" in prompt, f"{key}: valeur figée historique (2,36 MW) absente"
         assert "JAMAIS" in prompt, f"{key}: interdiction de commenter une tendance éolienne absente"
+
+
+def test_garde_fou_eolien_est_conditionnel_et_non_affirme_comme_permanent():
+    """Casse attendue : remettre « La valeur « Éolien » dans les données injectées
+    est **figée** » (affirmation inconditionnelle) doit faire rougir ce test."""
+    for key, expert in experts.EXPERTS.items():
+        prompt = expert["prompt"]
+        assert "si la ligne Éolien porte la mention « donnée figée »" in prompt, key
+        assert "dans les données injectées est **figée**" not in prompt, key
+
+
+# ─────────────────────────────────────────────
+#  Lot S0 (19/11/2026) — corrections D1-D6, D8 issues de la veille
+# ─────────────────────────────────────────────
+import re
+
+
+def test_aucune_persona_ne_dit_quil_ny_a_pas_de_chiffre_annuel_recent():
+    """D1 : « aucun chiffre officiel plus récent » était faux (OER 2024 = 92,4 %)."""
+    for key, e in experts.EXPERTS.items():
+        assert "aucun chiffre officiel plus récent" not in e["prompt"], key
+
+
+def test_chiffre_2023_jamais_presente_comme_derniere_moyenne():
+    for key, e in experts.EXPERTS.items():
+        p = e["prompt"]
+        if "56,6 %" in p or "57 %" in p:
+            assert "92,4 %" in p and "2024" in p, f"{key}: 2023 cité sans le chiffre 2024"
+
+
+def test_souverainete_distingue_enr_locales_officielles():
+    """D2 : indicateur officiel OER d'ENR locales (31,2 % en 2024)."""
+    p = experts.EXPERTS["souverainete"]["prompt"]
+    assert "31,2 %" in p and "bagasse" in p and "biogaz" in p
+    assert "ENR locales" in p
+
+
+def test_riviere_de_lest_inclut_garance():
+    """D3 : Garance (fin février 2025) doit figurer dans le constat Rivière de l'Est."""
+    p = experts.EXPERTS["souverainete"]["prompt"]
+    i = p.index("Rivière de l'Est")
+    assert "Garance" in p[i:i + 600], "Garance absent du constat Rivière de l'Est"
+    assert "09/05/2025" in p
+
+
+def test_tanika_toujours_presente_comme_projet():
+    """D4 : Tanika n'est JAMAIS une STEP en service ; horizon 2033 obligatoire."""
+    trouve = False
+    for key, e in experts.EXPERTS.items():
+        p = e["prompt"]
+        if "Tanika" in p:
+            trouve = True
+            assert "2033" in p, f"{key}: Tanika sans horizon 2033"
+            assert not re.search(r"Tanika[^.]{0,120}\b(est|sont) (en service|opérationnel)", p), key
+    assert trouve, "Tanika absent de toutes les personas"
+
+
+def test_juridique_signale_ppe_en_revision():
+    """D5 : la PPE est en révision ; ne pas la présenter comme figée."""
+    assert "en cours de révision" in experts.DOMAINE_JURIDIQUE
+
+
+def test_365_toujours_date_2023():
+    """D6 : 365 g/kWh est un chiffre 2023, jamais l'intensité actuelle."""
+    for key, e in experts.EXPERTS.items():
+        # « ne cite jamais 365 g » est l'interdiction elle-même, pas une citation du chiffre
+        for m in re.finditer(r"(?<!jamais )\b365\s*(g|en)", e["prompt"]):
+            assert "2023" in e["prompt"][max(0, m.start() - 150): m.end() + 150], key
+
+
+def test_series_carbone_perimees_absentes():
+    for key, e in experts.EXPERTS.items():
+        assert not re.search(r"\b(591|597|732|740)\s*g", e["prompt"]), key
+
+
+def test_climat_cite_la_reference_officielle_2024():
+    assert "77 gCO" in experts.DOMAINE_CLIMAT and "2024" in experts.DOMAINE_CLIMAT
+
+
+def test_tac_sud_nuancee():
+    """D8 : TAC Sud conçue pour 80 % bioéthanol, mais quasi intégralement fossile en volume."""
+    p = experts.DOMAINE_ELECTROTECHNIQUE
+    assert "bioéthanol" in p
+    assert "TAC Sud 41 MW), elles, restent fossiles" not in p
 
 
 def test_limite_epistemique_biomasse_bioliquide_presente_dans_toutes_les_personas():

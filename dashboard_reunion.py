@@ -113,10 +113,9 @@ st.markdown("""
 # Le namespace /api/v1/.../lines est MORT (404) : ne pas le réintroduire.
 # Le tri se fait sur le champ `date` en MINUSCULE ("Date DESC" → HTTP 400).
 API_URLS = [
-    # slug principal
+    # slug unique. L'ancien alias sans « -974 » renvoie 404 (constaté le
+    # 19/11/2026) : supprimé, il ne protégeait plus de rien.
     "https://opendata-reunion.edf.fr/api/explore/v2.1/catalog/datasets/prod-electricite-temps-reel-974/records",
-    # alias du même jeu de données, gardé en secours
-    "https://opendata-reunion.edf.fr/api/explore/v2.1/catalog/datasets/prod-electricite-temps-reel/records",
 ]
 
 # Plafond dur imposé par l'API explore v2.1 : limit > 100 → HTTP 400
@@ -459,6 +458,17 @@ def build_update_badge_html(kpis: dict) -> str:
     return f'<div class="update-badge">Dernière donnée : {ts} (heure Réunion) · statut : {statut}</div>'
 
 
+def build_eolien_caption(df: pd.DataFrame):
+    """Badge « donnée figée » de l'éolien, affiché SEULEMENT si la colonne est
+    constante sur la fenêtre (mesuré, pas supposé — voir agent_expert.eolien_est_fige).
+    Retourne None quand l'éolien varie."""
+    if not agent_expert.eolien_est_fige(df):
+        return None
+    valeur = df["Eolien"].dropna().iloc[0]
+    return (f"⚠️ Éolien : donnée figée / non fiable (valeur constante {valeur:.2f} MW "
+            f"sur toute la fenêtre, ne reflète pas la production réelle du parc éolien réunionnais).")
+
+
 def render_dashboard(df, kpis):
     """Onglet Dashboard : reçoit df/kpis déjà chargés par main (ne les recharge pas)."""
     # ── Timestamp ──────────────────────────────
@@ -486,7 +496,9 @@ def render_dashboard(df, kpis):
         st.markdown(render_kpi("Thermique fossile (Turbines à combustion)",
                                 f"{fossile_mw:.0f}", "MW", "kpi-orange"), unsafe_allow_html=True)
 
-    st.caption("⚠️ Éolien : donnée figée / non fiable (valeur constante ~2,36 MW, ne reflète pas la production réelle du parc éolien réunionnais).")
+    eolien_caption = build_eolien_caption(df)
+    if eolien_caption:
+        st.caption(eolien_caption)
 
     # ── Graphique principal : mix empilé ───────
     st.markdown('<div class="section-title">Mix énergétique</div>', unsafe_allow_html=True)

@@ -34,6 +34,24 @@ from experts import EXPERTS
 MODEL = "claude-sonnet-5"
 MAX_TOKENS = 1200
 
+# Agent MIS EN PAUSE (décision COO du 19/11/2026 : pas de crédits Anthropic).
+# SEUL interrupteur de l'agent : à False, l'onglet affiche « Agent en pause »,
+# ne demande aucune clé et n'appelle jamais l'API. Le code derrière reste en
+# place et testé (prompts, contexte) pour une réactivation sans réécriture.
+AGENT_ENABLED = False
+
+
+def eolien_est_fige(df: pd.DataFrame) -> bool:
+    """Vrai si la colonne Eolien est CONSTANTE sur la fenêtre chargée.
+    Le flux EDF a servi un éolien figé (2,3598 MW, juillet 2026) puis redevenu
+    variable (19/11/2026) : le badge « donnée figée » ne doit s'afficher que
+    lorsque la donnée l'est réellement, mesuré sur les données, pas supposé.
+    Moins de 2 valeurs non nulles → pas de verdict « figé » possible."""
+    if df is None or "Eolien" not in df.columns:
+        return False
+    serie = df["Eolien"].dropna()
+    return len(serie) >= 2 and serie.nunique() == 1
+
 
 # ─────────────────────────────────────────────
 #  Calcul de l'intensité carbone
@@ -166,13 +184,14 @@ def build_data_context(df: pd.DataFrame, kpis: dict) -> str:
     ])
 
     # ── Détail par filière (instantané) + % du Total ─────────────
+    eolien_fige = eolien_est_fige(df)
     lignes = []
     for src in EMISSION_FACTORS_LOW:
         if src in df.columns:
             val = last.get(src, 0) or 0
             if abs(val) > 0.01:
                 lbl = label(src)
-                if src == "Eolien":
+                if src == "Eolien" and eolien_fige:
                     lbl += " [donnée figée — non fiable, ne pas interpréter comme tendance]"
                 if total_last > 0:
                     pct = val / total_last * 100
@@ -198,7 +217,7 @@ def build_data_context(df: pd.DataFrame, kpis: dict) -> str:
 - Renouvelable réglementaire (+ Bioénergies + Biomasse ex-Charbon + Bioliquide ex-Diesel) : {ren_regl_mw:.1f} MW ({pct_regl:.1f} %)
 - ENR thermique / biogénique (Bioénergies+Biomasse+Bioliquide) : {bio_group_mw:.1f} MW
 - Thermique fossile (Turbines à combustion) : {fossile_mw:.1f} MW
-- Intensité carbone estimée du mix : {low:.0f}–{high:.0f} gCO₂/kWh (fourchette — neutralité biomasse/bagasse débattue, estimation non officielle)
+- Intensité carbone estimée du mix : {low:.0f}–{high:.0f} gCO₂/kWh (estimation instantanée du projet, non officielle — référence officielle annuelle directe : 77 g en 2024, OER)
 
 {tendance}
 
@@ -212,7 +231,8 @@ Filières couvertes : Photovoltaïque, Éolien, Hydraulique, Bioénergies,
 Biomasse (ex-Charbon), Bioliquide (ex-Diesel), Turbines à combustion, Stockage.
 Les libellés « Biomasse (ex-Charbon) » et « Bioliquide (ex-Diesel) » reflètent la
 communication officielle EDF sur la conversion de ces centrales (Bois-Rouge/Le Gol
-100 % biomasse depuis mars 2024 ; Port-Est huile de colza depuis déc. 2023) — les
+100 % biomasse, conversion du parc achevée mi-2024 ; Port-Est : conversion à l'huile
+de colza achevée en octobre 2023) — les
 colonnes de données restent nommées « Charbon »/« Diesel » côté API, mais ne
 désignent plus ces combustibles fossiles. Ces libellés sont déclaratifs et
 n'attestent pas que 100 % du combustible soit biogénique à chaque instant.
@@ -281,6 +301,12 @@ def render_agent_tab(df: pd.DataFrame, kpis: dict):
 
     st.markdown('<div class="section-title">🧠 Agent expert — Mix électrique La Réunion</div>',
                 unsafe_allow_html=True)
+
+    if not AGENT_ENABLED:
+        st.info("⏸️ **Agent en pause.** L'agent expert est momentanément désactivé : "
+                "aucune clé n'est demandée et aucun appel n'est envoyé. "
+                "Les données en direct restent consultables dans l'onglet Dashboard.")
+        return
 
     # ── Sélecteur d'angle d'expertise (persona) — défaut "generaliste" ──
     expert_keys = list(EXPERTS.keys())

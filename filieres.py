@@ -5,7 +5,8 @@ Noms internes capitalisés (issus de fetch_data). AUCUN import projet.
 
 Limite épistémique : les libellés « Biomasse (ex-Charbon) » / « Bioliquide (ex-Diesel) »
 reflètent la communication officielle EDF sur la conversion de ces centrales
-(Bois-Rouge/Le Gol 100% biomasse mars 2024 ; Port-Est huile de colza déc. 2023).
+(Bois-Rouge/Le Gol 100% biomasse, conversion du parc achevée mi-2024 ;
+Port-Est : conversion à l'huile de colza achevée en octobre 2023).
 Ils n'attestent pas que 100% du combustible soit biogénique à chaque instant.
 """
 

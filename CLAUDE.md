@@ -3,25 +3,28 @@
 > Mémoire projet persistante. Lire ce fichier au début de chaque session.
 > **Ce fichier décrit le réel, pas la cible.** Toute section démentie par une preuve
 > (re-probe, test) doit être corrigée ici *avant* de coder par-dessus.
-> Dernier recalage sur preuve : **2026-07-28** (Carte installations V1 ; recalages précédents : Phase 4/1.75 le 2026-07-20, Phase 2 le 2026-07-21).
+> Dernier recalage sur preuve : **2026-11-19** (Lot S0 : corrections D1-D12 de la veille du 19/11, agent mis en pause ; recalages précédents : Carte V1 le 2026-07-28, Phase 4/1.75 le 2026-07-20, Phase 2 le 2026-07-21).
+>
+> ⏸️ **Agent expert EN PAUSE (décision COO du 19/11/2026)** : pas de crédits Anthropic, et la clé actuelle est **invalide** (HTTP 401 « invalid x-api-key », constaté le 19/11/2026 — ce n'est plus seulement un problème de crédits). Interrupteur unique : `AGENT_ENABLED = False` dans `agent_expert.py`. Aucune action sur la clé, aucun appel LLM tant que le COO ne relance pas. À la reprise : régénérer une clé dans la console Anthropic, la réécrire dans `.streamlit/secrets.toml` en bash sans BOM, passer le drapeau à `True`.
 
 ## Objectif
-Dashboard temps réel du mix électrique de La Réunion (Open Data EDF Réunion), enrichi d'agents experts (Claude) qui analysent les données live sous plusieurs angles : électrotechnique, climat, juridique transition énergétique, **souveraineté/résilience**, et d'une **carte des installations** à la maille communale (registre EDF). Phases 0 (ingestion), 1 (contexte enrichi), 1.5 (reclassement nomenclature/carbone), 4 (git + fixture de régression), 1.75 (sprint dette : XSS, `width`, pagination curseur), **2 (expert souveraineté + sélecteur d'expert)** et **Carte installations V1 (registre, maille communale)** **livrées et validées** (Phase 2 : validation live des réponses en attente de crédits Anthropic). Prochaine étape possible : autres experts (économie ZNI, réseau/smart-grid, prospective 2040).
+Dashboard temps réel du mix électrique de La Réunion (Open Data EDF Réunion), enrichi d'agents experts (Claude) qui analysent les données live sous plusieurs angles : électrotechnique, climat, juridique transition énergétique, **souveraineté/résilience**, et d'une **carte des installations** à la maille communale (registre EDF). Phases 0 (ingestion), 1 (contexte enrichi), 1.5 (reclassement nomenclature/carbone), 4 (git + fixture de régression), 1.75 (sprint dette : XSS, `width`, pagination curseur), **2 (expert souveraineté + sélecteur d'expert)** et **Carte installations V1 (registre, maille communale)** **livrées et validées** (Phase 2 : validation live des réponses jamais faite ; agent en pause depuis le 19/11/2026). **Nouveau cap (19/11/2026)** : le projet devient aussi un site public statique « Le courant de l'île » (dossier `site/`, Astro). Prochaine étape possible : autres experts (économie ZNI, réseau/smart-grid, prospective 2040).
 
 ## Stack
 Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-autorefresh.
 
 ## Architecture des fichiers
 - `dashboard_reunion.py` — app principale, **4 onglets** (`st.tabs`) : Dashboard (`render_dashboard`), Carte (`registre_installations.render_carte_tab`, 2e position), Agent expert (`agent_expert.render_agent_tab`), Diagnostic (`render_diagnostic`). Contient `API_URLS`, `fetch_data`, `_fetch_records`, `compute_kpis`, les fabriques Plotly (`make_stacked_area`, `make_total_line`, `make_renewables_pct`, `make_thermal_lines`). Importe la taxonomie depuis `filieres.py`.
-- `agent_expert.py` — intégration agent Claude. `build_data_context` (contexte live enrichi : instantané, tendance 1h, amplitude, double %ENR, fourchette carbone), `compute_carbon_intensity` (retourne un couple `(low, high)`), `ask_expert(messages, api_key, data_context, system_prompt)` (le prompt est passé explicitement — plus de `SYSTEM_PROMPT` monolithique), `render_agent_tab` (avec **sélecteur d'expert** `st.selectbox`, reset de l'historique au changement de persona). Couplage lâche : reçoit `df`/`kpis`, ne manipule que les noms internes capitalisés. Importe la taxonomie depuis `filieres.py`, les personas depuis `experts.py`.
+- `agent_expert.py` — intégration agent Claude. `build_data_context` (contexte live enrichi : instantané, tendance 1h, amplitude, double %ENR, fourchette carbone), `compute_carbon_intensity` (retourne un couple `(low, high)`), `ask_expert(messages, api_key, data_context, system_prompt)` (le prompt est passé explicitement — plus de `SYSTEM_PROMPT` monolithique), `render_agent_tab` (avec **sélecteur d'expert** `st.selectbox`, reset de l'historique au changement de persona ; affiche « Agent en pause » et s'arrête là tant que `AGENT_ENABLED = False`), `eolien_est_fige(df)` (badge « donnée figée » conditionnel, D9). Couplage lâche : reçoit `df`/`kpis`, ne manipule que les noms internes capitalisés. Importe la taxonomie depuis `filieres.py`, les personas depuis `experts.py`.
 - `experts.py` — **SOCLE CONTENU** (personas, miroir de `filieres.py`) : `BASE_PROMPT` (posture + garde-fous éolien & limite épistémique biomasse/bioliquide, communs à TOUTES les personas), `DOMAINE_*` (électrotechnique, climat, juridique, **souveraineté/résilience**), `EXPERTS = {"generaliste", "souverainete", …}`. Texte pur, aucun import projet, aucune donnée filière (invariant n°7).
 - `filieres.py` — **SOURCE UNIQUE DE VÉRITÉ** (voir invariant n°7) : taxonomie 3 familles, `EMISSION_FACTORS_LOW/HIGH`, `DISPLAY_LABELS`/`label()`, `COLORS`. Socle pur, aucun import projet. Importé par les deux fichiers ci-dessus. **Non touché** par la Carte installations (registre) — voir ADR-003, nomenclature de filières différente.
 - `registre_installations.py` — **module ISOLÉ** (voir `docs/adr/003-*.md`), un seul consommateur (`dashboard_reunion.py`) : `fetch_registre_par_commune_filiere` (registre EDF agrégé commune×filière, kW→MW, cache TTL long), `load_centroides`/`joindre_centroides` (jointure sur `codeinseecommune` string strict), `make_bubble_map` (`go.Scattermap`, bulles ∝ MW échelle racine carrée), `render_carte_tab` (LAZY, dégradation locale). Palette `FILIERE_COLORS` locale, non fusionnée avec `filieres.COLORS` (nomenclature différente : Solaire/Thermique non renouvelable/etc., pas de Charbon/Diesel).
 - `geo/communes_974_centroides.json` + `geo/README.md` — 24 centroïdes communaux (INSEE→lat/lon), source `geo.api.gouv.fr` (Etalab), donnée de référence administrative publique, **pas** un hardcode par installation (voir invariant data-driven ADR-003).
-- **Tests — 62 au total, tous déterministes et HORS RÉSEAU** (fixtures figées, `anthropic` mocké) :
+- **Tests Python — 83 au total, tous déterministes et HORS RÉSEAU** (fixtures figées, `anthropic` mocké) :
   `test_fetch_data.py` (18, ingestion + pagination curseur + échappement XSS) ·
   `test_filieres.py` (7, taxonomie/facteurs) · `test_taxonomie_carbone.py` (3, fige le modèle Phase 1.5) ·
-  `test_experts.py` (14, personas + garde-fous transverses + ancrage dates sourcées + transmission du bon prompt) ·
+  `test_experts.py` (25, personas + garde-fous transverses + ancrage dates sourcées + transmission du bon prompt + ancres D1-D6/D8/D9 de la veille du 19/11) ·
+  `test_contexte_et_pause.py` (10, contexte LLM réel sur fixture : dates D7, carbone D6, éolien conditionnel D9, URL unique D11, onglet « Agent en pause » via `AppTest`) ·
   `test_registre_installations.py` (20, centroïdes/fetch kW→MW/`sum(nbinstallations)`≠`count(*)`/jointure/carte à bulles/`AppTest`).
   `fixture_utils.py` — doubles de test partagés (flux temps réel) · `tests/fixtures/payload_edf.json` — payload EDF **figé volontairement** (ne pas régénérer sans raison) · `tests/fixtures/payload_registre.json` — payload registre **figé volontairement** (capturé 2026-07-28, voir tests/README.md).
 - `docs/sources/SOURCE_bilan-previsionnel-2024.md` — **source primaire** (Bilan Prévisionnel EDF SEI 2024), référence factuelle de l'expert souveraineté.
@@ -88,17 +91,25 @@ Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-au
 > - `diesel`  → titre EDF **« Bioliquide (MW) »** (`x-originalName` = « Diesel »).
 >
 > **Il n'y a plus de charbon fossile à La Réunion** (Bois-Rouge/Le Gol 100 % biomasse — pellets
-> bois + bagasse ; autorisation CRE 2022, −84 % émissions vs charbon / étude Deloitte).
+> bois + bagasse ; −84 % d'émissions directes vs charbon = **projection ex ante** des délibérations
+> CRE 2020-291 (Bois-Rouge) et 2021-354 (Le Gol) ; l'« étude Deloitte » citée autrefois n'a pas été retrouvée).
 > **Le « diesel » = huile de colza** (Port-Est, EDF PEI, fournisseur Saipol, sans palme ni soja).
 > `turbines_combustion` reste **fossile** (libellé EDF « Turbines à combustion », non renommé) :
-> ce sont les **TAC de La Baie (80 MW, GNR) + TAC Sud (41 MW)**. Les **clés Python internes restent**
+> ce sont les **TAC de La Baie (80 MW, GNR) + TAC Sud (41 MW)**. Nuance (OER BER 2024) : la TAC Sud
+> est conçue pour 80 % bioéthanol / 20 % gazole, mais en 2024 le bioéthanol n'a produit que 2,8 GWh contre
+> ~189,5 GWh de fossile (GNR, fioul, secours) → **essentiellement** fossile en volume, classement FOSSILE
+> maintenu dans `filieres.py`. Les **clés Python internes restent**
 > `Charbon`/`Diesel` (couplage `fetch_data`/`COLORS`/Plotly) — seul l'AFFICHAGE passe par `label()`.
 >
 > 📅 **Dates exactes (recalées sur source primaire EDF SEI, 2026-07-20)** — voir
 > `docs/sources/SOURCE_bilan-previsionnel-2024.md` : Port-Est converti **oct. 2023** ;
 > Bois-Rouge tranche 2 en 2022, tranches 1.1/1.2 mi-2023 ; **Le Gol A.1/A.2 finalisées
 > fév. et juil. 2024** → la conversion de TOUT le parc charbon/fioul est achevée **mi-2024**
-> (et non « mars 2024 », correction d'une version antérieure de ce fichier).
+> Précision (veille du 19/11/2026, OER BER 2024) : « mars 2024 » n'est pas faux en soi, c'est la date
+> du **100 % biomasse en combustible** (stock de charbon épuisé en janvier-février 2024) ; « juillet 2024 »
+> est la **fin des travaux**. Pour éviter l'ambiguïté, le texte envoyé au modèle et `filieres.py` n'emploient
+> que « conversion du parc achevée mi-2024 ; Port-Est : conversion à l'huile de colza achevée en octobre 2023 »
+> (ancré par `test_contexte_et_pause.py` et `test_experts.py`).
 
 - **ENR directes** (sans combustion, incontestables) : Photovoltaique, Eolien, Hydraulique.
 - **Bioénergies** (ENR au sens réglementaire/OER, neutralité carbone DÉBATTUE) : Bioénergies,
@@ -110,12 +121,17 @@ Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-au
   vient de centrales à combustion bio-étiquetées → ne pas présenter le 90 % seul comme « autonomie ».
 - **Facteurs d'émission = FOURCHETTE** (`EMISSION_FACTORS_LOW/HIGH`, ESTIMATIONS) : Biomasse ex-Charbon
   200/230, Bioliquide ex-Diesel 30/150, Bioénergies 35/150, Turbines_combustion 700, ENR directes 0.
-  `compute_carbon_intensity` retourne un couple `(low, high)`. Ordre de grandeur mix : ~68-145 gCO₂/kWh.
-- ⚠️ **`eolien` est une DONNÉE FIGÉE** : constant à **2,3598 MW** sur 388 mesures / 35h (prouvé),
-  cardinalité 1. Le vrai parc (Sainte-Suzanne 19,8 MW, variable) produit ~4 MW moyen ; Sainte-Rose
-  démantelé 2023. Le flux API ne reflète PAS la réalité. Compté dans `total` (donc dans %ENR, biais
-  fixe +0,78 pt) mais **badgé « donnée figée »** dans l'UI et le contexte agent ; garde-fou prompt :
-  l'agent ne commente jamais de dynamique éolienne.
+  `compute_carbon_intensity` retourne un couple `(low, high)`. **Estimation instantanée du projet** :
+  ~68-145 gCO₂/kWh. **Référence officielle, directe et annuelle** (OER, périmètre quotas, biomasse/bioliquide
+  durables à zéro, par kWh consommé) : **77 g en 2024**, 365 g en 2023 (avant la fin des conversions).
+  Nos facteurs appliqués au mix annuel 2024 donnent 103-172 g : l'écart est la part biogénique/amont
+  que nous comptons. Ne jamais présenter l'un comme l'autre (enquête carbone, `docs/veille/2026-11-19-SYNTHESE.md`).
+- ⚠️ **`eolien` a été une DONNÉE FIGÉE, il ne l'est plus** : constant à **2,3598 MW** sur 388 mesures / 35h
+  en juillet 2026 (prouvé, cardinalité 1), puis **redevenu variable le 19/11/2026** (77-78 valeurs distinctes
+  sur 100 lignes, 0,49 à 4,33 MW, trois mesures indépendantes, chacune sur un payload unique — fenêtre de
+  ~11 h seulement, re-sonde ≥ 35 h prévue). Traitement depuis le Lot S0 (D9) : le badge « donnée figée »
+  (UI + contexte agent) ne s'affiche **que si `Eolien.nunique() == 1` sur la fenêtre** (`agent_expert.eolien_est_fige`) ;
+  garde-fou prompt conditionnel à cette mention. La fixture de test reste volontairement à éolien constant.
 - **Limite épistémique** : les libellés Biomasse/Bioliquide sont *déclaratifs* d'EDF — ils n'attestent
   pas 100 % biogénique à chaque instant (démarrage/incident/appoint fossile résiduel possible).
 
@@ -133,11 +149,11 @@ Python · Streamlit · Plotly · pandas · requests · anthropic · streamlit-au
 - La Réunion = **ZNI** (Zone Non Interconnectée) : réseau insulaire isolé, faible inertie, stabilité 50 Hz critique.
 - Plafond d'injection instantanée PV+éolien ~30 % (arrêté 23 avril 2008), assoupli via stockage.
 - Objectif **autonomie énergétique 2030** (100 % électricité renouvelable), loi outre-mer.
-- **Parc au 01/07/2024 = 563 MW** (source primaire EDF SEI) : bioénergie pilotable ~**415 MW** (l'ossature) · hydraulique **136 MW** (Rivière de l'Est 80, Takamaka I+II 43,4) · PV **210 MWc** · éolien (Perrière 8,8 MW après repowering partiel ; Sainte-Rose 0 MW, travaux jusqu'en 2026) · stockage batterie (Batrun 5 MW, Cratère 5 MW/10 MWh — **pas de STEP opérationnelle documentée**).
+- **Parc au 01/07/2024 = 563 MW** (source primaire EDF SEI) : bioénergie pilotable ~**415 MW** (l'ossature) · hydraulique **136 MW** (Rivière de l'Est 80, Takamaka I+II 43,4) · PV **210 MWc** (BP EDF SEI, parc au 01/07/2024 ; l'OER donne **312,1 MW** au 31/12/2024 — **périmètres différents** (date et assiette de comptage), à citer avec leur date et leur source, jamais l'un à la place de l'autre) · éolien (Perrière 8,8 MW après repowering partiel ; Sainte-Rose 0 MW, travaux jusqu'en 2026) · stockage batterie (Batrun 5 MW, Cratère 5 MW/10 MWh — **pas de STEP opérationnelle documentée**).
 - Centrales : **Port-Est** (EDF PEI, 211 MW, **bioliquide huile de colza** depuis oct. 2023, ≈40 % des besoins), **Bois-Rouge** (94,1 MW) **& Le Gol** (~105 MW) — Albioma, biomasse + bagasse, conversion du parc achevée **mi-2024** ; **TAC La Baie 80 MW (GNR) + TAC Sud 41 MW = seul fossile** ; groupes de secours 24 MW maintenus.
-- **Chiffres ENR ANNUELS officiels** (≠ instantané du dashboard) : **57 % en 2023**, en hausse depuis les conversions. Non-synchrone (PV+éolien) 2023 : dépassait rarement 40 % instantané, ~11 % de la conso annuelle. ⚠️ Ne jamais présenter un instantané (« 99 % ce soir ») comme la performance annuelle de l'île.
+- **Chiffres ENR ANNUELS officiels** (≠ instantané du dashboard) : 37,7 % en 2022 · 56,6 % en 2023 (le « 57 % » historique du projet) · **92,4 % en 2024** (OER BER 2024 ; EDF open data `production-annuelle-delectricite-par-filiere-reunion` : 92,49). Dont **ENR locales (OER) = 31,2 % en 2024** (hydraulique + PV + éolien + bagasse + biogaz) et **61,2 % importées** (biodiesel de colza 37,9 % + pellets 23,2 % + bioéthanol 0,1 %). Notre « %ENR strict » appliqué à l'année 2024 ≈ 25 %. **Aucun bilan officiel 2025** publié au 19/11/2026. Intensité carbone officielle : **77 gCO₂/kWh en 2024** (OER). Non-synchrone (PV+éolien) 2023 : dépassait rarement 40 % instantané, ~11 % de la conso annuelle. ⚠️ Ne jamais présenter un instantané (« 99 % ce soir ») comme la performance annuelle de l'île.
 - **Souveraineté** : le bioliquide est du **colza importé d'Europe** (Saipol, RED), la biomasse repose sur des **pellets importés** ; la bagasse locale ne couvre que la saison sucrière (~201 GWh sur 923 en 2023). La dépendance au fioul a été **déplacée**, pas supprimée.
-- **Vulnérabilités** (constats EDF) : Rivière de l'Est fragilisée par les cyclones Cheneso (2023) et Belal (2024) + lave torrentielle → travaux lourds ; fiabilité des centrales converties « à démontrer dans la durée » (S1 2024 compliqué) ; maintenance lourde Takamaka.
+- **Vulnérabilités** (constats EDF) : Rivière de l'Est fragilisée par Cheneso (2023), Belal (janv. 2024 : prise d'eau assurant 80 % de la production endommagée) + lave torrentielle, puis le **cyclone Garance (fin février 2025)** : prise d'eau n°1 des Orgues totalement détruite, n°2 obturée, 2 lignes HTB détruites (21 supports) ; réinjection depuis le 09/05/2025 (retex EDF SEI, juin 2025) ; fiabilité des centrales converties « à démontrer dans la durée » (S1 2024 compliqué) ; maintenance lourde Takamaka.
 - **Inertie/ZNI** : PV, éolien et batteries sont **non-synchrones** → pas d'inertie ; réserve primaire ~50 MW, secondaire jusqu'à ~200 MW (2033) ; critère de défaillance PPE = **3 h/an**.
 - **Trajectoire** : fossile 118 MW (2024) → 41 MW (Azur 2040) ou 0 dès 2027 (Emeraude) ; bioénergie reste ~415 MW jusqu'en 2040 (**la base combustion et la dépendance import perdurent**) ; pilotable complémentaire requis 80 MW (2033) → 480 MW (2040, fin contrat Port-Est) ; conso +40/+50 %, pointe 737-799 MW vs 498 MW en 2023.
 - Ordre de grandeur utile pour valider un KPI : production totale instantanée **≈ 340 MW**
@@ -184,7 +200,7 @@ Preuves indépendantes (triple mesure : `dev-features`, `gardien-qualite`, puis 
 
 ## État actuel — Phases 0 / 1 / 1.5 ✅ LIVRÉES (2026-07-18)
 
-- **Phase 0** (ingestion) : `fetch_data` prouvé vert (endpoint v2.1, mapping casse, négatifs). Test live agent : chaîne verte, clé + modèle `claude-sonnet-5` valides sur le compte ; seul bloquant = **crédits Anthropic** (administratif, pas technique).
+- **Phase 0** (ingestion) : `fetch_data` prouvé vert (endpoint v2.1, mapping casse, négatifs). Test live agent (juillet 2026) : chaîne verte, clé + modèle `claude-sonnet-5` acceptés, seul bloquant = crédits. ⚠️ **Périmé** : le 19/11/2026, la clé renvoie HTTP 401 « invalid x-api-key » → clé à régénérer ; agent en pause.
 - **Phase 1** (contexte enrichi) : `build_data_context` étendu (tendance 1h, amplitude, % par filière). Piège `pct_ren` (absent du df) contourné.
 - **Phase 1.5** (reclassement) : taxonomie 3 familles + double %ENR + libellés `ex-Charbon`/`ex-Diesel` + fourchette carbone, dans **`filieres.py`** (source unique, invariant n°7). Prouvé : 20 tests verts (13 fetch + 7 filieres), anti-dup et anti-cycle vérifiés, carbone chuté ~494 → **68-145 gCO₂/kWh**, %ENR réglementaire ~99 %, badge éolien + garde-fou prompt en place.
 - App **3 onglets** (`st.tabs`) fonctionnelle, `streamlit run` → HTTP 200.
@@ -311,18 +327,24 @@ Fermeture des 3 items de dette identifiés en Phase 0/1.5, avant ouverture publi
   pagination (AVANT logique offset reconstituée perd une ligne / APRÈS `dash._fetch_records` réel
   n'en perd aucune).
 
-### Dette restante (SEULE SECTION FAISANT AUTORITÉ — vérifiée le 2026-07-20)
+### Dette restante (SEULE SECTION FAISANT AUTORITÉ — vérifiée le 2026-11-19)
 - ⚠️ **`diesel`/Bioliquide = point carbone le plus incertain** (colza : combustion biogénique mais
   amont N₂O sols / transport bateau / ILUC) → fourchette volontairement large **30/150**, à affiner
   si une source CRE/EDF opérationnelle est trouvée. C'est la principale incertitude du modèle.
-- ⚠️ **Éolien figé** : cause exacte non tranchable par la donnée (capteur bloqué vs remontée EDF).
-  Traité défensivement (badge UI + garde-fou prompt), pas résolu à la source.
+- ⚠️ **Éolien** : redevenu variable le 19/11/2026 après des mois figé ; cause de l'épisode figé non
+  tranchable par la donnée. Badge désormais conditionnel (D9). Re-sonde ≥ 35 h (4 payloads uniques) à faire.
+- ⏸️ **Agent expert en pause** (`AGENT_ENABLED = False`) : clé invalide (HTTP 401, 19/11/2026) et pas de
+  crédits. Validation live des réponses jamais faite ; les 5 questions-test de `concepteur-experts` restent prêtes.
+- **D5 (PPE en révision)** appliqué sur instruction COO, mais la déclaration d'intention de la Région
+  (09/06/2026) n'a **pas été lue** (PDF en 404) : formulation volontairement prudente, à revérifier.
+- Dépendances en retard (constat 19/11/2026, non mises à jour) : anthropic 0.117 → 2.10, plotly 6.9 → 7.1,
+  pandas 3.0.3 → 3.1.1, pytest 9.1.1 → 9.2.0.
 - Imports morts préexistants dans `dashboard_reunion.py` : `plotly.express as px` (l.11),
   `from datetime import datetime` (l.13) — cosmétique.
-- **Validation live de l'agent en attente de crédits Anthropic** : la chaîne est prouvée verte
-  (clé + modèle `claude-sonnet-5` acceptés ; l'échec est un HTTP 400 « credit balance too low »,
-  pas un problème de code). Les 5 questions-test de `concepteur-experts` sont prêtes pour juger
-  la qualité des réponses sur le modèle corrigé.
+
+> ✅ **Soldé** le 19/11/2026 (Lot S0) : URL de secours morte retirée d'`API_URLS` (D11) ; dates de conversion
+> du contexte LLM et de `filieres.py` (D7) ; ancres annuelles 2024, ENR locales, Garance, Tanika, carbone
+> officiel, TAC Sud (D1-D4, D6, D8) dans `experts.py`, chacune ancrée par un test prouvé par casse.
 
 > ✅ **Soldé** en Phase 4 / 1.75, ne pas réinscrire comme dette : `pytest` (épinglé `pytest==9.1.1`),
 > `use_container_width` (migré `width='stretch'`, 0 occurrence), injection HTML (`html.escape`),
